@@ -1,15 +1,24 @@
-import React from "react";
-import classes from "./Toolbar.module.css";
+import React, {useState} from "react";
+import "./Toolbar.css";
 import {Link} from "react-router-dom";
-import DrawerToggleButton from "../SideDrawer/DrawerToggleButton";
+import DropDownMenu from "../DropDownMenu/DropDownMenu";
+
 
 function Toolbar (props) {
-       return(
-        <header className={classes.toolbar}>
-            <nav className={classes.toolbar_navigation}>
-                <div className={classes.toolbar_logo}><a href="/">LOGO</a></div>
-                <div className={classes.spacer}></div>
-                <div className={classes.toolbar_navigation_items}>
+    const[open, setOpen] = useState(false);
+
+    return(
+        <header className="toolbar">
+            <nav className="toolbar_navigation">
+                <div className="toolbar_base">
+                    <div className="toolbar_logo">
+                        <a href="/">LOGO</a>
+                    </div>
+                    <DropDownMenu/>
+                    <ion-icon class="menu-icon" name="menu-outline" onClick={() => setOpen(!open)}></ion-icon>
+                </div>
+                {/* main nav */}
+                <div className={`toolbar_navigation_items ${open ? " show_navigation_items" : ""}`}>
                     <ul>
                         <li><a href="/menu">MENU</a></li>
                         <li><a href="/gallery">GALLERY</a></li>
@@ -17,12 +26,16 @@ function Toolbar (props) {
                         <li><a href="/contact">CONTACT</a></li>
                     </ul>
                 </div>
-                <div className={classes.toolbar_navigation}>
-                    <Link to="/access_account">
-                        <ion-icon className={classes.acc_icon} color = "dark" name="person"></ion-icon>
-                    </Link>
-                    {/* <DrawerToggleButton click={props.drawerClickHandler}/> */}
-                </div>
+                {/* side nav */}
+                {/* <div className={`toolbar_navigation_items ${open ? " show_navigation_items" : ""}`}>
+                    <ul>
+                        <li>
+                            <Link to="/access_account">
+                                <ion-icon className="acc_icon" color = "dark" name="person"></ion-icon>
+                            </Link>
+                        </li>
+                    </ul>
+                </div> */}
             </nav>
         </header>
     );

@@ -1,0 +1,135 @@
+/*
+=============== 
+Variables
+===============
+*/
+
+:root {
+    
+    --clr-white: #fff;
+    --transition: all 0.3s linear;
+  }
+
+body {
+    margin: 0;
+    font-size: 1.125rem;
+    font-family: 'Ubuntu', sans-serif;
+    color: white;
+    font-weight: 300;
+    
+    text-shadow: 0px -2px 2px rgba(40, 40, 40, 1);
+}
+
+.toolbar{
+    width: 100%;
+    background: darkred;
+    border: solid 1px darkred;
+    /* height: 60px; */
+
+}
+
+.toolbar_base {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toolbar_navigation{
+    padding: 0 1rem;
+    
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar_logo {
+    /* margin: 0 auto; */
+    padding: 4px;
+}
+
+.menu-icon {
+  cursor: pointer;
+}
+
+.toolbar_logo a{
+    color: white;
+    font-size: 2rem;
+    text-decoration: blink;
+    text-shadow: 0px -2px 2px rgba(40, 40, 40, 1);
+
+}
+
+
+.toolbar_navigation_items ul{
+    list-style: none;
+    /* padding: 3% 0 ; */
+    /* overflow-x: -20; */
+    /* display: none; */
+    
+    transition: var(--transition);
+}
+.toolbar_navigation_items li{
+   padding: 0 .5em;
+   overflow: hidden;
+   height: 0;
+   margin: 0;
+   /* display: none; */
+   /* opacity: 0; */
+}
+
+.show_navigation_items ul {       
+    /* height: auto; */
+    /* display: block; */
+}
+
+.show_navigation_items li {       
+    height: 2em;
+    /* display: block; */
+    /* opacity: 1; */
+}
+
+
+.toolbar_navigation_items a{
+    color: white;
+    text-decoration: none;
+    display: block;
+    transition: var(--transition);
+}
+
+.toolbar_navigation_items a:hover{
+    /* filter: brightness(1.2); */
+    text-decoration: underline;
+
+}
+.toolbar_navigation_items a:active{
+    color: aliceblue;
+}
+.acc_icon {
+    padding-top: 2em;
+}
+
+
+@media (min-width: 550px) {
+    .menu-icon {
+        display: none;
+    }
+
+    .toolbar_navigation_items li {
+        width: fit-content;
+    }
+
+    .toolbar_navigation_items ul,
+    .toolbar_navigation {
+        height: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .toolbar_navigation {
+        text-align: center;
+    }
+
+    .toolbar_logo{
+        margin-left: 1rem;
+    }
+}
