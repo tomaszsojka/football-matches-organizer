@@ -2,7 +2,8 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import {Navigation} from "./components/Navigation/Navigation";
-import './App.css';
+
+import {Posts} from "./components/Pages/GuestPages/Posts"
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Navigation/>
       <Switch>
         <Route exact path={"/"}/>
+        <Route exact path={"/posts"} component={Posts}/>
       </Switch>
     </Router>
   );
