@@ -1,0 +1,14 @@
+body {
+    margin: 0;
+    font-size: 1.125rem;
+    font-family: 'Ubuntu', sans-serif;
+    color: #707070;
+    font-weight: 300;
+}
+
+
+ion-icon {
+    width: 1.2em;
+    height: 1.2em;
+
+}

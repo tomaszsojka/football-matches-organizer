@@ -9,7 +9,7 @@ function Toolbar (props) {
     return(
         <header className="toolbar">
             <nav>
-                <div className="base">
+                <div className="toolbar-base">
                     <div className="logo">
                         <a href="/">LOGO</a>
                     </div>
