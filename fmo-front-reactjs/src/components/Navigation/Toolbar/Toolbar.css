@@ -4,11 +4,6 @@ Variables
 ===============
 */
 
-:root {
-    
-    --clr-white: #fff;
-    --transition: all 0.3s linear;
-  }
 
 .toolbar{
     width: 100%;
@@ -71,6 +66,8 @@ nav{
    overflow: hidden;
    height: 0;
    margin: 0;
+
+   transition: var(--transition);
 }
 
 .show-navigation-items ul {

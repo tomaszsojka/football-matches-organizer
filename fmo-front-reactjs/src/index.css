@@ -1,9 +1,24 @@
+:root {
+    
+    --clr-white: #fff;
+    --transition: all 0.3s linear;
+  }
+
 body {
     margin: 0;
     font-size: 1.125rem;
     font-family: 'Ubuntu', sans-serif;
     color: #707070;
     font-weight: 300;
+}
+
+a {
+    color: #2f9e13;
+}
+
+a:hover,
+a:focus {
+    color: #1b3b13;
 }
 
 

@@ -3,7 +3,9 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import {Navigation} from "./components/Navigation/Navigation";
 
-import {Posts} from "./components/Pages/GuestPages/Posts"
+import {AccessAccount} from "./components/Pages/GuestPages/AccessAccount"
+import {Posts} from "./components/Pages/UserPages/Posts";
+
 
 function App() {
   return (
@@ -12,6 +14,7 @@ function App() {
       <Switch>
         <Route exact path={"/"}/>
         <Route exact path={"/posts"} component={Posts}/>
+        <Route exact path={"/access-account"} component={AccessAccount}/>
       </Switch>
     </Router>
   );
