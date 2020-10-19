@@ -1,8 +1,8 @@
 import React from "react";
 
 import "./AccessAccount.css";
-import {Login} from "../../Forms/Login";
-import {AddAccountForm} from "../../Forms/AddAccountForm";
+import {Login} from "./Login";
+import {AddAccountForm} from "./AddAccountForm";
 
 
 export class AccessAccount extends React.Component {

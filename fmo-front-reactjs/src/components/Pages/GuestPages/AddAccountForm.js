@@ -1,6 +1,6 @@
 import React from "react";
-import "../Pages/GuestPages/AccessAccount.css"
-import {sendHttpRequest} from "../../Fetch/useFetch"
+import "./AccessAccount.css"
+import {sendHttpRequest} from "../../../Fetch/useFetch"
 
 /**
  * class for register and adding accounts by admin
@@ -73,7 +73,7 @@ export class AddAccountForm extends React.Component {
         if(this.state.email === "") {
             this.showValidationErr("email", "Email address cannot be empty");
             isError = true;
-        }else if(this.state.email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)==null) {
+        }else if(this.state.email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)==null) {
             this.showValidationErr("email", "Email is not valid")
             isError = true;
         }

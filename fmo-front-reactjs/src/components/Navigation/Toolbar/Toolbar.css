@@ -16,7 +16,6 @@ Variables
     margin-bottom: 2em;
     color: white;
     font-weight: 300;
-
 }
 
 .toolbar-base {
@@ -70,13 +69,18 @@ nav{
    transition: var(--transition);
 }
 
+
+/* to make toolbar be on top */
+/* .show-navigation-items {
+    position: absolute;
+} */
+
 .show-navigation-items ul {
     margin: 0.1em 0;
     padding-top: 0.7em;
-
 }
 
-.show-navigation-items li {       
+.show-navigation-items li {   
     height: 2em;
 }
 

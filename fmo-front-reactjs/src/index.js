@@ -6,8 +6,6 @@ import * as serviceWorker from './serviceWorker';
 import "./index.css";
 
 
-// import {BackDrop} from "./components/Navigation/Backdrop/Backdrop"
-
 ReactDOM.render(
   <React.StrictMode>
     <App />

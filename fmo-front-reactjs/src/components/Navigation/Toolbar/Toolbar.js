@@ -7,7 +7,7 @@ function Toolbar (props) {
     const[open, setOpen] = useState(false);
 
     return(
-        <header className="toolbar">
+        <header className={`toolbar ${open ? " show-navigation-items" : ""}`}>
             <nav>
                 <div className="toolbar-base">
                     <div className="logo">
@@ -16,7 +16,7 @@ function Toolbar (props) {
                     <ion-icon class="menu-icon" name="menu-outline" onClick={() => setOpen(!open)}></ion-icon>
                 </div>
                 {/* main nav */}
-                <div className={`toolbar-navigation-items ${open ? " show-navigation-items" : ""}`}>
+                <div className={`toolbar-navigation-items`}>
                     <ul>
                         <li><a href="/">HOME</a></li>
                         <li><a href="/posts">POSTS</a></li>
