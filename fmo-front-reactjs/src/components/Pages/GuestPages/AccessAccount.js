@@ -28,24 +28,21 @@ export class AccessAccount extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <div className="mainContainer">
-                    <hr/>
-                    <div className="boxController">
-                        <div className={"controller" + (this.state.isLoginOpen ? " selectedController" : "")}
-                             onClick={this.showLoginBox.bind(this)}>
-                            Login
-                        </div>
-                        <div className={"controller" + (this.state.isRegisterOpen ? " selectedController" : "")}
-                             onClick={this.showRegisterBox.bind(this)}>
-                            Register
-                        </div>
+            <div className="main-container accessAccount-container">
+                <div className="boxController">
+                    <div className={"controller" + (this.state.isLoginOpen ? " selectedController" : "")}
+                            onClick={this.showLoginBox.bind(this)}>
+                        Login
                     </div>
-                    <div className="boxContainer">
-                        {this.state.isLoginOpen && <Login/>}
-                        {this.state.isRegisterOpen && <AddAccountForm title="Register" userRole="client" submitRedirect={this.showLoginBox.bind(this)}/>}
+                    <div className={"controller" + (this.state.isRegisterOpen ? " selectedController" : "")}
+                            onClick={this.showRegisterBox.bind(this)}>
+                        Register
+                    </div>
+                </div>
+                <div className="boxContainer">
+                    {this.state.isLoginOpen && <Login/>}
+                    {this.state.isRegisterOpen && <AddAccountForm title="Register" userRole="client" submitRedirect={this.showLoginBox.bind(this)}/>}
 
-                    </div>
                 </div>
             </div>
         );

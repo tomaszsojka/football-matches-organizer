@@ -12,6 +12,27 @@ body {
     font-weight: 300;
 }
 
+
+h1,
+h2,
+h3 {
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    color: #1b3b13;
+    margin-top: 0;
+}
+
+
+h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+
+strong {
+    font-weight: 700;
+}
+
 a {
     color: #2f9e13;
 }
@@ -25,5 +46,21 @@ a:focus {
 ion-icon {
     width: 1.2em;
     height: 1.2em;
+}
 
+.main-container {
+    margin-top: 60px;
+}
+
+.dropDownMenuOn {
+    background: black;
+    opacity: 0.4;
+}
+
+@media (min-width: 550px) {
+
+    /* global container for all data below toolbar */
+    .main-container {
+        /* margin-top: 60px; */
+    }
 }

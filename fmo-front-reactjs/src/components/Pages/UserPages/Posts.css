@@ -16,25 +16,6 @@ img {
   Topography 
   *********/
 
-h1,
-h2,
-h3 {
-    font-family: 'Lora', serif;
-    font-weight: 400;
-    color: #1b3b13;
-    margin-top: 0;
-}
-
-
-h1 {
-    font-size: 2rem;
-    margin: 0;
-}
-
-
-strong {
-    font-weight: 700;
-}
 
 .site-title {
     width: 60%;
@@ -90,13 +71,13 @@ strong {
    *******/
 
 
-.container {
+.posts-container {
     width: 90%;
     max-width: 1800px;
     margin: 0 auto;
 }
 
-.container-flex {
+.posts-container-flex {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -113,7 +94,7 @@ footer {
 }
 
 @media (min-width: 675px) {
-    .container-flex {
+    .posts-container-flex {
         flex-direction: row;
     }
 
@@ -196,26 +177,31 @@ Articles
   Widgets
   *****/
 
-  .sidebar-widget {
-      border: 20px solid #efefef;
-      padding: 1em;
-      margin-bottom: 2em;
+.sidebar-widget {
+    border: 20px solid #efefef;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+@media (min-width: 675px) {
+    .sidebar-widget {
       margin-left: 1em;
-  }
+    }
+}
 
-  .widget-recent-post {
-    border-bottom: #707070 1px solid;
-    margin-bottom: 1em;
-    display: flex;
-    flex-direction: column;
-  }
+.widget-recent-post {
+border-bottom: #707070 1px solid;
+margin-bottom: 1em;
+display: flex;
+flex-direction: column;
+}
 
-  .widget-recent-post:last-child {
-      border: 0;
-      margin: 0;
-  }
+.widget-recent-post:last-child {
+    border: 0;
+    margin: 0;
+}
 
-  .widget-image {
-    margin-bottom: 1em;
-    order: -1;
-  }
+.widget-image {
+margin-bottom: 1em;
+order: -1;
+}

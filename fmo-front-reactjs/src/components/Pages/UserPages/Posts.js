@@ -8,10 +8,9 @@ import {SideBar} from "./SideBar";
 export const Posts = (props) => {
 
     return (
-        <div className="container container-flex">
+        <div className="main-container posts-container posts-container-flex">
             <MainPosts/>
             <SideBar/>
-            
         </div>
     );
 }

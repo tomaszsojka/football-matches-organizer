@@ -9,13 +9,14 @@ Variables
     width: 100%;
     background: darkgreen;
     border: none;
-    /* height: 60px; */
-    
     text-shadow: 0px -2px 2px rgba(40, 40, 40, 1);
-
-    margin-bottom: 2em;
     color: white;
     font-weight: 300;
+
+    position: absolute;
+    top: 0;
+    /* above all */
+    z-index: 99;
 }
 
 .toolbar-base {
@@ -102,6 +103,7 @@ nav{
 }
 
 @media (min-width: 550px) {
+
     .menu-icon {
         display: none;
     }
