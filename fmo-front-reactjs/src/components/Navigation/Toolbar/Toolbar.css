@@ -1,15 +1,11 @@
-/*
-=============== 
-Variables
-===============
-*/
+
 
 
 .toolbar{
     width: 100%;
     background: darkgreen;
     border: none;
-    text-shadow: 0px -2px 2px rgba(40, 40, 40, 1);
+    text-shadow: var(--toolbar-text-shadow);
     color: white;
     font-weight: 300;
 
@@ -31,7 +27,7 @@ nav{
     display: flex;
     flex-direction: column;
     
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
 }
 
 .toolbar-logo {
@@ -47,7 +43,7 @@ nav{
     color: white;
     font-size: 2rem;
     text-decoration: blink;
-    text-shadow: 0px -2px 2px rgba(40, 40, 40, 1);
+    text-shadow: var(--toolbar-text-shadow);
 
 }
 
@@ -71,11 +67,6 @@ nav{
 }
 
 
-/* to make toolbar be on top */
-/* .show-navigation-items {
-    position: absolute;
-} */
-
 .show-navigation-items ul {
     margin: 0.1em 0;
     padding-top: 0.7em;
@@ -88,18 +79,9 @@ nav{
 
 .toolbar-navigation-items a{
     color: white;
-    text-decoration: none;
+    text-decoration: blink;
     display: block;
     transition: var(--transition);
-}
-
-.toolbar-navigation-items a:hover{
-    /* filter: brightness(1.2); */
-    text-decoration: underline;
-
-}
-.toolbar-navigation-items a:active{
-    color: aliceblue;
 }
 
 @media (min-width: 550px) {
@@ -131,7 +113,16 @@ nav{
         flex-direction: row;
     }
 
+    nav {
+        height: 54px;
+    }
+
     .logo{
         margin-left: 1rem;
+    }
+
+    .show-navigation-items ul {
+        margin: 0;
+        padding-top: 0;
     }
 }

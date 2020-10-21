@@ -1,7 +1,15 @@
+/*
+=============== 
+Variables
+===============
+*/
+
 :root {
     
     --clr-white: #fff;
     --transition: all 0.3s linear;
+    --box-shadow: 0px 0px 20px 0px rgba(15, 15, 15, 0.2);
+    --toolbar-text-shadow: 0px -2px 2px rgba(40, 40, 40, 1)
   }
 
 body {
@@ -50,17 +58,4 @@ ion-icon {
 
 .main-container {
     margin-top: 60px;
-}
-
-.dropDownMenuOn {
-    background: black;
-    opacity: 0.4;
-}
-
-@media (min-width: 550px) {
-
-    /* global container for all data below toolbar */
-    .main-container {
-        /* margin-top: 60px; */
-    }
 }
