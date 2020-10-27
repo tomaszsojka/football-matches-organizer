@@ -29,15 +29,17 @@ app.get('/api/posts', (req, res) => {
   res.json(posts);
 });
 
-// app.get('*', (request, response) => {
-// 	response.sendFile(path.join(__dirname, 'mo-front-reactjs/build', 'index.html'));
-// });
-
 const PORT = process.env.PORT || 5000;
 
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static("fmo-front-reactjs/build"));
+
+    // Express serve up index.html file if it doesn't recognize route
+    const path = require('path');
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
 }
 
 
