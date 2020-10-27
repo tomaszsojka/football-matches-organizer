@@ -52,11 +52,11 @@
 .header {
     text-align: center;
     padding: 5px;
-    margin-bottom: 17px;
+    margin-bottom: 1.1em;
     /* margin-left: 35px; */
     /* margin-right: 35px; */
     font-family: Ozxgen, sans-serif;
-    font-size: 22px;
+    font-size: 1.375rem;
     border-bottom: 2px solid darkgreen;
 }
 
@@ -69,25 +69,17 @@
 .inputGroup {
     display: flex;
     flex-direction: column;
+    width: 100%;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-.loginLabel {
-    font-family: Oxygen, sans-serif;
-    font-size: 20px;
-    font-weight: 600;
-    padding-left: 5px;
-}
-
 .loginInput {
-    height: 2.1em;
     border-radius: 3px;
     border: 1px solid darkgreen;
     transition: border 0.4s ease-out;
-    padding: 13px;
-    font-family: Oxygen, sans-serif;
-    font-size: 19px;
+    padding: .4em;
+    font-size: 1.1rem;
     color: #3e3e42;
     background: rgba(15, 15, 15, 0.01);
 }
@@ -96,22 +88,21 @@
     border: 2px solid darkgreen;
 }
 
-.loginInput:focus {
-    border: 2px solid #6565e7;
+.loginInput:focus,
+.loginInput:active {
+    border: 2px solid var(--darker-green);
     box-shadow: var(--box-shadow);
 }
 
 .loginInput::placeholder {
-    font-family: Oxygen, sans-serif;
-    font-size: 16px; 
-    color: rgba(46, 213, 116, 0.839);
+    font-size: 1rem; 
     color: rgba(15, 15, 15, 0.4);
 }
 
 .loginBtn {
     padding: 2px 30px;
     border: 0;
-    font-size: 18px;
+    font-size: 1.125rem;
     border-radius: 3px;
     font-family: Oxygen, sans-serif;
     background-color: rgba(15, 15, 15, 0.03);
@@ -129,34 +120,6 @@
 
 .passingError {
     color: #e74c3c;
-    font-size: 16px;
-}
-
-
-.passwordState {
-    display: flex;
-    flex-direction: row;
-    margin-top: 20px;
-}
-
-.pwd {
-    height: 6px;
-    flex: 1;
-    visibility: hidden;
-}
-
-.pwdWeak {
-    background-color: #e74c3c;
-}
-
-.pwdMedium {
-    background-color: #3498db;
-}
-
-.pwdStrong {
-    background-color: #2ecc71;
-}
-
-.show {
-    visibility: visible;
+    font-size: .9rem;
+    padding-left: .1em;
 }

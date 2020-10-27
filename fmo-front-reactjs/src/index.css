@@ -5,6 +5,9 @@ Variables
 */
 
 :root {
+    /* colors */
+    --light-green: #2f9e13;
+    --darker-green: #1b3b13;
     
     --clr-white: #fff;
     --transition: all 0.3s linear;
@@ -26,7 +29,7 @@ h2,
 h3 {
     font-family: 'Lora', serif;
     font-weight: 400;
-    color: #1b3b13;
+    color: var(--darker-green);
     margin-top: 0;
 }
 
@@ -42,12 +45,12 @@ strong {
 }
 
 a {
-    color: #2f9e13;
+    color: var(--light-green);
 }
 
 a:hover,
 a:focus {
-    color: #1b3b13;
+    color: var(--darker-green);
 }
 
 

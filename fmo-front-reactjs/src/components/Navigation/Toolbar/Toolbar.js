@@ -1,15 +1,12 @@
-import React, {useState} from "react";
+import React from "react";
 import "./Toolbar.css";
 import {Link} from "react-router-dom";
 
 
 function Toolbar (props) {
-    // const[open, setOpen] = useState(false);
 
     const openCloseDropDownMenu = () => {
-        // isOpen = props.isOpen;
         props.dropDownMenuClickHandler(!props.isOpen);
-        // setOpen(isOpen);
     }
 
     return(

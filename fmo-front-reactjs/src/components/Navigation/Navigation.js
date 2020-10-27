@@ -28,10 +28,9 @@ export class Navigation extends React.Component {
     }
 
     render() {
-            
         return(
                 <div >
-                    <Toolbar isOpen={this.state.open} dropDownMenuClickHandler={this.makeBackgroundDarker.bind(this)}/>
+                    <Toolbar isOpen={this.state.open} dropDownMenuClickHandler={(isOpen) =>this.makeBackgroundDarker(isOpen)}/>
                     {/* when clicked out of toolbar, drop menu is closing */}
                     <div className={this.state.name} onClick={() => {
                         this.setState({
