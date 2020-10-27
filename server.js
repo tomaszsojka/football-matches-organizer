@@ -29,6 +29,10 @@ app.get('/api/posts', (req, res) => {
   res.json(posts);
 });
 
+app.get('*', (request, response) => {
+	response.sendFile(path.join(__dirname, 'mo-front-reactjs/build', 'index.html'));
+});
+
 const PORT = process.env.PORT || 5000;
 
 
@@ -37,4 +41,5 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 
-app.listen(PORT, () => `Server running on port ${PORT}`);
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
