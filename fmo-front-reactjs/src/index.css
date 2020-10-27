@@ -62,3 +62,9 @@ ion-icon {
 .main-container {
     margin-top: 60px;
 }
+
+@media (min-width: 550px) {
+    .main-container {
+        margin-top: 90px;
+    }
+}

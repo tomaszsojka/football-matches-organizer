@@ -5,7 +5,21 @@ import "./Posts.css";
 export const MainPosts = (props) => {
     return (
         <main role="main">
-            <article className="article-recent">
+            {/* key added because of error */}
+            {props.posts.map((post) => 
+            <article key={post.id} className="article-recent">
+                <div className="article-recent-main">
+                    <h2 className="article-title">{post.title}</h2>
+                    <p className="article-body">{post.content}</p>
+                    <a href="/" className="article-read-more">CONTINUE READING</a>
+                </div>
+                <div className="article-recent-secondary">
+                    <img src="Images/white_n_flower.jpg" alt="" className="article-image"/>
+                    <p className="article-info">{post.info}</p>
+                </div>
+            </article>)}
+
+            {/* <article className="article-recent">
                 <div className="article-recent-main">
                     <h2 className="article-title">Finding simplicity in life</h2>
                     <p className="article-body">
@@ -63,7 +77,7 @@ export const MainPosts = (props) => {
                     <img src="Images/white_n_flower.jpg" alt="" className="article-image"/>
                     <p className="article-info">July 3, 2019 | 3 comments</p>
                 </div>
-            </article>
+            </article> */}
         </main>
     );
 }
