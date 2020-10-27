@@ -29,9 +29,9 @@ app.get('/api/posts', (req, res) => {
   res.json(posts);
 });
 
-app.get('*', (request, response) => {
-	response.sendFile(path.join(__dirname, 'mo-front-reactjs/build', 'index.html'));
-});
+// app.get('*', (request, response) => {
+// 	response.sendFile(path.join(__dirname, 'mo-front-reactjs/build', 'index.html'));
+// });
 
 const PORT = process.env.PORT || 5000;
 
