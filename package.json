@@ -5,6 +5,8 @@
   "main": "server.js",
   "scripts": {
     "client-install": "cd fmo-front-reactjs && npm install",
+    "build": "cd fmo-front-reactjs && npm run build",
+    "heroku-postbuild": "npm run client-install && npm run build",
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "cd fmo-front-reactjs && npm start",
