@@ -29,6 +29,151 @@ app.get('/api/posts', (req, res) => {
   res.json(posts);
 });
 
+
+app.get('/api/matches', (req, res) => {
+    const matches = [
+      {
+          id: 1, 
+          date: "2020-10-21", 
+          hometeam: "Bayern Munich",
+          homestartinglineup: {
+            positions: ["GK", "LB", "LCB", "RCB", "RB",
+                        "LDM", "RDM",
+                        "LW", "CM", "RW",
+                        "A"
+                       ],
+            playernames: ["Manuel Neuer", "Alphonso Davies", "David Alaba", "Niclas Sule", "Benjamin Pavard", 
+                          "Leon Goretzka", "Joshua Kimmich",
+                          "Leroy Sane", "Thomas Muller", "Kingsley Coman",
+                          "Robert Lewandowski"
+                         ]
+          },
+          awayteam: "Atletico Madit",
+          awaystartinglineup: {
+            positions: ["GK", "LB", "LCB", "RCB", "RB",
+                        "LDM", "RDM",
+                        "LW", "CM", "RW",
+                        "A"
+                       ],
+            playernames: ["Manuel Neuer", "Alphonso Davies", "David Alaba", "Niclas Sule", "Benjamin Pavard", 
+                          "Leon Goretzka", "Joshua Kimmich",
+                          "Leroy Sane", "Thomas Muller", "Kingsley Coman",
+                          "Robert Lewandowski"
+                         ]
+          },
+          score: "",
+          goalscorers: [],
+          yellowcards: [],
+          redcards: []
+      },
+      {
+          id: 2, 
+          date: "2020-10-27", 
+          hometeam: "Bayern Munich",
+          homestartinglineup: {
+            positions: ["GK", "LB", "LCB", "RCB", "RB",
+                        "LDM", "RDM",
+                        "LW", "CM", "RW",
+                        "A"
+                       ],
+            playernames: ["Manuel Neuer", "Alphonso Davies", "David Alaba", "Niclas Sule", "Benjamin Pavard", 
+                          "Leon Goretzka", "Joshua Kimmich",
+                          "Leroy Sane", "Thomas Muller", "Kingsley Coman",
+                          "Robert Lewandowski"
+                         ]
+          },
+          awayteam: "Lokomotiv Moscow",
+          awaystartinglineup: {
+            positions: ["GK", "LB", "LCB", "RCB", "RB",
+                        "LDM", "RDM",
+                        "LW", "CM", "RW",
+                        "A"
+                       ],
+            playernames: ["Manuel Neuer", "Alphonso Davies", "David Alaba", "Niclas Sule", "Benjamin Pavard", 
+                          "Leon Goretzka", "Joshua Kimmich",
+                          "Leroy Sane", "Thomas Muller", "Kingsley Coman",
+                          "Robert Lewandowski"
+                         ]
+          },
+          score: "",
+          goalscorers: [],
+          yellowcards: [],
+          redcards: []
+      },
+      {
+          id: 3, 
+          date: "2020-10-26", 
+          hometeam: "Real Madrit",
+          homestartinglineup: {
+            positions: ["GK", "LB", "LCB", "RCB", "RB",
+                        "LDM", "RDM",
+                        "LW", "CM", "RW",
+                        "A"
+                       ],
+            playernames: ["Manuel Neuer", "Alphonso Davies", "David Alaba", "Niclas Sule", "Benjamin Pavard", 
+                          "Leon Goretzka", "Joshua Kimmich",
+                          "Leroy Sane", "Thomas Muller", "Kingsley Coman",
+                          "Robert Lewandowski"
+                         ]
+          },
+          awayteam: "Barcelona",
+          awaystartinglineup: {
+            positions: ["GK", "LB", "LCB", "RCB", "RB",
+                        "LDM", "RDM",
+                        "LW", "CM", "RW",
+                        "A"
+                       ],
+            playernames: ["Manuel Neuer", "Alphonso Davies", "David Alaba", "Niclas Sule", "Benjamin Pavard", 
+                          "Leon Goretzka", "Joshua Kimmich",
+                          "Leroy Sane", "Thomas Muller", "Kingsley Coman",
+                          "Robert Lewandowski"
+                         ]
+          },
+          score: "",
+          goalscorers: [],
+          yellowcards: [],
+          redcards: []
+      },
+      {
+          id: 4, 
+          date: "2020-10-21", 
+          hometeam: "Bayern Munich",
+          homestartinglineup: {
+            positions: ["GK", "LB", "LCB", "RCB", "RB",
+                        "LDM", "RDM",
+                        "LW", "CM", "RW",
+                        "A"
+                       ],
+            playernames: ["Manuel Neuer", "Alphonso Davies", "David Alaba", "Niclas Sule", "Benjamin Pavard", 
+                          "Leon Goretzka", "Joshua Kimmich",
+                          "Leroy Sane", "Thomas Muller", "Kingsley Coman",
+                          "Robert Lewandowski"
+                         ]
+          },
+          awayteam: "Atletico Madit",
+          awaystartinglineup: {
+            positions: ["GK", "LB", "LCB", "RCB", "RB",
+                        "LDM", "RDM",
+                        "LW", "CM", "RW",
+                        "A"
+                       ],
+            playernames: ["Manuel Neuer", "Alphonso Davies", "David Alaba", "Niclas Sule", "Benjamin Pavard", 
+                          "Leon Goretzka", "Joshua Kimmich",
+                          "Leroy Sane", "Thomas Muller", "Kingsley Coman",
+                          "Robert Lewandowski"
+                         ]
+          },
+          score: "",
+          goalscorers: [],
+          yellowcards: [],
+          redcards: []
+      }
+    ];
+  
+    res.json(matches);
+  });
+
+
 const PORT = process.env.PORT || 5000;
 
 
