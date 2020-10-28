@@ -1,9 +1,10 @@
 
 
 .dropDownMenuOn {
-    height: calc(100% - 60px);
+    position: fixed;
+    height: 100%;
+    overflow: auto;
     width: 100%;
-    position: absolute;
     background: black;
     opacity: 0.4;
 

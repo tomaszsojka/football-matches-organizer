@@ -128,7 +128,7 @@ export class AddAccountForm extends React.Component {
         }
 
         return (
-            <div className="innerContainer">
+            <div>
                 <div className="header">
                     {this.props.title}
                 </div>

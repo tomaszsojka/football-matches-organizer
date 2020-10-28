@@ -118,7 +118,7 @@ export class Login extends React.Component {
             return <Redirect to='/admin'/>;
 
         return (
-            <div className="innerContainer">
+            <div >
                 <div className="header">
                     Login
                 </div>
