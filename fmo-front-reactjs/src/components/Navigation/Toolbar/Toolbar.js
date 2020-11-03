@@ -24,7 +24,7 @@ function Toolbar (props) {
                         {/* a was not closing ulist smoothly before reloading */}
                         <li><Link to="/" onClick={() => openCloseDropDownMenu()}>HOME</Link></li>
                         <li><Link to="/posts" onClick={() => openCloseDropDownMenu()}>POSTS</Link></li>
-                        <li><Link to="/gallery" onClick={() => openCloseDropDownMenu()}>GALLERY</Link></li>
+                        <li><Link to="/teams" onClick={() => openCloseDropDownMenu()}>TEAMS</Link></li>
                         <li><Link to="/contact" onClick={() => openCloseDropDownMenu()}>CONTACT</Link></li>
                         <li>
                             <Link to="/access-account" onClick={() => openCloseDropDownMenu()}>
