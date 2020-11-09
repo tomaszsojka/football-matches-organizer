@@ -7,15 +7,21 @@ export const MainPosts = (props) => {
         <main role="main">
             {/* key added because of error */}
             {props.posts.map((post) => 
-            <article key={post.id} className="article-recent">
+            <article key={post.id} className="article-recent posts-container-flex">
                 <div className="article-recent-main">
                     <h2 className="article-title">{post.title}</h2>
                     <p className="article-body">{post.content}</p>
-                    <a href="/" className="article-read-more">CONTINUE READING</a>
+                    <div className="posts-container-flex comment-container">
+                        <img src="../Images/profile_picture.png" alt="photo" className="comment-image"/>
+                        <input className="comment-input"></input>
+                    </div>
                 </div>
-                <div className="article-recent-secondary">
-                    <img src="../Images/white_n_flower.jpg" alt="photo" className="article-image"/>
-                    <p className="article-info">{post.info}</p>
+                <div className="article-recent-secondary article-recent-author posts-container-flex">
+                    <img src="../Images/profile_picture.png" alt="photo" className="article-image"/>
+                    <div className="name-date">
+                        <h3>Tomasz Sojka</h3>
+                        <p className="article-info">{post.info}</p>
+                    </div>
                 </div>
             </article>)}
 

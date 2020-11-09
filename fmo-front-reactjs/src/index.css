@@ -45,6 +45,14 @@ strong {
     font-weight: 700;
 }
 
+input {
+    border-radius: 3px;
+    border: 1px solid darkgreen;
+    transition: border 0.4s ease-out;
+    color: #3e3e42;
+    background: rgba(15, 15, 15, 0.01);
+}
+
 a {
     color: var(--light-green);
 }

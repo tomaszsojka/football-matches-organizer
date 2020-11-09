@@ -7,8 +7,6 @@ img {
     max-width: 100%;
     /* centering the image */
     display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 
@@ -34,25 +32,12 @@ img {
     font-size: 1.5rem;
 }
 
-.article-read-more,
 .article-info {
     font-size: .875rem;
 }
 
-.article-read-more {
-    color: #2f9e13;
-    text-decoration: none;
-    font-weight: 700;
-}
-
-.article-read-more:hover,
-.article-read-more:focus {
-    color: #1b3b13;
-    text-decoration: underline;
-}
-
 .article-info {
-    margin: 2em 0;
+    margin:  0;
 }
 
 .widget-title,
@@ -103,7 +88,7 @@ footer {
     }
 
     aside {
-        width: 25%;
+        width: 28%;
         min-width: 200px;
     }
 
@@ -115,33 +100,62 @@ footer {
 /****
 Articles
       **/
-
-.article-featured {
-    border-bottom: #707070 1px solid;
-    padding-bottom: 1em;
-    margin-bottom: 3em;
-}
-
 .article-recent {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2em;
+    padding: 1em;
+    margin-bottom: 1em;
+
+    box-shadow: var(--box-shadow);
 }
 
 .article-recent-main {
     order: 2;
+    margin: 1.5em 0 .5em 0;
 }
 
 .article-recent-secondary {
     order: 1;
 }
 
-.article-image {
-    width: 100%;
-    object-fit: cover;
-    max-height: 500px;
-    min-height: 150px;
+.article-recent-author {
+    flex-direction: row;
+    justify-content: start;
+    /* align-items: center; */
 }
+
+.article-recent-author h3 {
+    margin: 0;
+}
+
+.article-recent-author .name-date {
+    margin: 0 .5em 0 .5em;
+
+}
+
+.article-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;    
+    border-radius: 50%;
+}
+
+.comment-container {
+    flex-direction: row;
+    justify-content: center;
+}
+
+.comment-input {
+    width: 100%;
+}
+
+.comment-image {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+    object-fit: cover;    
+    border-radius: 50%;
+}
+
+
 
 @media (min-width: 675px) {
     .article-recent {
@@ -152,24 +166,34 @@ Articles
 
     .article-recent-main {
         width: 68%;
+        margin: 0;
     }
 
     .article-recent-secondary {
         width: 30%;
     }
 
-    .article-featured {
-        display: flex;
+    .article-recent-author {
+        /* justify-content: center; */
         flex-direction: column;
     }
 
     .article-image {
+        width: 90px;
+        height: 90px;
         order: -2;
     }
 
     .article-info {
         order: -1;
     }
+}
+
+@media (min-width: 1000px) {
+    .article-recent-author {
+        flex-direction: row;
+    }
+
 }
 
 
