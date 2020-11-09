@@ -28,7 +28,7 @@ export class AccessAccount extends React.Component {
 
     render() {
         return (
-            <div className="main-container accessAccount-container">
+            <div className=" accessAccount-container">
                 <div className="boxController">
                     <div className={"controller" + (this.state.isLoginOpen ? " selectedController" : "")}
                             onClick={this.showLoginBox.bind(this)}>

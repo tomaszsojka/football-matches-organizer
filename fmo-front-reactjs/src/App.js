@@ -1,16 +1,18 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Redirect, Link} from "react-router-dom";
 
 import UserRoot from "./components/UserRoot";
 import {Navigation} from "./components/Navigation/Navigation";
 
-import {AccessAccount} from "./components/Pages/GuestPages/AccessAccount"
+import GuestHome from "./components/Pages/GuestPages/GuestHome";
 import {Posts} from "./components/Pages/UserPages/Posts";
 
 import {Error} from "./components/Pages/Error";
 
 
 function App() {
+
+  let ulr = ""
   return (
 
     <Router >
@@ -21,19 +23,20 @@ function App() {
       </Switch> */}
       
       <Switch>
-      <Route  exact path={"/"} component={AccessAccount}/>
+      <Route  exact path={"/"} component={GuestHome}/>
       <Route path={"/user"} 
         render={({ match: { path } }) => (
           <UserRoot>
-            {/* <Route exact path={""} component={UserRoot}/> */}
             <Route exact path={`${path}/posts`} component={Posts}/>
+            
           </UserRoot>
-        )} 
+        )
+        
+        } 
       />
-
-      <Redirect to="/404" />
       <Route component={Error}/>
       </Switch>
+
     </Router>
   );
 }
