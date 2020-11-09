@@ -2,7 +2,9 @@ const express = require('express');
 
 const app = express();
 
-app.get('/api/posts', (req, res) => {
+// app.use(express.static('fmo-front-reactjs/public'));
+
+app.get('/api/user/posts', (req, res) => {
   const posts = [
     {id: 1, 
         title: 'Finding simplicity in life', 

@@ -14,7 +14,7 @@ function Toolbar (props) {
             <nav>
                 <div className="toolbar-base">
                     <div className="logo">
-                    <Link to="/" onClick={() => openCloseDropDownMenu()}>LOGO</Link>
+                    <Link to="/user" onClick={() => openCloseDropDownMenu()}>LOGO</Link>
                     </div>
                     <ion-icon class="menu-icon" name="menu-outline" onClick={() => openCloseDropDownMenu()}></ion-icon>
                 </div>
@@ -22,12 +22,12 @@ function Toolbar (props) {
                 <div className={`toolbar-navigation-items`}>
                     <ul>
                         {/* a was not closing ulist smoothly before reloading */}
-                        <li><Link to="/" onClick={() => openCloseDropDownMenu()}>HOME</Link></li>
-                        <li><Link to="/posts" onClick={() => openCloseDropDownMenu()}>POSTS</Link></li>
-                        <li><Link to="/teams" onClick={() => openCloseDropDownMenu()}>TEAMS</Link></li>
-                        <li><Link to="/contact" onClick={() => openCloseDropDownMenu()}>CONTACT</Link></li>
+                        <li><Link to="/user" onClick={() => openCloseDropDownMenu()}>HOME</Link></li>
+                        <li><Link to="/user/posts" onClick={() => openCloseDropDownMenu()}>POSTS</Link></li>
+                        <li><Link to="/user/teams" onClick={() => openCloseDropDownMenu()}>TEAMS</Link></li>
+                        <li><Link to="/user/contact" onClick={() => openCloseDropDownMenu()}>CONTACT</Link></li>
                         <li>
-                            <Link to="/access-account" onClick={() => openCloseDropDownMenu()}>
+                            <Link to="/user/profile" onClick={() => openCloseDropDownMenu()}>
                                 <ion-icon className="acc-icon" color = "white" name="person"></ion-icon>
                             </Link>
                         </li>

@@ -74,24 +74,22 @@ export class Login extends React.Component {
 
         if(isError === false) {
            //TODO phone number is not visible
-            sendHttpRequest('POST', '/api/v1/guest/login', this.state)
-                .then(responseData => {
-                    console.log(responseData.phoneNumber);
-                    var tmpRole = responseData.role[0].toUpperCase();
-                    if (tmpRole === 'C') {
-                        if(responseData.role[1] ==='h') {
-                            tmpRole = 'H';
-                        }
-                    }
-                    console.log(tmpRole);
-                    auth.login(tmpRole, responseData.email, responseData.phoneNumber);
-                    this.setState({role: tmpRole })
-                })
-                .catch(err => {
-                    this.showValidationErr("email", " Invalid email or password.");
-                    console.log(err, err);
-                });
+            // sendHttpRequest('POST', '/api/v1/guest/login', this.state)
+            //     .then(responseData => {
+            //         console.log(responseData.phoneNumber);
+            //         var tmpRole = responseData.role[0].toUpperCase();
+            //         console.log(tmpRole);
+            //         auth.login(tmpRole, responseData.email, responseData.phoneNumber);
+            //         this.setState({role: tmpRole })
+            //     })
+            //     .catch(err => {
+            //         this.showValidationErr("email", " Invalid email or password.");
+            //         console.log(err, err);
+            //     });
 
+            
+                //TODO delete
+                this.setState({role: 'U'});
         }
     }
 
@@ -108,14 +106,8 @@ export class Login extends React.Component {
                 passwordErr = err.msg;
             }
         }
-        if (role === 'C')
-            return <Redirect to='/client'/>;
-        if (role === 'H')
-            return <Redirect to='/chef'/>;
-        if (role === 'W')
-            return <Redirect to='/waiter'/>;
-        if (role === 'A')
-            return <Redirect to='/admin'/>;
+        if (role === 'U')
+            return <Redirect to='/user'/>;
 
         return (
             <div >

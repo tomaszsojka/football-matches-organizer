@@ -12,7 +12,7 @@ export function Posts() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        sendHttpRequest('GET', '/api/posts').then(responseData => {
+        sendHttpRequest('GET', '/api/user/posts').then(responseData => {
             setData(responseData);
             console.log(responseData);
         });

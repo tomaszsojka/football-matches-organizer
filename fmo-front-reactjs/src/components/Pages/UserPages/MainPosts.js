@@ -14,7 +14,7 @@ export const MainPosts = (props) => {
                     <a href="/" className="article-read-more">CONTINUE READING</a>
                 </div>
                 <div className="article-recent-secondary">
-                    <img src="Images/white_n_flower.jpg" alt="" className="article-image"/>
+                    <img src="../Images/white_n_flower.jpg" alt="photo" className="article-image"/>
                     <p className="article-info">{post.info}</p>
                 </div>
             </article>)}
