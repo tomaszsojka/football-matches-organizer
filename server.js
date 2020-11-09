@@ -2,6 +2,9 @@ const express = require('express');
 
 const app = express();
 
+app.use(express.urlencoded({ extended: false }))
+.use(express.json());
+
 // app.use(express.static('fmo-front-reactjs/public'));
 
 app.get('/api/user/posts', (req, res) => {
@@ -29,6 +32,24 @@ app.get('/api/user/posts', (req, res) => {
   ];
 
   res.json(posts);
+});
+
+app.post('/api/guest/login', (req, res) => {
+  const { body } = req;
+  const  userRes = 
+    {
+      email: "aaa@aa.com",
+      password: "aaa",
+      phoneNumber: "123123123",
+      role : "User"
+
+    };
+
+  if(body.email === userRes.email && body.password === userRes.password) {
+    console.log("OK");
+    res.json(userRes);
+    
+  }
 });
 
 

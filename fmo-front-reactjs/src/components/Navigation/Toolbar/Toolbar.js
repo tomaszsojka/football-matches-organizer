@@ -1,11 +1,14 @@
 import React from "react";
 import "./Toolbar.css";
 import {Link} from "react-router-dom";
+import Auth from "../../../Auth";
 
 
 function Toolbar (props) {
 
     const openCloseDropDownMenu = () => {
+        //TODO delete
+        Auth.logout();
         props.dropDownMenuClickHandler(!props.isOpen);
     }
 
@@ -27,7 +30,7 @@ function Toolbar (props) {
                         <li><Link to="/user/teams" onClick={() => openCloseDropDownMenu()}>TEAMS</Link></li>
                         <li><Link to="/user/contact" onClick={() => openCloseDropDownMenu()}>CONTACT</Link></li>
                         <li>
-                            <Link to="/user/profile" onClick={() => openCloseDropDownMenu()}>
+                            <Link to="/" onClick={() => openCloseDropDownMenu()}>
                                 <ion-icon className="acc-icon" color = "white" name="person"></ion-icon>
                             </Link>
                         </li>
