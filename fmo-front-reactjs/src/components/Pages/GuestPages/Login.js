@@ -83,7 +83,7 @@ export class Login extends React.Component {
                 })
                 .catch(err => {
                     this.showValidationErr("email", " Invalid email or password.");
-                    console.log(err, err);
+                    console.log(err);
                 });
 
             

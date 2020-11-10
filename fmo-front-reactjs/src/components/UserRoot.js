@@ -5,11 +5,11 @@ import {Redirect} from "react-router-dom";
 
 function UserRoot(props) {
 
-  console.log(React.Children.count(props.children));
-  if(!React.Children.count(props.children)) {
+  // console.log(React.Children.count(props.children));
+  // if(!React.Children.count(props.children)) {
     
-    return (<Redirect to="/404"/>);
-  }
+  //   return (<Redirect to="/404"/>);
+  // }
 
   return (
       <div>

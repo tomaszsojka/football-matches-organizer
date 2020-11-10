@@ -12,7 +12,10 @@ import {Error} from "./components/Pages/Error";
 
 function App() {
 
-  let ulr = ""
+  const urls = [
+    "posts"
+  ];
+  console.log(urls);
   return (
 
     <Router >
@@ -24,16 +27,34 @@ function App() {
       
       <Switch>
       <Route  exact path={"/"} component={GuestHome}/>
-      <Route path={"/user"} 
-        render={({ match: { path } }) => (
+      <Route
+        path="/user"
+        render={({ match: { url } }) => (
           <UserRoot>
-            <Route exact path={`${path}/posts`} component={Posts}/>
-            
+            <Route path={`${url}/posts`} component={Posts} />
           </UserRoot>
-        )
-        
-        } 
+        )}
       />
+      {/* <Route exact path={"/user/:rest"} 
+        render={({ match }) => (
+          
+          <>
+          {urls.some(url => match.params.rest === url || "" === url) 
+            ? 
+            <UserRoot>
+              <br/>
+              <br/>
+              <br/>
+              <h1>{match.isExact.toString()}</h1>
+              {match.params.rest === `${urls[0]}` && <Route exact path={`${match.url}`} component={Posts}/>}
+            </UserRoot> 
+            : 
+            <Route component={Error}/> 
+          }
+          </>
+           
+        )} 
+      /> */}
       <Route component={Error}/>
       </Switch>
 
