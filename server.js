@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const logger = require('./middleware/logger');
 const app = express();
 
@@ -6,7 +7,15 @@ const app = express();
 //Body parser middelware
 app.use(express.json());
 //Form submission
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }));
+
+//DB Config
+const db = require('./config/keys').mongoURI;
+//Connect to mongoDB
+mongoose
+    .connect(db)
+    .then(() => console.log("MongoDB connected..."))
+    .catch(err => console.log(err)); 
 
  //init of my middleware
 //app.use(logger);
@@ -20,7 +29,6 @@ app.use('/api/user', require('./routes/api/user'));
 app.use('/api/mobile', require('./routes/api/mobile'));
 
 
-const PORT = process.env.PORT || 5000;
 
 
 if (process.env.NODE_ENV === 'production') {
@@ -34,5 +42,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 

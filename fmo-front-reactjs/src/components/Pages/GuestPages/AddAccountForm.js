@@ -10,8 +10,8 @@ export class AddAccountForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            name: "",
             email : "",
-            phoneNumber: "",
             password: "",
             errors: []
         };
@@ -39,6 +39,13 @@ export class AddAccountForm extends React.Component {
         });
     }
 
+    onNameChange(e) {
+        this.setState({
+            name: e.target.value
+        });
+        this.clearValidationErr("name");
+    }
+
     onEmailChange(e) {
         this.setState({
             email: e.target.value
@@ -47,12 +54,6 @@ export class AddAccountForm extends React.Component {
 
     }
 
-    onPhoneNumberChange(e) {
-        this.setState({
-            phoneNumber: e.target.value
-        });
-        this.clearValidationErr("phoneNumber");
-    }
     onPasswordChange(e) {
         this.setState({
             password: e.target.value
@@ -63,11 +64,8 @@ export class AddAccountForm extends React.Component {
 
     submitAddAccount(e) {
         let isError = false;
-        if(this.state.phoneNumber === "") {
-            this.showValidationErr("phoneNumber", "Phone number cannot be empty");
-            isError = true;
-        }else if(this.state.phoneNumber.match(/^[0-9]{3}[ -]?[0-9]{3}[ -]?[0-9]{3}$/)==null) {
-            this.showValidationErr("phoneNumber", "Phone number is not valid")
+        if(this.state.name === "") {
+            this.showValidationErr("name", "Name cannot be empty");
             isError = true;
         }
         if(this.state.email === "") {
@@ -84,18 +82,14 @@ export class AddAccountForm extends React.Component {
 
         if(isError === false) {
             //TODO check if its ok
+            console.log("User data is ok");
 
             var userRole = this.props.userRole;
             var path;
-            if(userRole === "client") {
-                path = '/api/v1/guest/register';
-            }else if(userRole === "chef") {
-                path = '/api/v1/admin/add_chef';
-            }else if(userRole === "waiter") {
-                path = '/api/v1/admin/add_waiter';
+            if(userRole === "user") {
+                path = '/api/guest/register';
             }
-
-                sendHttpRequest('POST', path, this.state)
+            sendHttpRequest('POST', path, this.state)
                 .then(responseData => {
                     console.log(responseData);
                     //if redirecting function is not passed as a prop variable is null
@@ -104,20 +98,20 @@ export class AddAccountForm extends React.Component {
                         this.props.submitRedirect();
                     }
                 })
-                    .catch(err => {
-                        this.showValidationErr("email", " An account with the given email exists.");
-                        console.log(err, err.data);
-                    });
+                .catch(err => {
+                    this.showValidationErr("email", " An account with the given email exists.");
+                    console.log(err, err.data);
+                });
         }
     }
 
     render() {
 
-        let phoneNumberErr = null, emailErr = null, passwordErr = null;
+        let nameErr = null, emailErr = null, passwordErr = null;
 
         for(let err of this.state.errors) {
-            if(err.elm === "phoneNumber") {
-                phoneNumberErr = err.msg;
+            if(err.elm === "name") {
+                nameErr = err.msg;
             }
             if(err.elm === "email") {
                 emailErr = err.msg;
@@ -135,17 +129,16 @@ export class AddAccountForm extends React.Component {
                 <div className="box">
 
                     <div className="inputGroup">
-                        <label htmlFor="phone_number">Phone Number</label>
+                        <label htmlFor="name">Name</label>
                         <input
-                            type="tel"
-                            name="phone_number"
+                            type="text"
+                            name="name"
                             className="loginInput"
-                            pattern={"[0-9]{3}[ -]?[0-9]{2}[ -]?[0-9]{3}"}
                             required
-                            placeholder="Phone Number"
-                            onChange={this.onPhoneNumberChange.bind(this)}
+                            placeholder="First and second name"
+                            onChange={this.onNameChange.bind(this)}
                         />
-                        <small className="passingError">{ phoneNumberErr ? phoneNumberErr : "" }</small>
+                        <small className="passingError">{ nameErr ? nameErr : "" }</small>
                     </div>
 
                     <div className="inputGroup">

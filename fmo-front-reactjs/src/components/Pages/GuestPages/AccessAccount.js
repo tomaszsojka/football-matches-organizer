@@ -41,7 +41,7 @@ export class AccessAccount extends React.Component {
                 </div>
                 <div className="boxContainer">
                     {this.state.isLoginOpen && <Login/>}
-                    {this.state.isRegisterOpen && <AddAccountForm title="Register" userRole="client" submitRedirect={this.showLoginBox.bind(this)}/>}
+                    {this.state.isRegisterOpen && <AddAccountForm title="Register" userRole="user" submitRedirect={this.showLoginBox.bind(this)}/>}
 
                 </div>
             </div>

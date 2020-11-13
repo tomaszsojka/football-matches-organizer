@@ -5,7 +5,6 @@ class Auth {
         //window.sessionStorage.setItem('token', token);
         window.sessionStorage.setItem('role', role);
         window.sessionStorage.setItem('email', email);
-        window.sessionStorage.setItem('phoneNumber', phoneNumber);
         window.sessionStorage.setItem('auth', 'true');
     }
 
@@ -17,7 +16,6 @@ class Auth {
         //window.sessionStorage.removeItem('token');
         window.sessionStorage.removeItem('role');
         window.sessionStorage.removeItem('email');
-        window.sessionStorage.removeItem('phoneNumber');
         window.sessionStorage.removeItem('auth');
     }
 
@@ -30,10 +28,6 @@ class Auth {
     }
     getEmail() {
         return window.sessionStorage.getItem('email');
-    }
-
-    getPhoneNumber() {
-        return window.sessionStorage.getItem('phoneNumber');
     }
 
     // getToken() {
