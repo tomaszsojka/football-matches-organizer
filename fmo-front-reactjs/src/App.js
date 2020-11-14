@@ -1,8 +1,8 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch, Redirect, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 
 import UserRoot from "./components/UserRoot";
-import {Navigation} from "./components/Navigation/Navigation";
 
 import GuestHome from "./components/Pages/GuestPages/GuestHome";
 import {Posts} from "./components/Pages/UserPages/Posts";
@@ -26,36 +26,37 @@ function App() {
       </Switch> */}
       
       <Switch>
-      <Route  exact path={"/"} component={GuestHome}/>
-      <Route
-        path="/user"
-        render={({ match: { url } }) => (
-          <UserRoot>
-            <Route path={`${url}/posts`} component={Posts} />
-          </UserRoot>
-        )}
-      />
-      {/* <Route exact path={"/user/:rest"} 
-        render={({ match }) => (
-          
-          <>
-          {urls.some(url => match.params.rest === url || "" === url) 
-            ? 
+        <Route  exact path={"/"} component={GuestHome}/>
+
+        <Route
+          path="/user"
+          render={({ match: { url } }) => (
             <UserRoot>
-              <br/>
-              <br/>
-              <br/>
-              <h1>{match.isExact.toString()}</h1>
-              {match.params.rest === `${urls[0]}` && <Route exact path={`${match.url}`} component={Posts}/>}
-            </UserRoot> 
-            : 
-            <Route component={Error}/> 
-          }
-          </>
-           
-        )} 
-      /> */}
-      <Route component={Error}/>
+              <Route path={`${url}/posts`} component={Posts} />
+            </UserRoot>
+          )}
+        />
+        {/* <Route exact path={"/user/:rest"} 
+          render={({ match }) => (
+            
+            <>
+            {urls.some(url => match.params.rest === url || "" === url) 
+              ? 
+              <UserRoot>
+                <br/>
+                <br/>
+                <br/>
+                <h1>{match.isExact.toString()}</h1>
+                {match.params.rest === `${urls[0]}` && <Route exact path={`${match.url}`} component={Posts}/>}
+              </UserRoot> 
+              : 
+              <Route component={Error}/> 
+            }
+            </>
+            
+          )} 
+        /> */}
+        <Route component={Error}/>
       </Switch>
 
     </Router>
