@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 const db = require('./config/keys').mongoURI;
 //Connect to mongoDB
 mongoose
-    .connect(process.env.MONGODB_URI || db, {
+    .connect(process.env.MONGO_URI || db, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true
