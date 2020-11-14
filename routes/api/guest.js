@@ -5,7 +5,6 @@ const UserSession = require('../../models/UserSession');
 const router = express.Router();
 
 router.post('/register', (req, res) => {
-  console.log("Register start on server side");
   const { body } = req;
   const {
       name,
@@ -18,21 +17,21 @@ router.post('/register', (req, res) => {
 
   User.find({
     email : email  
-  }, (err, previousUser) => {
+  }, (err, previousUsers) => {
     if(err) {
       return res.send({
         success : false,
         message : "Error: Server error"
       });
-    } else if(previousUser.length > 0){
+    } else if(previousUsers.length > 0){
+      console.log(previousUsers.length);
       return res.send({
         success : false,
-        message : "Error: Account already exists"
+        message : "An account with the given email exists."
       }); 
     }
-
+    console.log(previousUsers.length);
     //Save new user
-    console.log("Saving new user");
     const newUser = new User();
     newUser.name = name;
     newUser.email = email;

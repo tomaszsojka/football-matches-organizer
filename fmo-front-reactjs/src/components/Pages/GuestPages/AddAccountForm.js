@@ -92,14 +92,18 @@ export class AddAccountForm extends React.Component {
             sendHttpRequest('POST', path, this.state)
                 .then(responseData => {
                     console.log(responseData);
-                    //if redirecting function is not passed as a prop variable is null
-                    let submitRedirect = this.props.submitRedirect || null;
-                    if(submitRedirect) {
-                        this.props.submitRedirect();
+                    if(!responseData.success) {
+                        this.showValidationErr("email", responseData.message);
+                    } else {
+                        //if redirecting function is not passed as a prop variable is null
+                        let submitRedirect = this.props.submitRedirect || null;
+                        if(submitRedirect) {
+                            this.props.submitRedirect();
+                        }
                     }
                 })
                 .catch(err => {
-                    this.showValidationErr("email", " An account with the given email exists.");
+                    this.showValidationErr("password", " Server error");
                     console.log(err, err.data);
                 });
         }
