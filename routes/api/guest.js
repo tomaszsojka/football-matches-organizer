@@ -123,5 +123,70 @@ router.post('/login', (req, res) => {
   });
 });
 
+router.get('/verify', (req, res, next) => {
+
+  const { query } = req;
+  const { token } = query;
+
+  console.log(query);
+  UserSession.find({
+    _id : token,
+    isDeleted : false
+  }, (err, sessions) => {
+     if(err) {
+       return res.send({
+        success : false,
+        message : 'Error : Server error'
+       });
+     }
+
+     if(sessions.length != 1) {
+      return res.send({
+        success : false,
+        message : 'Error : Invalid'
+       });
+     } else {
+      return res.send({
+        success : true,
+        message : 'Good'
+       });
+     }
+  });
+});
+
+router.get('/logout', (req, res, next) => { 
+  
+  const { query } = req;
+  const { token } = query;
+
+  console.log(query);
+  UserSession.findOneAndUpdate({
+    _id : token,
+    isDeleted : false
+  }, {
+    $set: {
+      isDeleted: true
+    }
+  }, null, (err, session) => {
+     if(err) {
+       return res.send({
+        success : false,
+        message : 'Error : Server error'
+       });
+     }
+
+     if(!session) {
+      return res.send({
+        success : false,
+        message : 'Error : Session does not exist'
+       });
+     } else {
+      return res.send({
+        success : true,
+        message : 'Good'
+      });
+    }
+  });
+});
 
 module.exports = router;

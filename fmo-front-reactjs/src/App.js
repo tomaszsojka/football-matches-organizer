@@ -27,7 +27,12 @@ function App() {
       
       <Switch>
         <Route  exact path={"/"} component={GuestHome}/>
-
+        {/* <PrivateRoute path={"/user"} 
+          render={({ match: { url } }) => (
+            <UserRoot>
+              <Route path={`${url}/posts`} render={() => <Posts/>} />
+            </UserRoot>
+          )}/> */}
         <Route
           path="/user"
           render={({ match: { url } }) => (

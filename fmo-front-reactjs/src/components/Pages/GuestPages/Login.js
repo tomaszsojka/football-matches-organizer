@@ -10,11 +10,15 @@ export class Login extends React.Component {
     constructor(props) {
         super(props);
         let role = auth.getRole();
+        let token = auth.getToken();
+        console.log("TOKEN");
+        console.log(token);
         this.state = {
             email : "",
             password: "",
             errors: [],
-            role: role
+            role: role,
+            token: token
         };
     }
 
@@ -74,13 +78,20 @@ export class Login extends React.Component {
         if(isError === false) {
             sendHttpRequest('POST', '/api/guest/login', this.state)
                 .then(responseData => {
-                    var tmpRole = responseData.role[0].toUpperCase();
-                    console.log(tmpRole);
-                    auth.login(tmpRole, responseData.email);
-                    this.setState({role: tmpRole })
+                    if(!responseData.success) {
+                        this.showValidationErr("email", responseData.message);
+                    } else {
+                        var tmpRole = 'U';
+                        console.log(responseData.token);
+                        auth.login(responseData.token, tmpRole);
+                        this.setState({
+                            token: responseData.token,
+                            role: tmpRole 
+                        });
+                    }
                 })
                 .catch(err => {
-                    this.showValidationErr("email", " Invalid email or password.");
+                    this.showValidationErr("email", "Server error");
                     console.log(err);
                 });
 
@@ -94,6 +105,7 @@ export class Login extends React.Component {
 
         let emailErr = null, passwordErr = null;
         let role = this.state.role;
+        let token = this.state.token;
 
         for(let err of this.state.errors) {
             if(err.elm === "email") {
@@ -103,8 +115,10 @@ export class Login extends React.Component {
                 passwordErr = err.msg;
             }
         }
-        if (role === 'U')
-            return <Redirect to='/user'/>;
+        if (token && role === 'U') {
+            window.location.reload(false);
+            // return <Redirect to='/user'/>;
+        }
 
         return (
             <div >
