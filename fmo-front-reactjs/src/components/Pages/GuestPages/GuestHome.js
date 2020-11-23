@@ -6,6 +6,7 @@ import {Redirect} from "react-router-dom";
 import auth from "../../../Auth";
 
 function GuestHome(props) {
+  
   console.log(auth.getToken());
   if (auth.getToken()) {
     return <Redirect to="/user"/>

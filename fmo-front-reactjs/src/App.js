@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 
 import UserRoot from "./components/UserRoot";
@@ -33,35 +33,23 @@ function App() {
               <Route path={`${url}/posts`} render={() => <Posts/>} />
             </UserRoot>
           )}/> */}
-        <Route
-          path="/user"
-          render={({ match: { url } }) => (
-            <UserRoot>
-              <Route path={`${url}/posts`} component={Posts} />
-            </UserRoot>
-          )}
-        />
-        {/* <Route exact path={"/user/:rest"} 
-          render={({ match }) => (
-            
-            <>
-            {urls.some(url => match.params.rest === url || "" === url) 
-              ? 
-              <UserRoot>
-                <br/>
-                <br/>
-                <br/>
-                <h1>{match.isExact.toString()}</h1>
-                {match.params.rest === `${urls[0]}` && <Route exact path={`${match.url}`} component={Posts}/>}
-              </UserRoot> 
-              : 
-              <Route component={Error}/> 
-            }
-            </>
-            
-          )} 
-        /> */}
-        <Route component={Error}/>
+        <Route path={"/user"}>
+          <UserRoot>
+            <Switch>
+              <Route exact path={"/user/posts"}>
+                <Posts/>
+              </Route>
+              <Error message={"User path do not exist!"}/>
+            </Switch>
+          </UserRoot>
+        </Route>
+        <Route exact path={"/401"}>
+          <Error message="Authentication error, go back to main page and login!"/>
+        </Route>
+        <Route exact path={"/404"}>
+          <Error message="Path do not exist!"/>
+        </Route>
+        <Redirect to={"/404"}/>
       </Switch>
 
     </Router>

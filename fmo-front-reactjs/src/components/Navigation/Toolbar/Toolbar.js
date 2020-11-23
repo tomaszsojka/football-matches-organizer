@@ -7,9 +7,14 @@ import Auth from "../../../Auth";
 function Toolbar (props) {
 
     const openCloseDropDownMenu = () => {
+        props.dropDownMenuClickHandler(!props.isOpen);
+    }
+
+    const logout = () => {
+        
         //TODO delete
         Auth.logout();
-        props.dropDownMenuClickHandler(!props.isOpen);
+        window.location.reload(false);
     }
 
     return(
@@ -30,7 +35,7 @@ function Toolbar (props) {
                         <li><Link to="/user/teams" onClick={() => openCloseDropDownMenu()}>TEAMS</Link></li>
                         <li><Link to="/user/contact" onClick={() => openCloseDropDownMenu()}>CONTACT</Link></li>
                         <li>
-                            <Link to="/user/profile" onClick={() => openCloseDropDownMenu()}>
+                            <Link to="/user/profile" onClick={() => logout()}>
                                 <ion-icon className="acc-icon" color = "white" name="person"></ion-icon>
                             </Link>
                         </li>

@@ -18,7 +18,7 @@ class Auth {
     }
 
     isAuthenticated() {
-        return window.localStorage.getItem("auth");
+        return window.localStorage.getItem("auth") ? window.localStorage.getItem('auth') : null;
     }
 
     getRole() {

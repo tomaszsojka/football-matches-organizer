@@ -9,16 +9,12 @@ export class Login extends React.Component {
 
     constructor(props) {
         super(props);
-        let role = auth.getRole();
-        let token = auth.getToken();
-        console.log("TOKEN");
-        console.log(token);
         this.state = {
             email : "",
             password: "",
             errors: [],
-            role: role,
-            token: token
+            role: "",
+            token: null
         };
     }
 
@@ -82,7 +78,6 @@ export class Login extends React.Component {
                         this.showValidationErr("email", responseData.message);
                     } else {
                         var tmpRole = 'U';
-                        console.log(responseData.token);
                         auth.login(responseData.token, tmpRole);
                         this.setState({
                             token: responseData.token,
@@ -94,10 +89,6 @@ export class Login extends React.Component {
                     this.showValidationErr("email", "Server error");
                     console.log(err);
                 });
-
-            
-                //TODO delete
-                // this.setState({role: 'U'});
         }
     }
 
@@ -116,8 +107,8 @@ export class Login extends React.Component {
             }
         }
         if (token && role === 'U') {
-            window.location.reload(false);
-            // return <Redirect to='/user'/>;
+            // window.location.reload(false);
+             return <Redirect to='/user'/>;
         }
 
         return (
