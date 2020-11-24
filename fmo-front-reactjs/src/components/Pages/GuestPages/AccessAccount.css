@@ -37,7 +37,7 @@
     display: flex;
     -webkit-box-shadow: var(--login-box-shadow);
     box-shadow: var(--login-box-shadow);
-    border-radius: 6px;
+    border-radius: var(--container-border-radius);
     margin-bottom: 2em;
     align-items: center;
     
@@ -59,7 +59,7 @@
 
 .boxContainer {
     box-shadow: var(--login-box-shadow);
-    border-radius: 6px;
+    border-radius: var(--container-border-radius);
     padding: 25px;
 }
 
@@ -110,7 +110,7 @@
     padding: 2px 30px;
     border: 0;
     font-size: 1.125rem;
-    border-radius: 3px;
+    border-radius: var(--button-border-radius);
     background-color: var(--light-grey);
     margin-top: 2em;
     border: 3px solid darkgreen;

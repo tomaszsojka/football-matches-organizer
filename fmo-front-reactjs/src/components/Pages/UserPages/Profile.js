@@ -1,9 +1,56 @@
 import React from "react";
 
 import "./Profile.css";
+import {sendHttpRequest} from "../../../Fetch/useFetch"
+import auth from "../../../Auth";
 
 
 export class Profile extends React.Component {
+
+    state = {
+        token: null,
+        name: "",
+        email: "",
+        password: ""
+    };
+
+    componentDidMount() {
+        this.setState({token : auth.getToken()});
+        sendHttpRequest('GET', '/api/user/profileData?token=' + this.status.token)
+        .then(responseData => {
+            console.log(responseData);
+            if(responseData.success) {
+                this.setState({
+                    name: responseData.name,
+                    email: responseData.email,
+                    password: responseData.password
+                });
+            }
+            console.log(responseData.message);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+    onSubmitLogout() {
+        console.log("LOGOUT");
+        sendHttpRequest('GET', '/api/user/logout?token=' + this.status.token)
+        .then(responseData => {
+            console.log(responseData);
+            if(responseData.success) {
+                //clean localStorage
+                auth.logout();
+                //Refresh page if logout success
+                window.location.reload();
+            }
+            console.log(responseData.message);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
     render() {
         return (
             <div className="main-container profile-container">
@@ -57,7 +104,7 @@ export class Profile extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <button type="button" className="subPageBtn">Logout</button>
+                    <button type="button" className="subPageBtn" onClick={() => this.onSubmitLogout()}>Logout</button>
                         
                 </div>
             </div>

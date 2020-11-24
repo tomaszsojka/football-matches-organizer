@@ -22,12 +22,12 @@
     margin: 0 auto;
     margin-bottom: 36px;
     min-height: 500px;
-    width: 100%;
-    max-width: 500px;
+    width: 95%;
+    max-width: 600px;
 }
 
 .profileContentContainer {
-    border-radius: 6px;
+    border-radius: var(--container-border-radius);
     padding: 5px;   
 }
 
@@ -59,7 +59,7 @@
     padding: 0 10px;
     border: 0;
     font-size: 1.125rem;
-    border-radius: 3px;
+    border-radius: var(--button-border-radius);
     background-color: var(--light-grey);
     box-shadow: var(--toolbar-text-shadow);
     /* border: 3px solid darkgreen; */
@@ -79,7 +79,7 @@
     padding: 2px 30px;
     border: 0;
     font-size: 1.125rem;
-    border-radius: 3px;
+    border-radius: var(--button-border-radius);
     background-color: var(--light-grey);
     margin-top: 2em;
     border: 3px solid darkgreen;
@@ -101,7 +101,7 @@
     margin: 0 auto;
     margin-bottom: 1em;
     object-fit: cover;    
-    border-radius: 50%;
+    border-radius: var(--round-radius);
 }
 
 @media (min-width: 500px) {
@@ -125,7 +125,7 @@
     background-color: var(--light-grey);
     margin: 1em 0;
     padding: 0.5em;
-    border-radius: 3px;
+    border-radius: var(--button-border-radius);
 }
 
 .inviteContent {
@@ -142,7 +142,7 @@
     height: 50px;
     margin-right: 1em;
     object-fit: cover;    
-    border-radius: 50%;
+    border-radius: var(--round-radius);
 }
 
 .invite-buttons {

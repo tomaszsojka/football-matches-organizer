@@ -56,14 +56,11 @@ router.post('/register', (req, res) => {
 
 
 router.post('/login', (req, res) => {
-  console.log("Login start on server side");
   const { body } = req;
   const {
       email,
       password
     } = body;
-
-  console.log(body);
 
   User.find({
     email : email  
@@ -120,72 +117,6 @@ router.post('/login', (req, res) => {
   //     console.log(`NIEOK : ${body.email}   ${userRes.email}`);
   //     res.status(401).json({msg : "User not exists"});
   // }
-  });
-});
-
-router.get('/verify', (req, res, next) => {
-
-  const { query } = req;
-  const { token } = query;
-
-  console.log(query);
-  UserSession.find({
-    _id : token,
-    isDeleted : false
-  }, (err, sessions) => {
-     if(err) {
-       return res.send({
-        success : false,
-        message : 'Error : Server error'
-       });
-     }
-
-     if(sessions.length != 1) {
-      return res.send({
-        success : false,
-        message : 'Error : Invalid'
-       });
-     } else {
-      return res.send({
-        success : true,
-        message : 'Good'
-       });
-     }
-  });
-});
-
-router.get('/logout', (req, res, next) => { 
-  
-  const { query } = req;
-  const { token } = query;
-
-  console.log(query);
-  UserSession.findOneAndUpdate({
-    _id : token,
-    isDeleted : false
-  }, {
-    $set: {
-      isDeleted: true
-    }
-  }, null, (err, session) => {
-     if(err) {
-       return res.send({
-        success : false,
-        message : 'Error : Server error'
-       });
-     }
-
-     if(!session) {
-      return res.send({
-        success : false,
-        message : 'Error : Session does not exist'
-       });
-     } else {
-      return res.send({
-        success : true,
-        message : 'Good'
-      });
-    }
   });
 });
 

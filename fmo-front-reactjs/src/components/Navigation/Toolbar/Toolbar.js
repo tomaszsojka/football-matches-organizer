@@ -10,19 +10,12 @@ function Toolbar (props) {
         props.dropDownMenuClickHandler(!props.isOpen);
     }
 
-    const logout = () => {
-        
-        //TODO delete
-        Auth.logout();
-        window.location.reload(false);
-    }
-
     return(
         <header className={`toolbar ${props.isOpen ? " show-navigation-items" : ""}`}>
             <nav>
                 <div className="toolbar-base">
                     <div className="logo">
-                    <Link to="/user" onClick={() => logout()}>LOGO</Link>
+                    <Link to="/user" onClick={() => openCloseDropDownMenu()}>LOGO</Link>
                     </div>
                     <ion-icon class="menu-icon" name="menu-outline" onClick={() => openCloseDropDownMenu()}></ion-icon>
                 </div>

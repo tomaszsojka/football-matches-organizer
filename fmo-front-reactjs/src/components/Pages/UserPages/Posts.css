@@ -135,7 +135,7 @@ Articles
     width: 40px;
     height: 40px;
     object-fit: cover;    
-    border-radius: 50%;
+    border-radius: var(--round-radius);
 }
 
 .comment-container {
@@ -152,7 +152,7 @@ Articles
     height: 25px;
     margin-right: 5px;
     object-fit: cover;    
-    border-radius: 50%;
+    border-radius: var(--round-radius);
 }
 
 
