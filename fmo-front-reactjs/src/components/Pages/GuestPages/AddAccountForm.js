@@ -127,7 +127,7 @@ export class AddAccountForm extends React.Component {
 
         return (
             <div>
-                <div className="header">
+                <div className="account-header">
                     {this.props.title}
                 </div>
                 <div className="box">

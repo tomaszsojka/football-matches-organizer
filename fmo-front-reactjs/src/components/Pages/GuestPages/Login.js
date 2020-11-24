@@ -113,7 +113,7 @@ export class Login extends React.Component {
 
         return (
             <div >
-                <div className="header">
+                <div className="account-header">
                     Login
                 </div>
                 <div className="box">

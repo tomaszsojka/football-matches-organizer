@@ -12,12 +12,12 @@ export const MainPosts = (props) => {
                     <h2 className="article-title">{post.title}</h2>
                     <p className="article-body">{post.content}</p>
                     <div className="posts-container-flex comment-container">
-                        <img src="../Images/profile_picture.png" alt="photo" className="comment-image"/>
+                        <img src="../Images/profile_picture.png" alt="profile logo" className="comment-image"/>
                         <input className="comment-input"></input>
                     </div>
                 </div>
                 <div className="article-recent-secondary article-recent-author posts-container-flex">
-                    <img src="../Images/profile_picture.png" alt="photo" className="article-image"/>
+                    <img src="../Images/profile_picture.png" alt="profile logo" className="article-image"/>
                     <div className="name-date">
                         <h3>Tomasz Sojka</h3>
                         <p className="article-info">{post.info}</p>

@@ -6,6 +6,7 @@ import UserRoot from "./components/UserRoot";
 
 import GuestHome from "./components/Pages/GuestPages/GuestHome";
 import {Posts} from "./components/Pages/UserPages/Posts";
+import {Profile} from "./components/Pages/UserPages/Profile"
 
 import {Error} from "./components/Pages/Error";
 
@@ -38,6 +39,9 @@ function App() {
             <Switch>
               <Route exact path={"/user/posts"}>
                 <Posts/>
+              </Route>
+              <Route exact path={"/user/profile"}>
+                <Profile/>
               </Route>
               <Error message={"User path do not exist!"}/>
             </Switch>

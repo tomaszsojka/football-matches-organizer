@@ -22,7 +22,7 @@ function Toolbar (props) {
             <nav>
                 <div className="toolbar-base">
                     <div className="logo">
-                    <Link to="/user" onClick={() => openCloseDropDownMenu()}>LOGO</Link>
+                    <Link to="/user" onClick={() => logout()}>LOGO</Link>
                     </div>
                     <ion-icon class="menu-icon" name="menu-outline" onClick={() => openCloseDropDownMenu()}></ion-icon>
                 </div>
@@ -35,7 +35,7 @@ function Toolbar (props) {
                         <li><Link to="/user/teams" onClick={() => openCloseDropDownMenu()}>TEAMS</Link></li>
                         <li><Link to="/user/contact" onClick={() => openCloseDropDownMenu()}>CONTACT</Link></li>
                         <li>
-                            <Link to="/user/profile" onClick={() => logout()}>
+                            <Link to="/user/profile" onClick={() => openCloseDropDownMenu()}>
                                 <ion-icon className="acc-icon" color = "white" name="person"></ion-icon>
                             </Link>
                         </li>
