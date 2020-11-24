@@ -12,7 +12,7 @@
     word-wrap: break-word;
     word-break: break-all;
     overflow-wrap: break-word;
-
+    margin-right: .5em;
 }
 
 .profile-container {

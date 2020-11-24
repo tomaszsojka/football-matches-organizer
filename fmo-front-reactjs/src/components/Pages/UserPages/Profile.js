@@ -7,23 +7,26 @@ import auth from "../../../Auth";
 
 export class Profile extends React.Component {
 
-    state = {
-        token: null,
-        name: "",
-        email: "",
-        password: ""
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            name : "",
+            email : "",
+            token: ""
+        };
+    }
 
     componentDidMount() {
-        this.setState({token : auth.getToken()});
-        sendHttpRequest('GET', '/api/user/profileData?token=' + this.status.token)
+        let tok = auth.getToken();
+        sendHttpRequest('GET', '/api/user/profileData?token=' + tok)
         .then(responseData => {
             console.log(responseData);
             if(responseData.success) {
                 this.setState({
                     name: responseData.name,
                     email: responseData.email,
-                    password: responseData.password
+                    // setstate in callback not to cause render() being called twice
+                    token : tok
                 });
             }
             console.log(responseData.message);
@@ -35,7 +38,7 @@ export class Profile extends React.Component {
 
     onSubmitLogout() {
         console.log("LOGOUT");
-        sendHttpRequest('GET', '/api/user/logout?token=' + this.status.token)
+        sendHttpRequest('GET', '/api/user/logout?token=' + this.state.token)
         .then(responseData => {
             console.log(responseData);
             if(responseData.success) {
@@ -52,6 +55,8 @@ export class Profile extends React.Component {
     }
 
     render() {
+        // this.setState({token : auth.getToken()});
+
         return (
             <div className="main-container profile-container">
                 
@@ -64,17 +69,17 @@ export class Profile extends React.Component {
                         
                         <div className="flex profileData">
                             <div className="profileData-placehold">Name:</div>
-                            <div>{`Tomasz Sojka`}</div>
+                            <div>{this.state.name}</div>
                             <div/>
                         </div>
                         <div className="flex profileData">
                             <div className="profileData-placehold">Email:</div>
-                            <div className="textWrap">{`tomasoj305@student.polsl.pl`}</div>
+                            <div className="textWrap">{this.state.email}</div>
                             <div/>
                         </div>
                         <div className="flex profileData">
                             <div className="profileData-placehold">Password:</div>
-                            <div >{`*********`}</div>
+                            <div className="textWrap">***** ***</div>
                             <button type="button" className="changeBtn">
                                 Edit
                             </button>
