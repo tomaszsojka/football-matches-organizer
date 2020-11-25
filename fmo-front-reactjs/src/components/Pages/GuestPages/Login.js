@@ -1,5 +1,5 @@
 import React from "react";
-import "./AccessAccount.css";
+import "./GuestPage.css";
 import {sendHttpRequest} from "../../../Fetch/useFetch";
 
 import auth from "../../../Auth";
@@ -112,13 +112,13 @@ export class Login extends React.Component {
         }
 
         return (
-            <div >
-                <div className="account-header">
+            <div className="boxContainer">
+                <div className="boxContainer-header bottomBorder">
                     Login
                 </div>
-                <div className="box">
+                <div className="flex box">
 
-                    <div className="inputGroup">
+                    <div className="flex inputGroup">
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
@@ -130,7 +130,7 @@ export class Login extends React.Component {
                         <small className="passingError">{ emailErr ? emailErr : "" }</small>
                     </div>
 
-                    <div className="inputGroup">
+                    <div className="flex inputGroup">
                         <label htmlFor="password">Password</label>
                         <input
                             type="password"
@@ -144,7 +144,7 @@ export class Login extends React.Component {
 
                     <button
                         type="button"
-                        className="loginBtn"
+                        className="greenBtn loginBtn"
                         onClick={this.submitLogin.bind(this)}>Login</button>
                 </div>
             </div>

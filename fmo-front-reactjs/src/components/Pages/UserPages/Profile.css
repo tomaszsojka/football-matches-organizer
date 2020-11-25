@@ -1,24 +1,4 @@
-.flex {
-    display: flex;
-    justify-content: space-between;
-}
-
-
-.bottom-border {
-    border-bottom: 2px solid darkgreen;
-}
-
-.textWrap {
-    word-wrap: break-word;
-    word-break: break-all;
-    overflow-wrap: break-word;
-    margin-right: .5em;
-}
-
 .profile-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     margin: 0 auto;
     margin-bottom: 36px;
     min-height: 500px;
@@ -26,73 +6,32 @@
     max-width: 600px;
 }
 
-.profileContentContainer {
-    border-radius: var(--container-border-radius);
-    padding: 5px;   
-}
-
-@media (min-width: 500px) {
-    .profileContentContainer {
-        padding: 25px;
-        box-shadow: var(--login-box-shadow);
-    }
-}
-
-.profile-header {
-    text-align: center;
-    padding: 5px;
-    margin-bottom: 1.1em;
-    font-size: 1.5rem;
-}
-
 .profileBox {
-    color: black;
-    display: flex;
+    color: var(--black);
     flex-direction: column;
     justify-content: center;
     padding-bottom: 1.344444444em;
 }
 
-
-
-.changeBtn {
-    padding: 0 10px;
-    border: 0;
+.editBtn {
+    padding: 2px 10px;
     font-size: 1.125rem;
     border-radius: var(--button-border-radius);
     background-color: var(--light-grey);
     box-shadow: var(--toolbar-text-shadow);
-    /* border: 3px solid darkgreen; */
     transition: var(--transition);
     cursor: pointer;
 }
 
-.chengeBtn:hover,
-.changeBtn:focus {
-    background-color: darkgreen;
+.editBtn:hover,
+.editBtn:focus {
+    background-color: var(--dark-grey);
     color: white;
 }
 
-
-
-.subPageBtn {
-    padding: 2px 30px;
-    border: 0;
-    font-size: 1.125rem;
-    border-radius: var(--button-border-radius);
-    background-color: var(--light-grey);
+.logoutBtn {
     margin-top: 2em;
-    border: 3px solid darkgreen;
-    transition: var(--transition);
-    cursor: pointer;
-
     width: 100%;
-}
-
-.subPageBtn:hover,
-.subPageBtn:focus {
-    background-color: darkgreen;
-    color: white;
 }
 
 .profile-image {
@@ -100,8 +39,6 @@
     height: 100px;
     margin: 0 auto;
     margin-bottom: 1em;
-    object-fit: cover;    
-    border-radius: var(--round-radius);
 }
 
 @media (min-width: 500px) {
@@ -112,6 +49,7 @@
 }
 
 .profileData {
+    justify-content: space-between;
     font-size: 1.2rem;
     margin: 1em 0;
 }
@@ -120,16 +58,19 @@
     margin-right: .5em;
 }
 
+.profileData-text {
+    margin-right: .5em;
+}
+
 .teamInvitation {
     align-items: center;
-    background-color: var(--light-grey);
+    background-color: var(--light-light-grey);
     margin: 1em 0;
     padding: 0.5em;
     border-radius: var(--button-border-radius);
 }
 
 .inviteContent {
-    
     width: 100%;
 }
 
@@ -138,11 +79,9 @@
 }
 
 .invite-image {
-    width: 50px;
-    height: 50px;
+    width: 57px;
+    height: 57px;
     margin-right: 1em;
-    object-fit: cover;    
-    border-radius: var(--round-radius);
 }
 
 .invite-buttons {

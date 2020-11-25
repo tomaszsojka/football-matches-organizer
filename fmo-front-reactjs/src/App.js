@@ -2,9 +2,9 @@ import React from 'react';
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 
-import UserRoot from "./components/UserRoot";
 
-import GuestHome from "./components/Pages/GuestPages/GuestHome";
+import GuestRoot from "./components/Pages/GuestPages/GuestRoot";
+import UserRoot from "./components/Pages/UserPages/UserRoot";
 import {Posts} from "./components/Pages/UserPages/Posts";
 import {Profile} from "./components/Pages/UserPages/Profile"
 
@@ -27,7 +27,7 @@ function App() {
       </Switch> */}
       
       <Switch>
-        <Route  exact path={"/"} component={GuestHome}/>
+        <Route  exact path={"/"} component={GuestRoot}/>
         {/* <PrivateRoute path={"/user"} 
           render={({ match: { url } }) => (
             <UserRoot>

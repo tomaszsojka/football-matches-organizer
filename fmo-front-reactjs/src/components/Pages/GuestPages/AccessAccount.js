@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./AccessAccount.css";
+import "./GuestPage.css";
 import {Login} from "./Login";
 import {AddAccountForm} from "./AddAccountForm";
 
@@ -28,8 +28,8 @@ export class AccessAccount extends React.Component {
 
     render() {
         return (
-            <div className=" accessAccount-container">
-                <div className="boxController">
+            <div className="accessAccount-container">
+                <div className="flex boxController">
                     <div className={"controller" + (this.state.isLoginOpen ? " selectedController" : "")}
                             onClick={this.showLoginBox.bind(this)}>
                         Login
@@ -39,11 +39,8 @@ export class AccessAccount extends React.Component {
                         Register
                     </div>
                 </div>
-                <div className="boxContainer">
-                    {this.state.isLoginOpen && <Login/>}
-                    {this.state.isRegisterOpen && <AddAccountForm title="Register" userRole="user" submitRedirect={this.showLoginBox.bind(this)}/>}
-
-                </div>
+                {this.state.isLoginOpen && <Login/>}
+                {this.state.isRegisterOpen && <AddAccountForm title="Register" userRole="user" submitRedirect={this.showLoginBox.bind(this)}/>}
             </div>
         );
     }

@@ -7,10 +7,15 @@ Variables
 :root {
     /* colors */
     --light-green: #2f9e13;
+    --dark-green: rgb(0, 100, 0);
     --darker-green: #1b3b13;
-    --light-grey: rgba(15, 15, 15, 0.03);
-    
+    --light-light-grey: rgba(15, 15, 15, 0.03);
+    --light-grey: #efefef;
+    --dark-grey : rgba(14, 17, 13, 0.75);
+    --black: black;
+    --error-red: #e74c3c;
     --clr-white: #fff;
+    
     --transition: all 0.3s linear;
     --box-shadow: 0px 0px 20px 0px rgba(15, 15, 15, 0.2);
     --login-box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
@@ -73,6 +78,8 @@ ion-icon {
     height: 1.2em;
 }
 
+/* GENERAL CLASSES */
+
 .main-container {
     margin-top: 60px;
 }
@@ -81,4 +88,66 @@ ion-icon {
     .main-container {
         margin-top: 90px;
     }
+}
+
+.flex {
+    display: flex;
+    /* justify-content: space-between; */
+}
+
+.bottomBorder {
+    border-bottom: 2px solid darkgreen;
+}
+
+.textWrap {
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow-wrap: break-word;
+}
+
+/* data container login / profile / teams */
+.boxContainer {
+    border-radius: var(--container-border-radius);
+    padding: 5px; 
+}
+
+@media (min-width: 500px) {
+    .boxContainer {
+        padding: 25px;
+        box-shadow: var(--login-box-shadow);
+    }
+}
+
+.boxContainer-header {
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 1.1em;
+    font-size: 1.5rem;
+}
+
+.user-image {
+    object-fit: cover;    
+    border-radius: 50%;
+}
+
+.team-image {
+    object-fit: cover;    
+    border-radius: 20%;
+}
+
+.greenBtn {
+    padding: 2px 30px;
+    font-size: 1.125rem;
+    border-radius: var(--button-border-radius);
+    background-color: var(--light-grey);
+    border: 3px solid darkgreen;
+    transition: var(--transition);
+    cursor: pointer;
+    
+}
+
+.greenBtn:hover,
+.greenBtn:focus {
+    background-color: darkgreen;
+    color: white;
 }

@@ -3,10 +3,10 @@
 
 .toolbar{
     width: 100%;
-    background: darkgreen;
+    background: var(--dark-green);
     border: none;
     text-shadow: var(--toolbar-text-shadow);
-    color: white;
+    color: var(--clr-white);
     font-weight: 300;
 
     position: fixed;
@@ -16,7 +16,6 @@
 }
 
 .toolbar-base {
-    display: flex;
     align-items: center;
     justify-content: space-between;
 
@@ -24,7 +23,6 @@
 }
 
 nav{
-    display: flex;
     flex-direction: column;
     
     box-shadow: var(--box-shadow);
@@ -49,7 +47,6 @@ nav{
 
 
 .toolbar-navigation-items ul{
-    display: flex;
     flex-direction: column;
     align-items: center;
     list-style: none;

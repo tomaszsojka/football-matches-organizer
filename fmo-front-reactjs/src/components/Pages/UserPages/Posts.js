@@ -14,12 +14,11 @@ export function Posts() {
     useEffect(() => {
         sendHttpRequest('GET', '/api/user/posts').then(responseData => {
             setData(responseData);
-            console.log(responseData);
         });
     }, []);
 
     return (
-        <div className="main-container posts-container posts-container-flex">
+        <div className="flex main-container posts-container posts-container-flex">
             <MainPosts posts={data} />
             <SideBar/>
         </div>

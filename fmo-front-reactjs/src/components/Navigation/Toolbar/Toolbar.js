@@ -12,8 +12,8 @@ function Toolbar (props) {
 
     return(
         <header className={`toolbar ${props.isOpen ? " show-navigation-items" : ""}`}>
-            <nav>
-                <div className="toolbar-base">
+            <nav className="flex">
+                <div className="flex toolbar-base">
                     <div className="logo">
                     <Link to="/user" onClick={() => openCloseDropDownMenu()}>LOGO</Link>
                     </div>
@@ -21,7 +21,7 @@ function Toolbar (props) {
                 </div>
                 {/* main nav */}
                 <div className={`toolbar-navigation-items`}>
-                    <ul>
+                    <ul className="flex">
                         {/* a was not closing ulist smoothly before reloading */}
                         <li><Link to="/user" onClick={() => openCloseDropDownMenu()}>HOME</Link></li>
                         <li><Link to="/user/posts" onClick={() => openCloseDropDownMenu()}>POSTS</Link></li>

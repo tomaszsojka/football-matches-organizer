@@ -1,5 +1,5 @@
 import React from "react";
-import "./AccessAccount.css"
+import "./GuestPage.css"
 import {sendHttpRequest} from "../../../Fetch/useFetch"
 
 /**
@@ -126,13 +126,13 @@ export class AddAccountForm extends React.Component {
         }
 
         return (
-            <div>
-                <div className="account-header">
+            <div className="boxContainer">
+                <div className="boxContainer-header bottomBorder">
                     {this.props.title}
                 </div>
-                <div className="box">
+                <div className="flex box">
 
-                    <div className="inputGroup">
+                    <div className="flex inputGroup">
                         <label htmlFor="name">Name</label>
                         <input
                             type="text"
@@ -145,7 +145,7 @@ export class AddAccountForm extends React.Component {
                         <small className="passingError">{ nameErr ? nameErr : "" }</small>
                     </div>
 
-                    <div className="inputGroup">
+                    <div className="flex inputGroup">
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
@@ -157,7 +157,7 @@ export class AddAccountForm extends React.Component {
                         <small className="passingError">{ emailErr ? emailErr : "" }</small>
                     </div>
 
-                    <div className="inputGroup">
+                    <div className="flex inputGroup">
                         <label htmlFor="password">Password</label>
                         <input
                             type="password"
@@ -170,7 +170,7 @@ export class AddAccountForm extends React.Component {
                     </div>
                     <button
                         type="button"
-                        className="loginBtn"
+                        className="greenBtn loginBtn"
                         onClick={this.submitAddAccount.bind(this)}>{this.props.title}</button>
                 </div>
             </div>

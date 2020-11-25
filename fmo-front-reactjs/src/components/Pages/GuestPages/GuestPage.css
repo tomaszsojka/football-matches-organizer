@@ -1,19 +1,18 @@
-.guestHome-container {    
+.guestRoot-container {    
     height: 100vh;
     margin: 10px;
     min-height: 600px;
-    display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
 }
 
-.guestHome-container h1 {
+.guestRoot-container h1 {
     font-size: 4rem;
     color: var(--light-green);
 }
 
-.guestHome-container p {
+.guestRoot-container p {
     color: var(--darker-green);
 }
 
@@ -24,7 +23,7 @@
 }
 
 @media (min-width: 800px) {
-    .guestHome-container {
+    .guestRoot-container {
         flex-direction: row;
     }
     .accessAccount-container {
@@ -34,7 +33,6 @@
 }
 
 .boxController {
-    display: flex;
     -webkit-box-shadow: var(--login-box-shadow);
     box-shadow: var(--login-box-shadow);
     border-radius: var(--container-border-radius);
@@ -57,29 +55,12 @@
     border-bottom: 2px solid darkgreen;
 }
 
-.boxContainer {
-    box-shadow: var(--login-box-shadow);
-    border-radius: var(--container-border-radius);
-    padding: 25px;
-}
-
-
-.account-header {
-    text-align: center;
-    padding: 5px;
-    margin-bottom: 1.1em;
-    font-size: 1.375rem;
-    border-bottom: 2px solid darkgreen;
-}
-
 .box {
-    display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .inputGroup {
-    display: flex;
     flex-direction: column;
     width: 100%;
     margin-top: 5px;
@@ -107,25 +88,11 @@
 }
 
 .loginBtn {
-    padding: 2px 30px;
-    border: 0;
-    font-size: 1.125rem;
-    border-radius: var(--button-border-radius);
-    background-color: var(--light-grey);
     margin-top: 2em;
-    border: 3px solid darkgreen;
-    transition: var(--transition);
-    cursor: pointer;
-}
-
-.loginBtn:hover,
-.loginBtn:focus {
-    background-color: darkgreen;
-    color: white;
 }
 
 .passingError {
-    color: #e74c3c;
+    color: var(--error-red);
     font-size: .9rem;
     padding-left: .1em;
 }
