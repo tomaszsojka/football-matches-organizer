@@ -1,0 +1,39 @@
+.teamsBox {
+    color: var(--black);
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 1.344444444em;
+}
+
+.teamBtn {
+    align-items: center;
+    margin: 1em 0;
+    padding: 0.5em;
+}
+
+.addTeamBtn {
+    text-align: center;
+    font-size: 1.125rem;
+    border-radius: var(--button-border-radius);
+    background-color: var(--dark-grey);
+    color: var(--clr-white);
+    box-shadow: var(--toolbar-text-shadow);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.addTeamBtn:hover,
+.addTeamBtn:focus {
+    background-color: var(--light-grey);
+    color: var(--black);
+}
+
+.teamTitle {
+    font-size: 1.3rem;
+}
+
+.teamsItem-image {
+    width: 63px;
+    height: 63px;
+    margin-right: 1em;
+}

@@ -1,9 +1,6 @@
 .profile-container {
-    margin: 0 auto;
     margin-bottom: 36px;
     min-height: 500px;
-    width: 95%;
-    max-width: 600px;
 }
 
 .profileBox {
@@ -11,22 +8,6 @@
     flex-direction: column;
     justify-content: center;
     padding-bottom: 1.344444444em;
-}
-
-.editBtn {
-    padding: 2px 10px;
-    font-size: 1.125rem;
-    border-radius: var(--button-border-radius);
-    background-color: var(--light-grey);
-    box-shadow: var(--toolbar-text-shadow);
-    transition: var(--transition);
-    cursor: pointer;
-}
-
-.editBtn:hover,
-.editBtn:focus {
-    background-color: var(--dark-grey);
-    color: white;
 }
 
 .logoutBtn {

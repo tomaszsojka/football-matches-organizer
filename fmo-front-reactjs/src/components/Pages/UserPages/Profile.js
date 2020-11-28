@@ -43,7 +43,7 @@ export class Profile extends React.Component {
             console.log(responseData);
 
             //TODO delete this line
-            auth.logout();
+            //auth.logout();
 
             if(responseData.success) {
                 //clean localStorage
@@ -62,7 +62,7 @@ export class Profile extends React.Component {
         // this.setState({token : auth.getToken()});
 
         return (
-            <div className="main-container profile-container">
+            <div className="main-container central-container profile-container">
                 
                 <div className="boxContainer">
                     <div className="boxContainer-header bottomBorder">
@@ -84,7 +84,7 @@ export class Profile extends React.Component {
                         <div className="flex profileData">
                             <div className="profileData-placehold">Password:</div>
                             <div className="textWrap profileData-text">***** ***</div>
-                            <button type="button" className="editBtn">
+                            <button type="button" className="greyBtn">
                                 Edit
                             </button>
                         </div>
@@ -97,8 +97,8 @@ export class Profile extends React.Component {
                             <div className="inviteContent">
                                 <p>Team Vestra Vesteris is inviting you to join</p>
                                 <div className="flex invite-buttons">
-                                    <div className="editBtn">join</div>
-                                    <div className="editBtn">delete</div>
+                                    <div className="greyBtn">join</div>
+                                    <div className="greyBtn">delete</div>
                                 </div>
                             </div>   
                         </div>
@@ -107,8 +107,8 @@ export class Profile extends React.Component {
                             <div className="inviteContent">
                                 <p>Team Bayern is inviting you to join</p>
                                 <div className="flex invite-buttons">
-                                    <div className="editBtn">join</div>
-                                    <div className="editBtn">delete</div>
+                                    <div className="greyBtn">join</div>
+                                    <div className="greyBtn">delete</div>
                                 </div>
                             </div>
                         </div>
