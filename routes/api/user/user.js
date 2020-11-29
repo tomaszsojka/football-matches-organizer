@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const User = require('../../models/User');
-const UserSession = require('../../models/UserSession');
-const posts = require('../../posts');
+const User = require('../../../models/User');
+const UserSession = require('../../../models/UserSession');
+const posts = require('../../../posts');
 
 router.get('/posts', (req, res) => {
     res.json(posts);
@@ -19,31 +19,31 @@ router.get('/profileData', (req, res) => {
         isDeleted : false
     }, (err, sessions) => {
         if(err) {
-        return res.send({
-        success : false,
-        message : 'Error : Server error'
-        });
+          return res.send({
+          success : false,
+          message : 'Error : Server error'
+          });
         }
 
         if(sessions.length != 1) {
-        return res.send({
-        success : false,
-        message : 'Error : Invalid'
-        });
+          return res.send({
+          success : false,
+          message : 'Error : Invalid'
+          });
         } else {
             User.find({
                 _id : sessions[0].userId 
             }, (err, users) => {
                 if(err) {
-                return res.send({
-                    success : false,
-                    message : "Error: Server error"
-                });
+                  return res.send({
+                      success : false,
+                      message : "Error: Server error"
+                  });
                 }  else if(users.length != 1) {
-                return res.send({
-                    success : false,
-                    message : "Error: Invalid"
-                });
+                  return res.send({
+                      success : false,
+                      message : "Error: Invalid"
+                  });
                 }
             
                 const user = users[0];
@@ -114,15 +114,15 @@ router.get('/logout', (req, res, next) => {
   
        if(!session) {
          console.log(token);
-        return res.send({
-          success : false,
-          message : 'Error : Session does not exist'
-         });
+          return res.send({
+            success : false,
+            message : 'Error : Session does not exist'
+          });
        } else {
-        return res.send({
-          success : true,
-          message : 'Logged out with success'
-        });
+          return res.send({
+            success : true,
+            message : 'Logged out with success'
+          });
       }
     });
 });

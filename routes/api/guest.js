@@ -24,7 +24,6 @@ router.post('/register', (req, res) => {
         message : "Error: Server error"
       });
     } else if(previousUsers.length > 0){
-      console.log(previousUsers.length);
       return res.send({
         success : false,
         message : "An account with the given email exists."

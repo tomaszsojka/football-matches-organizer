@@ -28,7 +28,8 @@ mongoose
 
 app.use('/api/guest', require('./routes/api/guest'));
 
-app.use('/api/user', require('./routes/api/user'));
+app.use('/api/user', require('./routes/api/user/user'));
+app.use('/api/user', require('./routes/api/user/teams'));
 
 app.use('/api/mobile', require('./routes/api/mobile'));
 

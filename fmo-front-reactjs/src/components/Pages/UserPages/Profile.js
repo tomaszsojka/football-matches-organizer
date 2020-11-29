@@ -84,7 +84,7 @@ export class Profile extends React.Component {
                         <div className="flex profileData">
                             <div className="profileData-placehold">Password:</div>
                             <div className="textWrap profileData-text">***** ***</div>
-                            <button type="button" className="greyBtn">
+                            <button type="button" className="greyBtn editBtn">
                                 Edit
                             </button>
                         </div>
@@ -97,8 +97,8 @@ export class Profile extends React.Component {
                             <div className="inviteContent">
                                 <p>Team Vestra Vesteris is inviting you to join</p>
                                 <div className="flex invite-buttons">
-                                    <div className="greyBtn">join</div>
-                                    <div className="greyBtn">delete</div>
+                                    <div className="greyBtn editBtn">join</div>
+                                    <div className="greyBtn editBtn">delete</div>
                                 </div>
                             </div>   
                         </div>
@@ -107,8 +107,8 @@ export class Profile extends React.Component {
                             <div className="inviteContent">
                                 <p>Team Bayern is inviting you to join</p>
                                 <div className="flex invite-buttons">
-                                    <div className="greyBtn">join</div>
-                                    <div className="greyBtn">delete</div>
+                                    <div className="greyBtn editBtn">join</div>
+                                    <div className="greyBtn editBtn">delete</div>
                                 </div>
                             </div>
                         </div>

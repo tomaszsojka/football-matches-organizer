@@ -43,6 +43,10 @@
     margin-right: .5em;
 }
 
+.editBtn {
+    padding: 2px 10px;
+}
+
 .teamInvitation {
     align-items: center;
     background-color: var(--light-light-grey);
