@@ -72,6 +72,10 @@ a:focus {
     color: var(--darker-green);
 }
 
+button {
+    font-family: 'Ubuntu', sans-serif;
+}
+
 
 ion-icon {
     width: 1.2em;
@@ -161,6 +165,7 @@ ion-icon {
 
 .greyBtn {
     font-size: 1.125rem;
+    border: none;
     border-radius: var(--button-border-radius);
     background-color: var(--light-grey);
     box-shadow: var(--toolbar-text-shadow);

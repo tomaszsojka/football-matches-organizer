@@ -16,6 +16,7 @@
     text-align: center;
     font-size: 1.125rem;
     padding: 0.5em;
+    border: none;
     border-radius: var(--button-border-radius);
     background-color: var(--dark-grey);
     color: var(--clr-white);

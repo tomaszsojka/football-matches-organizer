@@ -4,7 +4,6 @@ const router = express.Router();
 const Team = require('../../../models/Team');
 const User = require('../../../models/User');
 const UserSession = require('../../../models/UserSession');
-const teams = require('../../../teams');
 
 
 router.post('/add-team', (req, res) => {
@@ -31,7 +30,7 @@ router.post('/add-team', (req, res) => {
         message : "A team with the given name exists."
       }); 
     } else {
-        //no team with sgiven name 
+        //no team with given name 
         UserSession.find({
             _id : token,
             isDeleted : false 
@@ -77,16 +76,45 @@ router.post('/add-team', (req, res) => {
 
 
 router.get('/teams', (req, res) => {
-    Team.find({}, (err, teams) => {
+    const { query } = req;
+    const { token } = query;
+    
+    UserSession.find({
+        _id : token,
+        isDeleted : false 
+    }, (err, sessions) => {
         if(err) {
             return res.send({
             success : false,
             message : 'Error : Server error'
             });
-        } else {
-            return res.json(teams);
         }
-      });
+        if(sessions.length != 1) {
+            return res.send({
+            success : false,
+            message : 'Error : Invalid'
+            });
+        } else {
+            
+            Team.find({
+                playersIds : sessions[0].userId
+            }, (err, teams) => {
+                if(err) {
+                    return res.send({
+                    success : false,
+                    message : 'Error : Server error'
+                    });
+                } else {
+                    return res.send({
+                        teams : teams,
+                        currentUserId : sessions[0].userId
+                    });
+                }
+            });
+
+        }
+    });
+
 });
 
 

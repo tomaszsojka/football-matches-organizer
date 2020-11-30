@@ -9,7 +9,7 @@ const TeamSchema = new mongoose.Schema({
         type : String,
         default: ""
     },
-    PlayersIds : {
+    playersIds : {
         type : [String],
         default : []
     }

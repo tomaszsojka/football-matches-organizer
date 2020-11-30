@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./Profile.css";
-import {sendHttpRequest} from "../../../Fetch/useFetch"
+import {sendHttpRequest} from "../../../Fetch/useFetch";
 import auth from "../../../Auth";
 
 

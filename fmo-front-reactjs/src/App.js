@@ -7,7 +7,7 @@ import GuestRoot from "./components/Pages/GuestPages/GuestRoot";
 import UserRoot from "./components/Pages/UserPages/UserRoot";
 import {Posts} from "./components/Pages/UserPages/Posts";
 import {Profile} from "./components/Pages/UserPages/Profile";
-import {Teams} from "./components/Pages/UserPages/Teams";
+import {Teams} from "./components/Pages/UserPages/Teams/Teams";
 
 import {Error} from "./components/Pages/Error";
 
