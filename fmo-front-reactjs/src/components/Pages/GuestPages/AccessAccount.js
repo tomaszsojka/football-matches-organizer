@@ -40,7 +40,7 @@ class AccessAccount extends React.Component {
                     </div>
                 </div>
                 {this.state.isLoginOpen && <Login/>}
-                {this.state.isRegisterOpen && <AddAccount title="Register" docType="user" submitRedirect={this.showLoginBox.bind(this)}/>}
+                {this.state.isRegisterOpen && <AddAccount title="Register" userType="user" submitRedirect={this.showLoginBox.bind(this)}/>}
             </div>
         );
     }

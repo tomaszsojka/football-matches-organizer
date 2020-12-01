@@ -84,9 +84,9 @@ class AddAccount extends React.Component {
             //TODO check if its ok
             console.log("User data is ok");
 
-            var documentType = this.props.docType;
+            var userType = this.props.userType;
             var path;
-            if(documentType === "user") {
+            if(userType === "user") {
                 path = '/api/guest/register';
             }
             sendHttpRequest('POST', path, this.state)
