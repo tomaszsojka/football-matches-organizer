@@ -1,14 +1,14 @@
 import React from "react";
 
  import "./Teams.css";
-import {sendHttpRequest} from "../../../../Fetch/useFetch";
+import sendHttpRequest from "../../../../Fetch/useFetch";
 import auth from "../../../../Auth";
 
 import {TeamsList} from "./TeamsList";
 import { Redirect } from "react-router-dom";
 
 
-export class Teams extends React.Component {
+class Teams extends React.Component {
 
     constructor(props) {
         super(props);
@@ -59,3 +59,5 @@ export class Teams extends React.Component {
 
     }
 }
+
+export default Teams;

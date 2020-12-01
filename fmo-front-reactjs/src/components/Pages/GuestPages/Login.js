@@ -1,11 +1,11 @@
 import React from "react";
 import "./GuestPage.css";
-import {sendHttpRequest} from "../../../Fetch/useFetch";
+import sendHttpRequest from "../../../Fetch/useFetch";
 
 import auth from "../../../Auth";
 import {Redirect} from "react-router-dom";
 
-export class Login extends React.Component {
+class Login extends React.Component {
 
     constructor(props) {
         super(props);
@@ -150,5 +150,6 @@ export class Login extends React.Component {
             </div>
         );
     }
-
 }
+
+export default Login;

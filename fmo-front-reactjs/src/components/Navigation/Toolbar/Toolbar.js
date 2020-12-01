@@ -1,10 +1,9 @@
 import React from "react";
 import "./Toolbar.css";
 import {Link} from "react-router-dom";
-import Auth from "../../../Auth";
 
 
-function Toolbar (props) {
+const Toolbar = (props) => {
 
     const openCloseDropDownMenu = () => {
         props.dropDownMenuClickHandler(!props.isOpen);

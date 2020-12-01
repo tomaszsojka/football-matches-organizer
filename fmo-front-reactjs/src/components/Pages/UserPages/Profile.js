@@ -1,11 +1,11 @@
 import React from "react";
 
 import "./Profile.css";
-import {sendHttpRequest} from "../../../Fetch/useFetch";
+import sendHttpRequest from "../../../Fetch/useFetch";
 import auth from "../../../Auth";
 
 
-export class Profile extends React.Component {
+class Profile extends React.Component {
 
     constructor(props) {
         super(props);
@@ -120,3 +120,5 @@ export class Profile extends React.Component {
         );
     }
 }
+
+export default Profile;

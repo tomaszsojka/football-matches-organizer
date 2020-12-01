@@ -1,13 +1,11 @@
 import React from 'react';
 
 import "./GuestPage.css";
-import {AccessAccount} from "./AccessAccount";
+import AccessAccount from "./AccessAccount";
 import {Redirect} from "react-router-dom";
 import auth from "../../../Auth";
 
-function GuestRoot(props) {
-  
-  console.log(auth.getToken());
+const GuestRoot = (props) => {
   if (auth.getToken()) {
     return <Redirect to="/user"/>
   } else {

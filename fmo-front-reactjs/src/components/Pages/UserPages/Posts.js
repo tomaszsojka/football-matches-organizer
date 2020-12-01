@@ -1,28 +1,35 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 
 import "./Posts.css";
 
-import {MainPosts} from "./MainPosts";
-import {SideBar} from "./SideBar";
+import MainPosts from "./MainPosts";
+import SideBar from "./SideBar";
 
-import {sendHttpRequest} from "../../../Fetch/useFetch";
+import sendHttpRequest from "../../../Fetch/useFetch";
 
-export function Posts() {
-    
-    const [data, setData] = useState([]);
+class Posts extends React.Component {
 
-    useEffect(() => {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: []
+        };
+    }
+
+    componentDidMount() {
         sendHttpRequest('GET', '/api/user/posts').then(responseData => {
-            setData(responseData);
+            this.setState({data : responseData});
         });
-    }, []);
+    }
 
-    return (
-        <div className="flex main-container posts-container posts-container-flex">
-            <MainPosts posts={data} />
-            <SideBar/>
-        </div>
-    );
+    render() {
+        return (
+            <div className="flex main-container posts-container posts-container-flex">
+                <MainPosts posts={this.state.data} />
+                <SideBar/>
+            </div>
+        );
+    }
 }
 
-// export default Posts;
+export default Posts;

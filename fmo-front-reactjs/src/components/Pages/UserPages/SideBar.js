@@ -1,7 +1,7 @@
 import React from "react";
 import "./Posts.css";
 
-export const SideBar = (props) => {
+const SideBar = (props) => {
     return (
         <aside className="sidebar">
             <div className="sidebar-widget">
@@ -28,3 +28,5 @@ export const SideBar = (props) => {
         </aside>
     );
 }
+
+export default SideBar;

@@ -19,7 +19,7 @@ function useFetch(url) {
 export { useFetch };
 */
 
-export const sendHttpRequest = (method, url, data) => {
+const sendHttpRequest = (method, url, data) => {
     return fetch(url, {
         method: method,
         body: JSON.stringify(data),
@@ -38,3 +38,5 @@ export const sendHttpRequest = (method, url, data) => {
         return response.json();
     });
 };
+
+export default sendHttpRequest;

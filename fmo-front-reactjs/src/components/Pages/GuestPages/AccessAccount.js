@@ -1,11 +1,11 @@
 import React from "react";
 
 import "./GuestPage.css";
-import {Login} from "./Login";
-import {AddAccountForm} from "./AddAccountForm";
+import Login from "./Login";
+import AddDocument from "./AddDocument";
 
 
-export class AccessAccount extends React.Component {
+class AccessAccount extends React.Component {
 
     constructor(props) {
         super(props);
@@ -40,8 +40,10 @@ export class AccessAccount extends React.Component {
                     </div>
                 </div>
                 {this.state.isLoginOpen && <Login/>}
-                {this.state.isRegisterOpen && <AddAccountForm title="Register" userRole="user" submitRedirect={this.showLoginBox.bind(this)}/>}
+                {this.state.isRegisterOpen && <AddDocument title="Register" docType="user" submitRedirect={this.showLoginBox.bind(this)}/>}
             </div>
         );
     }
 }
+
+export default AccessAccount;

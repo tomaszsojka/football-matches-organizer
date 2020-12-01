@@ -1,11 +1,11 @@
 import React from "react";
 import "./GuestPage.css"
-import {sendHttpRequest} from "../../../Fetch/useFetch"
+import sendHttpRequest from "../../../Fetch/useFetch"
 
 /**
- * class for register and adding accounts by admin
+ * class for register and adding another documents to db like teams
  */
-export class AddAccountForm extends React.Component {
+class AddAccountForm extends React.Component {
 //TODO if we have time password strength bar
     constructor(props) {
         super(props);
@@ -84,9 +84,9 @@ export class AddAccountForm extends React.Component {
             //TODO check if its ok
             console.log("User data is ok");
 
-            var userRole = this.props.userRole;
+            var documentType = this.props.docType;
             var path;
-            if(userRole === "user") {
+            if(documentType === "user") {
                 path = '/api/guest/register';
             }
             sendHttpRequest('POST', path, this.state)
@@ -177,3 +177,5 @@ export class AddAccountForm extends React.Component {
         );
     }
 }
+
+export default AddAccountForm;
