@@ -62,7 +62,7 @@ class Profile extends React.Component {
         // this.setState({token : auth.getToken()});
 
         return (
-            <div className="main-container central-container profile-container">
+            <div className="main-container profile-container central-container ">
                 
                 <div className="boxContainer">
                     <div className="boxContainer-header bottomBorder">

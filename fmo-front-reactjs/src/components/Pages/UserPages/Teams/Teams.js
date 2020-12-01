@@ -15,6 +15,7 @@ class Teams extends React.Component {
         this.state = {
             token : "",
             isRedirect: false,
+            isAddTeamRedir: false,
             teams : [],
             userId : ""
         };
@@ -36,9 +37,15 @@ class Teams extends React.Component {
         this.setState({isRedirect : true});
     }
 
+    addTeamRedirect() {
+        this.setState({isAddTeamRedir : true});
+    }
+
     render() {
         if(this.state.isRedirect) {
             return <Redirect to={"/"}/>;
+        } else if(this.state.isAddTeamRedir) {
+            return <Redirect to={"/user/teams/add-team"}/>;
         } else {
             return (
                 <div className="main-container central-container">             
@@ -48,7 +55,7 @@ class Teams extends React.Component {
                         </div>
                         <TeamsList teams={this.state.teams} userId={this.state.userId} onTeamClick={() => this.teamRedirect()}/>
                         <div className="flex teamsBox">
-                            <button className="teamBtn addTeamBtn">
+                            <button className="teamBtn addTeamBtn" onClick={() => this.addTeamRedirect()}>
                                 <div className="teamTitle">Add new team</div>
                             </button>
                         </div>

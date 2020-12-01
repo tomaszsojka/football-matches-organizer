@@ -5,7 +5,7 @@ import sendHttpRequest from "../../../Fetch/useFetch"
 /**
  * class for register and adding another documents to db like teams
  */
-class AddAccountForm extends React.Component {
+class AddAccount extends React.Component {
 //TODO if we have time password strength bar
     constructor(props) {
         super(props);
@@ -178,4 +178,4 @@ class AddAccountForm extends React.Component {
     }
 }
 
-export default AddAccountForm;
+export default AddAccount;
