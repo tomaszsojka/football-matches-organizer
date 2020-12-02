@@ -5,7 +5,12 @@
     padding-bottom: 1.344444444em;
 }
 
+.teamsBox a {
+    width: 100%;
+}
+
 .teamBtn {
+    width: 100%;
     align-items: center;
     justify-content: space-between;
     margin: 1em 0;
@@ -13,6 +18,7 @@
 }
 
 .addTeamBtn {
+    width: 100%;
     text-align: center;
     font-size: 1.125rem;
     padding: 0.5em;

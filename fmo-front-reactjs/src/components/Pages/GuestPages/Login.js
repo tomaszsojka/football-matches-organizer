@@ -5,6 +5,10 @@ import sendHttpRequest from "../../../Fetch/useFetch";
 import auth from "../../../Auth";
 import {Redirect} from "react-router-dom";
 
+import { connect } from "react-redux";
+
+import { setToken, setUserId } from "../../../store/actions/authActions";
+
 class Login extends React.Component {
 
     constructor(props) {
@@ -12,9 +16,7 @@ class Login extends React.Component {
         this.state = {
             email : "",
             password: "",
-            errors: [],
-            role: "",
-            token: null
+            errors: []
         };
     }
 
@@ -79,10 +81,7 @@ class Login extends React.Component {
                     } else {
                         var tmpRole = 'U';
                         auth.login(responseData.token, tmpRole);
-                        this.setState({
-                            token: responseData.token,
-                            role: tmpRole 
-                        });
+                        this.props.login(responseData.token, responseData.userId);
                     }
                 })
                 .catch(err => {
@@ -95,8 +94,7 @@ class Login extends React.Component {
     render() {
 
         let emailErr = null, passwordErr = null;
-        let role = this.state.role;
-        let token = this.state.token;
+        let token = this.props.auth.token;
 
         for(let err of this.state.errors) {
             if(err.elm === "email") {
@@ -106,7 +104,7 @@ class Login extends React.Component {
                 passwordErr = err.msg;
             }
         }
-        if (token && role === 'U') {
+        if (token) {
             // window.location.reload(false);
              return <Redirect to='/user'/>;
         }
@@ -152,4 +150,21 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+
+const mapStateToProps = (state) => {
+    return {
+        auth: state.authReducer
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (token, userId) => {
+            dispatch(setToken(token));
+            dispatch(setUserId(userId));
+        }
+
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (Login);

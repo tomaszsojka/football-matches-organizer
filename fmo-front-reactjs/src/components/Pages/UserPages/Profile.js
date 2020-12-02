@@ -3,6 +3,8 @@ import React from "react";
 import "./Profile.css";
 import sendHttpRequest from "../../../Fetch/useFetch";
 import auth from "../../../Auth";
+import {connect} from "react-redux";
+import {cleanToken, cleanUserId} from "../../../store/actions/authActions";
 
 
 class Profile extends React.Component {
@@ -11,14 +13,13 @@ class Profile extends React.Component {
         super(props);
         this.state = {
             name : "",
-            email : "",
-            token: ""
+            email : ""
         };
     }
 
     componentDidMount() {
-        let tok = auth.getToken();
-        sendHttpRequest('GET', '/api/user/profileData?token=' + tok)
+        console.log(this.props.auth);
+        sendHttpRequest('GET', '/api/user/profileData?token=' + this.props.auth.token)
         .then(responseData => {
             console.log(responseData);
             if(responseData.success) {
@@ -26,7 +27,6 @@ class Profile extends React.Component {
                     name: responseData.name,
                     email: responseData.email,
                     // setstate in callback not to cause render() being called twice
-                    token : tok
                 });
             }
             console.log(responseData.message);
@@ -38,7 +38,7 @@ class Profile extends React.Component {
 
     onSubmitLogout() {
         console.log("LOGOUT");
-        sendHttpRequest('GET', '/api/user/logout?token=' + this.state.token)
+        sendHttpRequest('GET', '/api/user/logout?token=' + this.props.auth.token)
         .then(responseData => {
             console.log(responseData);
 
@@ -48,6 +48,8 @@ class Profile extends React.Component {
             if(responseData.success) {
                 //clean localStorage
                 auth.logout();
+                //clean redux storage
+                this.props.logout();
                 //Refresh page if logout success
                 window.location.reload();
             }
@@ -59,7 +61,6 @@ class Profile extends React.Component {
     }
 
     render() {
-        // this.setState({token : auth.getToken()});
 
         return (
             <div className="main-container profile-container central-container ">
@@ -121,4 +122,19 @@ class Profile extends React.Component {
     }
 }
 
-export default Profile;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.authReducer
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logout : () => {
+            dispatch(cleanToken());
+            dispatch(cleanUserId());
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (Profile);

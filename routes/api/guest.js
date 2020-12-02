@@ -103,7 +103,8 @@ router.post('/login', (req, res) => {
       return res.send({
         success : true,
         message : "Valid login",
-        token : doc._id
+        token : doc._id,
+        userId : user._id
       });
     });
 

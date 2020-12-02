@@ -5,6 +5,7 @@ import PrivateRoute from "./components/PrivateRoute";
 
 import GuestRoot from "./components/Pages/GuestPages/GuestRoot";
 import UserRoot from "./components/Pages/UserPages/UserRoot";
+import Home from "./components/Pages/UserPages/Home";
 import Posts from "./components/Pages/UserPages/Posts";
 import Profile from "./components/Pages/UserPages/Profile";
 import Teams from "./components/Pages/UserPages/Teams/Teams";
@@ -39,6 +40,9 @@ function App() {
         <Route path={"/user"}>
           <UserRoot>
             <Switch>
+              <Route exact path={"/user"}>
+                <Home/>
+              </Route>
               <Route exact path={"/user/posts"}>
                 <Posts/>
               </Route>
@@ -51,7 +55,7 @@ function App() {
               <Route exact path={"/user/teams/add-team"}>
                 <AddTeam/>
               </Route>
-              <Error message={"User path do not exist!"}/>
+              <Error message="User path do not exist!"/>
             </Switch>
           </UserRoot>
         </Route>

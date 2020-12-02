@@ -2,69 +2,60 @@ import React from "react";
 
  import "./Teams.css";
 import sendHttpRequest from "../../../../Fetch/useFetch";
-import auth from "../../../../Auth";
 
 import {TeamsList} from "./TeamsList";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+
+import { connect } from "react-redux";
+import { setTeamsList} from "../../../../store/actions/teamsActions";
 
 
 class Teams extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            token : "",
-            isRedirect: false,
-            isAddTeamRedir: false,
-            teams : [],
-            userId : ""
-        };
-    }
-
-
     componentDidMount() {
-        let tok = auth.getToken();
+        console.log(this.props);
+        let tok = this.props.auth.token;
         sendHttpRequest('GET', '/api/user/teams?token=' + tok).then(responseData => {
-            this.setState({
-                teams : responseData.teams,
-                userId : responseData.currentUserId,
-                token : tok
-            });
+            this.props.loadTeamsList(responseData.teams);
+            console.log(this.props.teams.teams);
         });
     }
 
-    teamRedirect() {
-        this.setState({isRedirect : true});
-    }
-
-    addTeamRedirect() {
-        this.setState({isAddTeamRedir : true});
-    }
-
     render() {
-        if(this.state.isRedirect) {
-            return <Redirect to={"/"}/>;
-        } else if(this.state.isAddTeamRedir) {
-            return <Redirect to={"/user/teams/add-team"}/>;
-        } else {
-            return (
-                <div className="main-container central-container">             
-                    <div className="boxContainer">
-                        <div className="boxContainer-header bottomBorder">
-                            Teams
-                        </div>
-                        <TeamsList teams={this.state.teams} userId={this.state.userId} onTeamClick={() => this.teamRedirect()}/>
-                        <div className="flex teamsBox">
-                            <button className="teamBtn addTeamBtn" onClick={() => this.addTeamRedirect()}>
+        console.log(this.props.teams.teams);
+        return (
+            <div className="main-container central-container">             
+                <div className="boxContainer">
+                    <div className="boxContainer-header bottomBorder">
+                        Teams
+                    </div>
+                    <TeamsList teams={this.props.teams.teams} userId={this.props.auth.userId}/>
+                    <div className="flex teamsBox">
+                        <Link to={"/user/teams/add-team"}>
+                            <button className="teamBtn addTeamBtn" >
                                 <div className="teamTitle">Add new team</div>
                             </button>
-                        </div>
+                        </Link>
                     </div>
-                </div>    
-            );
-        }
-
+                </div>
+            </div>    
+        );
     }
 }
 
-export default Teams;
+const mapStateToProps = (state) => {
+    return {
+        teams: state.teamsReducer,
+        auth: state.authReducer
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadTeamsList: (teams) => {
+            dispatch(setTeamsList(teams));
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (Teams);

@@ -65,6 +65,7 @@ input {
 
 a {
     color: var(--light-green);
+    text-decoration: none;
 }
 
 a:hover,

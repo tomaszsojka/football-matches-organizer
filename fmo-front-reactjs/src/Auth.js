@@ -4,7 +4,7 @@ class Auth {
         //const email = this.parseJwt(token);
         window.localStorage.setItem('token', token);
         window.localStorage.setItem('role', role);
-        window.localStorage.setItem('auth', 'true');
+        window.localStorage.setItem('auth', true);
     }
 
     saveId(id) {
