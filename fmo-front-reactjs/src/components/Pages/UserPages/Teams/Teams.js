@@ -22,7 +22,7 @@ class Teams extends React.Component {
     }
 
     render() {
-        console.log(this.props.teams.teams);
+        console.log(this.props.auth.userId);
         return (
             <div className="main-container central-container">             
                 <div className="boxContainer">

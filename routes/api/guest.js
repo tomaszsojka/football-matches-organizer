@@ -13,7 +13,6 @@ router.post('/register', (req, res) => {
     } = body;
 
   const role = "user";
-  console.log(body);
 
   User.find({
     email : email  
@@ -29,7 +28,6 @@ router.post('/register', (req, res) => {
         message : "An account with the given email exists."
       }); 
     }
-    console.log(previousUsers.length);
     //Save new user
     const newUser = new User();
     newUser.name = name;
@@ -77,21 +75,17 @@ router.post('/login', (req, res) => {
     }
 
     const user = users[0];
-    console.log("user 0");
     console.log(user);
     if(!user.validPassword(password)) {
-      console.log("valid password");
       return res.send({
         success : false,
         message : "Error: Invalid"
       });
     }
 
-    console.log("correct user");
     //Correct user
     const userSession = new UserSession();
     userSession.userId = user._id;
-    console.log(userSession);
     userSession.save((err, doc) => {
       if(err) {
         return res.send({
@@ -107,16 +101,6 @@ router.post('/login', (req, res) => {
         userId : user._id
       });
     });
-
-
-  // if(body.email === userRes.email && body.password === userRes.password) {
-  //   console.log("OK");
-  //   res.json(userRes);
-    
-  // } else {
-  //     console.log(`NIEOK : ${body.email}   ${userRes.email}`);
-  //     res.status(401).json({msg : "User not exists"});
-  // }
   });
 });
 

@@ -1,25 +1,17 @@
 import React from 'react';
 import {Navigation} from "../../Navigation/Navigation";
-import auth from "../../../Auth";
 import {Redirect} from "react-router-dom";
 
+import { connect } from "react-redux";
 
 const UserRoot = (props) => {
-    let token = auth.getToken();
-    let isAuth = auth.isAuthenticated();
-    if (token) {
-      if(!isAuth) {
-        return (
-          <Redirect to="/404"/>
-        );
-      }else {
-        return (
-          <div>
-            <Navigation/>
-            {props.children}
-          </div>
-        );
-      }
+    if (props.auth.token) {
+      return (
+        <div>
+          <Navigation/>
+          {props.children}
+        </div>
+      );
     } else {
       return (
         <Redirect to="/"/>
@@ -27,4 +19,16 @@ const UserRoot = (props) => {
     }
 }
 
-export default UserRoot;
+
+const mapStateToProps = (state) => {
+  return {
+      auth: state.authReducer
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (UserRoot);

@@ -2,12 +2,10 @@ import React from "react";
 import "./GuestPage.css";
 import sendHttpRequest from "../../../Fetch/useFetch";
 
-import auth from "../../../Auth";
 import {Redirect} from "react-router-dom";
-
 import { connect } from "react-redux";
 
-import { setToken, setUserId } from "../../../store/actions/authActions";
+import { login } from "../../../store/actions/authActions";
 
 class Login extends React.Component {
 
@@ -79,8 +77,6 @@ class Login extends React.Component {
                     if(!responseData.success) {
                         this.showValidationErr("email", responseData.message);
                     } else {
-                        var tmpRole = 'U';
-                        auth.login(responseData.token, tmpRole);
                         this.props.login(responseData.token, responseData.userId);
                     }
                 })
@@ -160,8 +156,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         login: (token, userId) => {
-            dispatch(setToken(token));
-            dispatch(setUserId(userId));
+            dispatch(login(token, userId));
         }
 
     };

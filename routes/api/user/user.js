@@ -47,8 +47,6 @@ router.get('/profileData', (req, res) => {
                 }
             
                 const user = users[0];
-                console.log("user 0");
-                console.log(user);
                 return res.send({
                     success : true,
                     message : "Profile data received from server",
@@ -65,7 +63,6 @@ router.get('/verify', (req, res, next) => {
     const { query } = req;
     const { token } = query;
   
-    console.log(query);
     UserSession.find({
       _id : token,
       isDeleted : false
@@ -96,7 +93,6 @@ router.get('/logout', (req, res, next) => {
     const { query } = req;
     const { token } = query;
   
-    console.log(query);
     UserSession.findOneAndUpdate({
       _id : token,
       isDeleted : false
@@ -113,7 +109,6 @@ router.get('/logout', (req, res, next) => {
        }
   
        if(!session) {
-         console.log(token);
           return res.send({
             success : false,
             message : 'Error : Session does not exist'

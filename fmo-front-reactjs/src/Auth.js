@@ -1,19 +1,12 @@
 class Auth {
 
-    login(token, role) {
-        //const email = this.parseJwt(token);
+    login(token) {
         window.localStorage.setItem('token', token);
-        window.localStorage.setItem('role', role);
         window.localStorage.setItem('auth', true);
-    }
-
-    saveId(id) {
-        window.localStorage.setItem("id", id);
     }
 
     logout() {
         window.localStorage.removeItem('token');
-        window.localStorage.removeItem('role');
         window.localStorage.removeItem('auth');
     }
 
@@ -21,15 +14,8 @@ class Auth {
         return window.localStorage.getItem("auth") ? window.localStorage.getItem('auth') : null;
     }
 
-    getRole() {
-        return window.localStorage.getItem('role');
-    }
     getToken() {
         return window.localStorage.getItem('token') ? window.localStorage.getItem('token') : null;
-    }
-
-    getId() {
-        return window.localStorage.getItem("id");
     }
 
     // parseJwt = (token) => {

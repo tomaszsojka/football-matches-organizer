@@ -2,9 +2,8 @@ import React from "react";
 
 import "./Profile.css";
 import sendHttpRequest from "../../../Fetch/useFetch";
-import auth from "../../../Auth";
 import {connect} from "react-redux";
-import {cleanToken, cleanUserId} from "../../../store/actions/authActions";
+import {logout} from "../../../store/actions/authActions";
 
 
 class Profile extends React.Component {
@@ -37,17 +36,13 @@ class Profile extends React.Component {
     }
 
     onSubmitLogout() {
-        console.log("LOGOUT");
         sendHttpRequest('GET', '/api/user/logout?token=' + this.props.auth.token)
         .then(responseData => {
             console.log(responseData);
 
-            //TODO delete this line
-            //auth.logout();
 
             if(responseData.success) {
                 //clean localStorage
-                auth.logout();
                 //clean redux storage
                 this.props.logout();
                 //Refresh page if logout success
@@ -131,8 +126,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         logout : () => {
-            dispatch(cleanToken());
-            dispatch(cleanUserId());
+            dispatch(logout());
         }
     };
 };

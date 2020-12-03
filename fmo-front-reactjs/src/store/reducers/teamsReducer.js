@@ -1,3 +1,4 @@
+import {SET_TEAMSLIST} from "../actions/types";
 
 const initialState = {
     teams : []
@@ -6,7 +7,7 @@ const initialState = {
         
 const teamsReducer = (state = initialState, action) => {
     switch(action.type) {
-        case "SET_TEAMSLIST":
+        case SET_TEAMSLIST:
             state = {
                 ...state,
                 teams: action.payload

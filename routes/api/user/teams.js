@@ -13,7 +13,6 @@ router.post('/add-team', (req, res) => {
       name
     } = body;
 
-  console.log(body);
 
   Team.find({
     name : name  
@@ -24,7 +23,6 @@ router.post('/add-team', (req, res) => {
         message : "Error: Server error"
       });
     } else if(previousTeams.length > 0){
-      console.log(previousTeams.length);
       return res.send({
         success : false,
         message : "A team with the given name exists."
@@ -41,7 +39,6 @@ router.post('/add-team', (req, res) => {
                     message : 'Error : Server error'
                     });
                 }
-                console.log(sessions);
                 if(sessions.length != 1) {
                     return res.send({
                     success : false,

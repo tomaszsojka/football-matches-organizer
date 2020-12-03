@@ -9,8 +9,8 @@ export const TeamsList = (props) => {
         <div  className="flex teamsBox bottomBorder">
             {/* key added because of error */}
             {props.teams.map((team) => 
-                <Link to={`/user/teams/${team.name}`}>
-                    <button key={team._id} className="flex teamBtn greyBtn">
+                <Link to={`/user/teams/${team.name}`} key={team._id}>
+                    <button className="flex teamBtn greyBtn">
                         <img src="../Images/vestra.jpg" alt="team logo" className="team-image teamsItem-image"/>
                         <div className="teamTitle">{team.name}</div> 
                         {/* if user is captain of a team show " C " sign on button, if not empty object*/}

@@ -1,25 +1,25 @@
-export function setToken(token) {
+import {
+  USER_LOADED,
+  USER_LOADING,
+  AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT_SUCCESS,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL
+} from './types';
+
+// Login User
+export const login = (token, userId) => {
     return {
-        type: "SET_TOKEN",
-        payload: token
-    };
+        type: LOGIN_SUCCESS,
+        payload: {token: token,userId: userId}
+    }
 };
 
-export function setUserId(userId) {
-    return {
-        type: "SET_USERID",
-        payload: userId
-    };
-}
-
-export function cleanToken() {
-    return {
-        type: "CLEAN_TOKEN"
-    };
+// Logout User
+export const logout = () => {
+  return {
+    type: LOGOUT_SUCCESS
+  };
 };
-
-export function cleanUserId() {
-    return {
-        type: "CLEAN_USERID"
-    };
-}

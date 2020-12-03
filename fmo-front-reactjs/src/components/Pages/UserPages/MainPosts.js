@@ -3,7 +3,6 @@ import "./Posts.css";
 
 
 const MainPosts = (props) => {
-    console.log(props.posts);
     return (
         <main role="main">
             {/* key added because of error */}

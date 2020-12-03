@@ -16,19 +16,9 @@ import Error from "./components/Pages/Error";
 
 function App() {
 
-  const urls = [
-    "posts"
-  ];
-  console.log(urls);
   return (
 
-    <Router >
-      {/* <Navigation/>
-      <Switch>
-        <Route exact path={"/posts"} component={Posts}/>
-        <Route exact path={"/access-account"} component={AccessAccount}/>
-      </Switch> */}
-      
+    <Router >      
       <Switch>
         <Route  exact path={"/"} component={GuestRoot}/>
         {/* <PrivateRoute path={"/user"} 
