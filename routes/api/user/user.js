@@ -89,7 +89,6 @@ router.get('/verify', (req, res, next) => {
 });  
 
 router.get('/logout', (req, res, next) => { 
-  
     const { query } = req;
     const { token } = query;
   

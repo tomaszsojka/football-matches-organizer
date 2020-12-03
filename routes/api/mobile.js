@@ -42,11 +42,6 @@ router.put('/update-matchinfo', (req, res) => {
               message : 'Error : Match does not exist'
             });
          } else {
-             console.log("HOMETEAM \n\n\n\n\n");
-             console.log(match.homeTeam);
-             
-             console.log("BODY \n\n\n\n\n");
-             console.log(body);
             return res.send({
               success : true,
               message : 'Match info updated with success'

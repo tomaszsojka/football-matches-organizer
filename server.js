@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const logger = require('./middleware/logger');
 const app = express();
 
+mongoose.set('useFindAndModify', false);
+
 
 //Body parser middelware
 app.use(express.json());
