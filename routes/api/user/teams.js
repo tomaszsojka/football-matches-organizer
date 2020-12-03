@@ -10,7 +10,8 @@ router.post('/add-team', (req, res) => {
     const { body } = req;
   const {
       token,
-      name
+      name,
+      location
     } = body;
 
 
@@ -50,7 +51,9 @@ router.post('/add-team', (req, res) => {
                     //Save new team with UserSession's userId as captain
                     const newTeam = new Team();
                     newTeam.name = name;
+                    newTeam.location = location;
                     newTeam.captainId = sessions[0].userId;
+                    newTeam.playersIds.push(sessions[0].userId);
                     console.log("Saving new team");
                     newTeam.save((err, team) => {
                         if(err) {

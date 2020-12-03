@@ -31,10 +31,8 @@ const matches = [
           {playername: "Joao Felix", tshirtnumber: "7", position: "LFW", yellowcards: "", redcards: "", scoredgoalstime: ""},
           {playername: "Luis Suarez", tshirtnumber: "9", position: "RFW", yellowcards: "", redcards: "", scoredgoalstime: ""}
       ],
-        score: "",
-        goalscorers: [],
-        yellowcards: [],
-        redcards: []
+        homescore: "",
+        awayscore: ""
     },
     {
         id: 2, 
@@ -68,10 +66,8 @@ const matches = [
           {playername: "Joao Felix", tshirtnumber: "7", position: "LFW", yellowcards: "", redcards: "", scoredgoalstime: ""},
           {playername: "Luis Suarez", tshirtnumber: "9", position: "RFW", yellowcards: "", redcards: "", scoredgoalstime: ""}
       ],
-        score: "",
-        goalscorers: [],
-        yellowcards: [],
-        redcards: []
+        homescore: "",
+        awayscore: ""
     },
     {
         id: 3, 
@@ -105,10 +101,8 @@ const matches = [
           {playername: "Joao Felix", tshirtnumber: "7", position: "LFW", yellowcards: "", redcards: "", scoredgoalstime: ""},
           {playername: "Luis Suarez", tshirtnumber: "9", position: "RFW", yellowcards: "", redcards: "", scoredgoalstime: ""}
       ],
-        score: "",
-        goalscorers: [],
-        yellowcards: [],
-        redcards: []
+        homescore: "",
+        awayscore: ""
     },
     {
         id: 4, 
@@ -142,10 +136,8 @@ const matches = [
           {playername: "Joao Felix", tshirtnumber: "7", position: "LFW", yellowcards: "", redcards: "", scoredgoalstime: ""},
           {playername: "Luis Suarez", tshirtnumber: "9", position: "RFW", yellowcards: "", redcards: "", scoredgoalstime: ""}
       ],
-        score: "",
-        goalscorers: [],
-        yellowcards: [],
-        redcards: []
+        homescore: "",
+        awayscore: ""
     }
   ];
 

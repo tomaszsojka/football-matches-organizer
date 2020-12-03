@@ -5,6 +5,10 @@ const TeamSchema = new mongoose.Schema({
         type : String,
         default: ''
     },
+    location : {
+        type : String,
+        default: ''
+    },
     captainId : {
         type : String,
         default: ""

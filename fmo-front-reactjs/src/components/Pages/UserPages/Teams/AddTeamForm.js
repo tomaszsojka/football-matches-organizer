@@ -1,18 +1,16 @@
 import React from "react";
-import "./GuestPage.css"
-import sendHttpRequest from "../../../Fetch/useFetch"
+import ".././../GuestPages/GuestPage.css";
+import sendHttpRequest from "../../../../Fetch/useFetch";
 
-/**
- * class for register and adding another documents to db like teams
- */
-class AddAccount extends React.Component {
+import { connect } from "react-redux";
+
+class AddTeamForm extends React.Component {
 //TODO if we have time password strength bar
     constructor(props) {
         super(props);
         this.state = {
             name: "",
-            email : "",
-            password: "",
+            location : "",
             errors: []
         };
     }
@@ -46,55 +44,38 @@ class AddAccount extends React.Component {
         this.clearValidationErr("name");
     }
 
-    onEmailChange(e) {
+    onLocationChange(e) {
         this.setState({
-            email: e.target.value
+            location: e.target.value
         });
-        this.clearValidationErr("email");
-
+        this.clearValidationErr("location");
     }
 
-    onPasswordChange(e) {
-        this.setState({
-            password: e.target.value
-        });
-        this.clearValidationErr("password");
-
-    }
-
-    submitAddAccount(e) {
+    submitAddTeam(e) {
         let isError = false;
         if(this.state.name === "") {
             this.showValidationErr("name", "Name cannot be empty");
             isError = true;
         }
-        if(this.state.email === "") {
-            this.showValidationErr("email", "Email address cannot be empty");
-            isError = true;
-        }else if(this.state.email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)==null) {
-            this.showValidationErr("email", "Email is not valid")
-            isError = true;
-        }
-        if(this.state.password === "") {
-            this.showValidationErr("password", "Password cannot be empty");
+        if(this.state.location === "") {
+            this.showValidationErr("location", "Location cannot be empty");
             isError = true;
         }
 
         if(isError === false) {
-            //TODO check if its ok
-            console.log("User data is ok");
-
-            var userType = this.props.userType;
-            var path;
-            if(userType === "user") {
-                path = '/api/guest/register';
-            }
-            sendHttpRequest('POST', path, this.state)
+            console.log("Team data is ok");
+            const req = {
+                token : this.props.auth.token,
+                name : this.state.name,
+                location : this.state.location
+            };
+            sendHttpRequest('POST', "/api/user/add-team", req)
                 .then(responseData => {
                     console.log(responseData);
                     if(!responseData.success) {
-                        this.showValidationErr("email", responseData.message);
+                        this.showValidationErr("location", responseData.message);
                     } else {
+                        console.log("SUCCESSS");
                         //if redirecting function is not passed as a prop variable is null
                         let submitRedirect = this.props.submitRedirect || null;
                         if(submitRedirect) {
@@ -103,7 +84,7 @@ class AddAccount extends React.Component {
                     }
                 })
                 .catch(err => {
-                    this.showValidationErr("password", " Server error");
+                    this.showValidationErr("location", " Server error");
                     console.log(err, err.data);
                 });
         }
@@ -111,17 +92,14 @@ class AddAccount extends React.Component {
 
     render() {
 
-        let nameErr = null, emailErr = null, passwordErr = null;
+        let nameErr = null, locationErr = null;
 
         for(let err of this.state.errors) {
             if(err.elm === "name") {
                 nameErr = err.msg;
             }
-            if(err.elm === "email") {
-                emailErr = err.msg;
-            }
-            if(err.elm === "password") {
-                passwordErr = err.msg;
+            if(err.elm === "location") {
+                locationErr = err.msg;
             }
         }
 
@@ -139,7 +117,7 @@ class AddAccount extends React.Component {
                             name="name"
                             className="formInput"
                             required
-                            placeholder="First and second name"
+                            placeholder="Name of new team"
                             onChange={this.onNameChange.bind(this)}
                         />
                         <small className="passingError">{ nameErr ? nameErr : "" }</small>
@@ -148,34 +126,36 @@ class AddAccount extends React.Component {
                     <div className="flex inputGroup">
                         <label htmlFor="email">Email</label>
                         <input
-                            type="email"
-                            name="email"
+                            type="location"
+                            name="location"
                             className="formInput"
-                            placeholder="Email"
-                            onChange={this.onEmailChange.bind(this)}
+                            placeholder="Location / region"
+                            onChange={this.onLocationChange.bind(this)}
                         />
-                        <small className="passingError">{ emailErr ? emailErr : "" }</small>
-                    </div>
-
-                    <div className="flex inputGroup">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            className="formInput"
-                            placeholder="Password"
-                            onChange={this.onPasswordChange.bind(this)}
-                        />
-                        <small className="passingError">{ passwordErr ? passwordErr : "" }</small>
+                        <small className="passingError">{ locationErr ? locationErr : "" }</small>
                     </div>
                     <button
                         type="button"
                         className="greenBtn formBtn"
-                        onClick={this.submitAddAccount.bind(this)}>{this.props.title}</button>
+                        onClick={this.submitAddTeam.bind(this)}>{this.props.title}
+                    </button>
                 </div>
             </div>
         );
     }
 }
 
-export default AddAccount;
+
+const mapStateToProps = (state) => {
+    return {
+        teams: state.teamsReducer,
+        auth: state.authReducer
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (AddTeamForm);

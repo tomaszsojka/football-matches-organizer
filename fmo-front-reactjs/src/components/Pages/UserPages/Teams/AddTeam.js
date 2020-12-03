@@ -1,6 +1,6 @@
 import React from "react";
 import "../../GuestPages/GuestPage.css";
-import AddAccount from "../../GuestPages/AddAccount";
+import AddTeamForm from "./AddTeamForm";
 import { Redirect } from "react-router-dom";
 
 
@@ -21,11 +21,11 @@ class AddTeam extends React.Component {
 
     render() {
         if(this.state.isRedirect) {
-            <Redirect to={"/user/teams"}/>
+            return <Redirect to={"/user/teams"}/>;
         } else {
             return(
                 <div className="main-container central-container">
-                    <AddAccount title="AddTeam" docType="user" submitRedirect={this.redirectToTeamList.bind(this)}/>
+                    <AddTeamForm title="Add Team" submitRedirect={this.redirectToTeamList.bind(this)}/>
                 </div>
             );
         }

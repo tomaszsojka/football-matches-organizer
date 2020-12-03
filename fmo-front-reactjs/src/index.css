@@ -180,3 +180,46 @@ ion-icon {
     background-color: var(--dark-grey);
     color: white;
 }
+
+
+/* 
+FORM CLASSES
+*/
+
+
+.inputGroup {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.formInput {
+    padding: .4em;
+    font-size: 1.1rem;
+}
+
+.formInput:hover {
+    border: 2px solid var(--darker-green);
+}
+
+.formInput:focus,
+.formInput:active {
+    border: 2px solid var(--darker-green);
+    box-shadow: var(--box-shadow);
+}
+
+.formInput::placeholder {
+    font-size: 1rem; 
+    color: rgba(15, 15, 15, 0.4);
+}
+
+.formBtn {
+    margin-top: 2em;
+}
+
+.passingError {
+    color: var(--error-red);
+    font-size: .9rem;
+    padding-left: .1em;
+}
