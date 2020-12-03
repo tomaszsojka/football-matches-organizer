@@ -1,144 +1,78 @@
 const matches = [
     {
-        id: 1, 
-        date: "2020-10-21", 
-        hour: "21:00", 
-        hometeam: "Bayern Munich",
-        homestartinglineup: [
-            {playername: "Manuel Neuer", tshirtnumber: "1", position: "GK", yellowcards: "", redcards: "", scoredgoalstime: ""},
-            {playername: "Alphonso Davies", tshirtnumber: "19", position: "LB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-            {playername: "David Alaba", tshirtnumber: "27", position: "LCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-            {playername: "Niclas Sule", tshirtnumber: "4", position: "RCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-            {playername: "Benjamin Pavard", tshirtnumber: "5", position: "RB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-            {playername: "Leon Goretzka", tshirtnumber: "18", position: "LDM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-            {playername: "Joshua Kimmich", tshirtnumber: "6", position: "RDM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-            {playername: "Leroy Sane", tshirtnumber: "10", position: "LW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-            {playername: "Thomas Muller", tshirtnumber: "25", position: "CM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-            {playername: "Kingsley Coman", tshirtnumber: "29", position: "RW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-            {playername: "Robert Lewandowski", tshirtnumber: "9", position: "FW", yellowcards: "", redcards: "", scoredgoalstime: ""}
-        ],
-        awayteam: "Atletico Madit",
-        awaystartinglineup: [
-          {playername: "Jan Oblak", tshirtnumber: "13", position: "GK", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Renan Lodi", tshirtnumber: "12", position: "LB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Jose Maria Gimenez", tshirtnumber: "2", position: "LCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Stefan Savic", tshirtnumber: "15", position: "RCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Kieran Trippier", tshirtnumber: "23", position: "RB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Marcos Llorente", tshirtnumber: "14", position: "LW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Saul Niguez", tshirtnumber: "8", position: "LM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Hector Herrera", tshirtnumber: "16", position: "RM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Angel Correa", tshirtnumber: "10", position: "RW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Joao Felix", tshirtnumber: "7", position: "LFW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Luis Suarez", tshirtnumber: "9", position: "RFW", yellowcards: "", redcards: "", scoredgoalstime: ""}
-      ],
-        homescore: "",
-        awayscore: ""
+      date: "2020-12-03T21:32:49",
+      homeTeam: {
+        teamName: "Bayern Munich",
+        teamScore: "",
+        lineup: [
+            {playerName: "Manuel Neuer", tShirtNumber: "1", position: "GK", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Alphonso Davies", tShirtNumber: "19", position: "LB", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "David Alaba", tShirtNumber: "27", position: "LCB", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Niclas Sule", tShirtNumber: "4", position: "RCB", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Benjamin Pavard", tShirtNumber: "5", position: "RB", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Leon Goretzka", tShirtNumber: "18", position: "LDM", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Joshua Kimmich", tShirtNumber: "6", position: "RDM", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Leroy Sane", tShirtNumber: "10", position: "LW", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Thomas Muller", tShirtNumber: "25", position: "CM", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Kingsley Coman", tShirtNumber: "29", position: "RW", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Robert Lewandowski", tShirtNumber: "9", position: "FW", yellowCards: "", redCards: "", scoredGoals: ""}
+        ]
+      },
+      awayTeam: {
+        teamName : "Atletico Madit",
+        teamScore: "",
+        lineup: [
+          {playerName: "Jan Oblak", tShirtNumber: "13", position: "GK", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Renan Lodi", tShirtNumber: "12", position: "LB", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Jose Maria Gimenez", tShirtNumber: "2", position: "LCB", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Stefan Savic", tShirtNumber: "15", position: "RCB", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Kieran Trippier", tShirtNumber: "23", position: "RB", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Marcos Llorente", tShirtNumber: "14", position: "LW", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Saul Niguez", tShirtNumber: "8", position: "LM", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Hector Herrera", tShirtNumber: "16", position: "RM", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Angel Correa", tShirtNumber: "10", position: "RW", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Joao Felix", tShirtNumber: "7", position: "LFW", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Luis Suarez", tShirtNumber: "9", position: "RFW", yellowCards: "", redCards: "", scoredGoals: ""}
+        ]
+      }
     },
     {
-        id: 2, 
-        date: "2020-10-27",  
-        hour: "21:00", 
-        hometeam: "Bayern Munich",
-        homestartinglineup: [
-          {playername: "Manuel Neuer", tshirtnumber: "1", position: "GK", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Alphonso Davies", tshirtnumber: "19", position: "LB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "David Alaba", tshirtnumber: "27", position: "LCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Niclas Sule", tshirtnumber: "4", position: "RCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Benjamin Pavard", tshirtnumber: "5", position: "RB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Leon Goretzka", tshirtnumber: "18", position: "LDM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Joshua Kimmich", tshirtnumber: "6", position: "RDM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Leroy Sane", tshirtnumber: "10", position: "LW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Thomas Muller", tshirtnumber: "25", position: "CM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Kingsley Coman", tshirtnumber: "29", position: "RW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Robert Lewandowski", tshirtnumber: "9", position: "FW", yellowcards: "", redcards: "", scoredgoalstime: ""}
-      ],
-        awayteam: "Lokomotiv Moscow",
-        awaystartinglineup: [
-          {playername: "Jan Oblak", tshirtnumber: "13", position: "GK", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Renan Lodi", tshirtnumber: "12", position: "LB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Jose Maria Gimenez", tshirtnumber: "2", position: "LCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Stefan Savic", tshirtnumber: "15", position: "RCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Kieran Trippier", tshirtnumber: "23", position: "RB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Marcos Llorente", tshirtnumber: "14", position: "LW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Saul Niguez", tshirtnumber: "8", position: "LM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Hector Herrera", tshirtnumber: "16", position: "RM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Angel Correa", tshirtnumber: "10", position: "RW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Joao Felix", tshirtnumber: "7", position: "LFW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Luis Suarez", tshirtnumber: "9", position: "RFW", yellowcards: "", redcards: "", scoredgoalstime: ""}
-      ],
-        homescore: "",
-        awayscore: ""
-    },
-    {
-        id: 3, 
-        date: "2020-10-26",  
-        hour: "21:00", 
-        hometeam: "Real Madrit",
-        homestartinglineup: [
-          {playername: "Manuel Neuer", tshirtnumber: "1", position: "GK", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Alphonso Davies", tshirtnumber: "19", position: "LB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "David Alaba", tshirtnumber: "27", position: "LCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Niclas Sule", tshirtnumber: "4", position: "RCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Benjamin Pavard", tshirtnumber: "5", position: "RB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Leon Goretzka", tshirtnumber: "18", position: "LDM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Joshua Kimmich", tshirtnumber: "6", position: "RDM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Leroy Sane", tshirtnumber: "10", position: "LW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Thomas Muller", tshirtnumber: "25", position: "CM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Kingsley Coman", tshirtnumber: "29", position: "RW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Robert Lewandowski", tshirtnumber: "9", position: "FW", yellowcards: "", redcards: "", scoredgoalstime: ""}
-      ],
-        awayteam: "Barcelona",
-        awaystartinglineup: [
-          {playername: "Jan Oblak", tshirtnumber: "13", position: "GK", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Renan Lodi", tshirtnumber: "12", position: "LB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Jose Maria Gimenez", tshirtnumber: "2", position: "LCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Stefan Savic", tshirtnumber: "15", position: "RCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Kieran Trippier", tshirtnumber: "23", position: "RB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Marcos Llorente", tshirtnumber: "14", position: "LW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Saul Niguez", tshirtnumber: "8", position: "LM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Hector Herrera", tshirtnumber: "16", position: "RM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Angel Correa", tshirtnumber: "10", position: "RW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Joao Felix", tshirtnumber: "7", position: "LFW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Luis Suarez", tshirtnumber: "9", position: "RFW", yellowcards: "", redcards: "", scoredgoalstime: ""}
-      ],
-        homescore: "",
-        awayscore: ""
-    },
-    {
-        id: 4, 
-        date: "2020-10-21",  
-        hour: "21:00", 
-        hometeam: "Bayern Munich",
-        homestartinglineup: [
-          {playername: "Manuel Neuer", tshirtnumber: "1", position: "GK", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Alphonso Davies", tshirtnumber: "19", position: "LB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "David Alaba", tshirtnumber: "27", position: "LCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Niclas Sule", tshirtnumber: "4", position: "RCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Benjamin Pavard", tshirtnumber: "5", position: "RB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Leon Goretzka", tshirtnumber: "18", position: "LDM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Joshua Kimmich", tshirtnumber: "6", position: "RDM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Leroy Sane", tshirtnumber: "10", position: "LW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Thomas Muller", tshirtnumber: "25", position: "CM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Kingsley Coman", tshirtnumber: "29", position: "RW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Robert Lewandowski", tshirtnumber: "9", position: "FW", yellowcards: "", redcards: "", scoredgoalstime: ""}
-      ],
-        awayteam: "Atletico Madit",
-        awaystartinglineup: [
-          {playername: "Jan Oblak", tshirtnumber: "13", position: "GK", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Renan Lodi", tshirtnumber: "12", position: "LB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Jose Maria Gimenez", tshirtnumber: "2", position: "LCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Stefan Savic", tshirtnumber: "15", position: "RCB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Kieran Trippier", tshirtnumber: "23", position: "RB", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Marcos Llorente", tshirtnumber: "14", position: "LW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Saul Niguez", tshirtnumber: "8", position: "LM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Hector Herrera", tshirtnumber: "16", position: "RM", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Angel Correa", tshirtnumber: "10", position: "RW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Joao Felix", tshirtnumber: "7", position: "LFW", yellowcards: "", redcards: "", scoredgoalstime: ""},
-          {playername: "Luis Suarez", tshirtnumber: "9", position: "RFW", yellowcards: "", redcards: "", scoredgoalstime: ""}
-      ],
-        homescore: "",
-        awayscore: ""
+      homeTeam: {
+        teamName: "Ruch Chorzów",
+        teamScore: "",
+        lineup: [
+            {playerName: "Manuel Neuer", tShirtNumber: "1", position: "GK", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Alphonso Davies", tShirtNumber: "19", position: "LB", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "David Alaba", tShirtNumber: "27", position: "LCB", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Niclas Sule", tShirtNumber: "4", position: "RCB", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Benjamin Pavard", tShirtNumber: "5", position: "RB", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Leon Goretzka", tShirtNumber: "18", position: "LDM", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Joshua Kimmich", tShirtNumber: "6", position: "RDM", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Leroy Sane", tShirtNumber: "10", position: "LW", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Thomas Muller", tShirtNumber: "25", position: "CM", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Kingsley Coman", tShirtNumber: "29", position: "RW", yellowCards: "", redCards: "", scoredGoals: ""},
+            {playerName: "Robert Lewandowski", tShirtNumber: "9", position: "FW", yellowCards: "", redCards: "", scoredGoals: ""}
+        ]
+      },
+      awayTeam: {
+        teamName : "GKS Katowice",
+        teamScore: "",
+        lineup: [
+          {playerName: "Jan Oblak", tShirtNumber: "13", position: "GK", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Renan Lodi", tShirtNumber: "12", position: "LB", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Jose Maria Gimenez", tShirtNumber: "2", position: "LCB", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Stefan Savic", tShirtNumber: "15", position: "RCB", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Kieran Trippier", tShirtNumber: "23", position: "RB", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Marcos Llorente", tShirtNumber: "14", position: "LW", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Saul Niguez", tShirtNumber: "8", position: "LM", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Hector Herrera", tShirtNumber: "16", position: "RM", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Angel Correa", tShirtNumber: "10", position: "RW", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Joao Felix", tShirtNumber: "7", position: "LFW", yellowCards: "", redCards: "", scoredGoals: ""},
+          {playerName: "Luis Suarez", tShirtNumber: "9", position: "RFW", yellowCards: "", redCards: "", scoredGoals: ""}
+        ]
+      }
     }
+    
   ];
 
   module.exports = matches;
