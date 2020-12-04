@@ -45,7 +45,6 @@ class Login extends React.Component {
             password: e.target.value
         });
         this.clearValidationErr("password");
-
     }
 
     onEmailChange(e) {
@@ -53,7 +52,6 @@ class Login extends React.Component {
             email: e.target.value
         });
         this.clearValidationErr("email");
-
     }
 
 
@@ -131,7 +129,7 @@ class Login extends React.Component {
                             name="password"
                             className="formInput"
                             placeholder="Password"
-                            onChange={this.onPasswordChange.bind(this)}
+                            onChange={(e) => this.onPasswordChange(e)}
                         />
                         <small className="passingError">{ passwordErr ? passwordErr : "" }</small>
                     </div>
