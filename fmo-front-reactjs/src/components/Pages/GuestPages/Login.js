@@ -68,7 +68,7 @@ class Login extends React.Component {
             this.showValidationErr("password", "Password cannot be empty");
             isError = true;
         }
-
+        console.log(this.state);
         if(isError === false) {
             sendHttpRequest('POST', '/api/guest/login', this.state)
                 .then(responseData => {

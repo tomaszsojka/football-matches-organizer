@@ -12,25 +12,32 @@ class AddDocForm extends React.Component {
   
         // map to {inputname1 : ""}, {inputname2 : ""}
         // and then reduce to {inputname1 : "", inputname2 : ""}
-        let inputNames = this.props.inputs
-            .map((input, i) => input.name)
-            .reduce( (current, item) => {
-            current[item] = "";
-            return current;
-          }, {});
+        // let inputNames = this.props.inputs
+        //     .map((input, i) => input.name)
+        //     .reduce( (current, item) => {
+        //     current[item] = "";
+        //     return current;
+        //   }, {});
+
+        let inputNames = Object.keys(this.props.inputs);
+           console.log(inputNames);
         this.state = {
-            ...inputNames,
             errors: [],
+            ...this.props.inputs,
             inputNames
         };
+        console.log(this.state);
     }
 
-    showValidationErr(elm, msg) {
+    showValidationErr(name, msg) {
         this.setState((prevState) => ({
-                errors: [
-                    ...prevState.errors,
-                    {elm, msg}
-                ]
+                [name] : {
+                    ...prevState[name],
+                    errors : [
+                        ...prevState[name].errors,
+                        msg
+                    ]
+                }
             })
         );
     }
@@ -38,27 +45,39 @@ class AddDocForm extends React.Component {
     clearValidationErr(elm) {
         this.setState((prevState) => {
             let newArr = [];
-            for(let err of prevState.errors) {
-                if(elm !== err.elm) {
-                    newArr.push(err);
+            return {
+                [elm] : {
+                    ...prevState[elm],
+                    errors: newArr
                 }
-            }
-            return {errors: newArr};
+            };
         });
     }
 
     onInputChange(e, name) {
         this.setState({
-            [name] : e.target.value
+            [name] : {
+                ...this.state[name],
+                value : e.target.value
+            }
         });
         this.clearValidationErr(`${name}`);
     }
 
     onSubmitForm() {
         let isError = false;
-        for(let propName in this.state.inputNames) {
-            if(this.state[propName] === "") {
+        // for(let propName in this.state.inputNames) {
+        //     if(this.state[propName] === "") {
+        //         this.showValidationErr(propName, `${propName} cannot be empty`);
+        //         isError = true
+        //     }
+        // }
+        for(let propName in this.state) {
+            if(this.state[propName].value === "") {
                 this.showValidationErr(propName, `${propName} cannot be empty`);
+                isError = true
+            }else if(this.state[propName].type ==="email" && this.state[propName].value.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)==null) {
+                this.showValidationErr(propName, `${propName} is not valid`);
                 isError = true
             }
         }
@@ -70,23 +89,6 @@ class AddDocForm extends React.Component {
     }
 
     render() {
-
-        let errors = this.state.inputNames;
-        for(let propName in errors) {
-                errors[propName] = "";
-        }
-
-        this.state.errors.forEach(err => {
-            for(let propName in errors) {
-                if(propName === err.elm) {
-                    errors[propName] = err.msg;
-                }
-            }
-        });
-        console.log(errors);
-        console.log(errors["input1"]);
-        // console.log(errors.getOwnPropertyNames());
-
         return (
             <div className="boxContainer">
                 <div className="boxContainer-header bottomBorder">
@@ -94,18 +96,18 @@ class AddDocForm extends React.Component {
                 </div>
                 <div className="flex box">
 
-                    {this.props.inputs.map((input, i) =>
+                    {Object.values(this.props.inputs).map((input, i) =>
                     <div key={i} className="flex inputGroup">
-                        <label htmlFor={`${input.name}`}>{input.name}</label>
+                        <label htmlFor={`${this.state.inputNames[i]}`}>{this.state.inputNames[i]}</label>
                         <input
                             type={`${input.type}`}
-                            name={`${input.name}`}
+                            name={`${this.state.inputNames[i]}`}
                             className="formInput"
                             required
                             placeholder={`${input.placeholder}`}
-                            onChange={(e) => this.onInputChange(e, input.name)}
+                            onChange={(e) => this.onInputChange(e, this.state.inputNames[i])}
                         />
-                        <small className="passingError">{ errors[input.name] ? errors[input.name] : "" }</small>
+                        <small className="passingError">{ this.state[this.state.inputNames[i]].errors[0] }</small>
                     </div>
                     )}
                     <button

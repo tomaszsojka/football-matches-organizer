@@ -14,6 +14,11 @@ const GuestRoot = (props) => {
     console.log("XD");
   }
 
+  let inputs={
+    input1 : {name: "input1", type : "text", value : "", placeholder : "input1", errors : []},
+    input2 : {name: "input2", type : "email", value : "", placeholder : "input2", errors : []}
+  };
+
   if (props.auth.tokens) {
     return <Redirect to="/user"/>
   } else {
@@ -26,9 +31,7 @@ const GuestRoot = (props) => {
           <AccessAccount/>
           <AddDocForm 
             title="asdf" 
-            inputs={[
-              {name : "input1", type : "text", placeholder : "input1"},
-              {name : "input2", type : "text", placeholder : "input2"}]}
+            inputs={inputs}
             onSubmitForm={() => tmp()}
           />
         </div>
