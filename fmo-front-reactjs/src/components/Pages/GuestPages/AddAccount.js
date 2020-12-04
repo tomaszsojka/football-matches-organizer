@@ -130,7 +130,7 @@ class AddAccount extends React.Component {
                 <div className="boxContainer-header bottomBorder">
                     {this.props.title}
                 </div>
-                <div className="flex box">
+                <div className="flex formBox">
 
                     <div className="flex inputGroup">
                         <label htmlFor="name">Name</label>

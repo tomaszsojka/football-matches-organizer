@@ -215,7 +215,13 @@ FORM CLASSES
 }
 
 .formBtn {
+    width: 100%;
     margin-top: 2em;
+}
+
+.formBox {
+    flex-direction: column;
+    /* justify-content: center; */
 }
 
 .passingError {

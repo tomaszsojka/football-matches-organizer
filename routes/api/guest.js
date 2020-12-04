@@ -79,7 +79,7 @@ router.post('/login', (req, res) => {
     if(!user.validPassword(password)) {
       return res.send({
         success : false,
-        message : "Error: Invalid"
+        message : "Password is not valid"
       });
     }
 

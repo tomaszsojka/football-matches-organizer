@@ -1,8 +1,7 @@
 import React from "react";
-import "./GuestPage.css";
 
 /**
- * class for register and adding another documents to db like teams
+ * class is a unified form for user login or adding documents to db like teams or users
  */
 class AddDocForm extends React.Component {
 //TODO if we have time password strength bar
@@ -10,7 +9,7 @@ class AddDocForm extends React.Component {
         super(props);
 
   
-        // map to {inputname1 : ""}, {inputname2 : ""}
+        // map to {"inputname1", "inputname2"}
         // and then reduce to {inputname1 : "", inputname2 : ""}
         // let inputNames = this.props.inputs
         //     .map((input, i) => input.name)
@@ -20,21 +19,19 @@ class AddDocForm extends React.Component {
         //   }, {});
 
         let inputNames = Object.keys(this.props.inputs);
-           console.log(inputNames);
         this.state = {
             errors: [],
             ...this.props.inputs,
             inputNames
         };
-        console.log(this.state);
     }
 
-    showValidationErr(name, msg) {
+    showValidationErr(propName, msg) {
         this.setState((prevState) => ({
-                [name] : {
-                    ...prevState[name],
+                [propName] : {
+                    ...prevState[propName],
                     errors : [
-                        ...prevState[name].errors,
+                        ...prevState[propName].errors,
                         msg
                     ]
                 }
@@ -42,16 +39,14 @@ class AddDocForm extends React.Component {
         );
     }
 
-    clearValidationErr(elm) {
-        this.setState((prevState) => {
-            let newArr = [];
-            return {
-                [elm] : {
-                    ...prevState[elm],
-                    errors: newArr
+    clearValidationErr(propName) {
+        this.setState((prevState) => ({
+                [propName] : {
+                    ...prevState[propName],
+                    errors: []
                 }
-            };
-        });
+            })
+        );
     }
 
     onInputChange(e, name) {
@@ -66,26 +61,31 @@ class AddDocForm extends React.Component {
 
     onSubmitForm() {
         let isError = false;
-        // for(let propName in this.state.inputNames) {
-        //     if(this.state[propName] === "") {
-        //         this.showValidationErr(propName, `${propName} cannot be empty`);
-        //         isError = true
-        //     }
-        // }
         for(let propName in this.state) {
             if(this.state[propName].value === "") {
                 this.showValidationErr(propName, `${propName} cannot be empty`);
                 isError = true
             }else if(this.state[propName].type ==="email" && this.state[propName].value.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)==null) {
-                this.showValidationErr(propName, `${propName} is not valid`);
+                this.showValidationErr(propName, `This is not a valid email address`);
                 isError = true
             }
         }
 
         if(!isError) {
-            this.props.onSubmitForm();
-        }
+            //inputNames array to {inputName : "", inputName2 : ""}
+            let formResponse = this.state.inputNames
+                .reduce( (current, item) => {
+                        current[item] = "";
+                        return current;
+                      }, {}
+                );
 
+            // values of inputs assigned to propertyNames
+            for(let inName in formResponse) {
+                formResponse[inName] = this.state[inName].value;
+            }
+            this.props.onSubmitForm(formResponse);
+        }
     }
 
     render() {
@@ -94,8 +94,7 @@ class AddDocForm extends React.Component {
                 <div className="boxContainer-header bottomBorder">
                     {this.props.title}
                 </div>
-                <div className="flex box">
-
+                <div className="flex formBox">
                     {Object.values(this.props.inputs).map((input, i) =>
                     <div key={i} className="flex inputGroup">
                         <label htmlFor={`${this.state.inputNames[i]}`}>{this.state.inputNames[i]}</label>

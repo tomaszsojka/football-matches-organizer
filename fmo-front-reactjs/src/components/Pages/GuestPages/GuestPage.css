@@ -54,8 +54,3 @@
     transition: border 0.5s ease-out;
     border-bottom: 2px solid darkgreen;
 }
-
-.box {
-    flex-direction: column;
-    justify-content: center;
-}
