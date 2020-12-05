@@ -43,6 +43,10 @@ const MatchSchema = new mongoose.Schema({
     date : {
         type : Date,
         default: Date.now
+    },    
+    isUpdated : {
+        type : Boolean,
+        default: false
     },
     homeTeam : TeamInfoSchema,
     awayTeam : TeamInfoSchema,
