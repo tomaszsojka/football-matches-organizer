@@ -13,11 +13,9 @@ import { setTeamsList} from "../../../../store/actions/teamsActions";
 class Teams extends React.Component {
 
     componentDidMount() {
-        console.log(this.props);
         let tok = this.props.auth.token;
         sendHttpRequest('GET', '/api/user/teams?token=' + tok).then(responseData => {
             this.props.loadTeamsList(responseData.teams);
-            console.log(this.props.teams.teams);
         });
     }
 

@@ -2,7 +2,7 @@ import React from "react";
 
 import "./GuestPage.css";
 import Login from "./Login";
-import AddAccount from "./AddAccount";
+import Register from "./Register";
 
 
 class AccessAccount extends React.Component {
@@ -40,7 +40,7 @@ class AccessAccount extends React.Component {
                     </div>
                 </div>
                 {this.state.isLoginOpen && <Login/>}
-                {this.state.isRegisterOpen && <AddAccount title="Register" userType="user" submitRedirect={this.showLoginBox.bind(this)}/>}
+                {this.state.isRegisterOpen && <Register submitRedirect={this.showLoginBox.bind(this)}/>}
             </div>
         );
     }
