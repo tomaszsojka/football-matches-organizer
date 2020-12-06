@@ -5,7 +5,9 @@ const router = express.Router();
 const Match = require('../../models/Match');
 
 router.get('/matches', (req, res) => {
-    Match.find({}, (err, matches) => {
+    Match.find({
+        isUpdated : false
+    }, (err, matches) => {
         if(err) {
             return res.send({
             success : false,
