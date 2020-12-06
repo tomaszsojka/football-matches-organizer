@@ -17,14 +17,31 @@ router.get('/matches', (req, res) => {
     });
 });
 
+router.get('/updated-matches', (req, res) => {
+    Match.find({
+        isUpdated : true
+    }, (err, matches) => {
+        if(err) {
+            return res.send({
+            success : false,
+            message : 'Error : Server error'
+            });
+        } else {
+            res.json(matches);  
+        }
+    });
+});
+
 router.put('/update-matchinfo', (req, res) => {
     
     const { body } = req;
 
     Match.findOneAndUpdate({
-        _id : body._id
+        _id : body._id,
+        isUpdated : false
       }, {
         $set: {
+            isUpdated : true,
             homeTeam : body.homeTeam,
             awayTeam : body.awayTeam 
         }
@@ -39,9 +56,9 @@ router.put('/update-matchinfo', (req, res) => {
          if(!match) {
             return res.send({
               success : false,
-              message : 'Error : Match does not exist'
+              message : 'Error : Match does not exist or is already updated'
             });
-         } else {
+         }else {
             return res.send({
               success : true,
               message : 'Match info updated with success'
