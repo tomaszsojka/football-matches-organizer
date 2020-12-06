@@ -14,16 +14,16 @@ const LineUpSchema = new mongoose.Schema({
         default: 'CM'
     },
     yellowCards : {
-        type : [String],
-        default : []
+        type : Number,
+        default : 0
     },
     redCards : {
-        type : String,
-        default: ''
+        type : Number,
+        default: 0
     },
     scoredGoals : {
-        type : [String],
-        default : []
+        type : Number,
+        default : 0
     }
 });
 

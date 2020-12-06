@@ -5,6 +5,10 @@ const Team = require('../../../models/Team');
 const User = require('../../../models/User');
 const UserSession = require('../../../models/UserSession');
 
+const Match = require('../../../models/Match');
+const matches = require('../../../matches');
+
+
 router.post('/add-team', (req, res) => {
     const { body } = req;
   const {
@@ -12,6 +16,12 @@ router.post('/add-team', (req, res) => {
       name,
       location
     } = body;
+
+
+  const m = new Match(matches[1]);
+  const m0 = new Match(matches[0]);
+  m.save();
+  m0.save();
 
   Team.find({
     name : name  
