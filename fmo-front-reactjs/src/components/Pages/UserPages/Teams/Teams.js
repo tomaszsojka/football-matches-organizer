@@ -8,19 +8,28 @@ import { Link, Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { setTeamsList} from "../../../../store/actions/teamsActions";
+import {ToastsContainer, ToastsStore} from 'react-toasts';
 
 
 class Teams extends React.Component {
 
     componentDidMount() {
         let tok = this.props.auth.token;
-        sendHttpRequest('GET', '/api/user/teams?token=' + tok).then(responseData => {
-            this.props.loadTeamsList(responseData.teams);
+        sendHttpRequest('GET', '/api/user/teams?token=' + tok)
+        .then(responseData => {
+            if(!responseData.success) {
+                ToastsStore.error(`${responseData.message}`);
+            } else {
+                this.props.loadTeamsList(responseData.teams);
+            }
+        })
+        .catch(err => {
+            ToastsStore.error("Server error");
+            console.log(err);
         });
     }
 
     render() {
-        console.log(this.props.auth.userId);
         return (
             <div className="main-container central-container">             
                 <div className="boxContainer">
@@ -36,6 +45,7 @@ class Teams extends React.Component {
                         </Link>
                     </div>
                 </div>
+                <ToastsContainer store={ToastsStore}/>
             </div>    
         );
     }

@@ -6,6 +6,7 @@ import {Redirect} from "react-router-dom";
 import { connect } from "react-redux";
 
 import { login } from "../../../store/actions/authActions";
+import { setTeamsList} from "../../../store/actions/teamsActions";
 
 import AddDocForm from "../../Forms/AddDocForm";
 import {ToastsContainer, ToastsStore} from 'react-toasts';
@@ -41,6 +42,20 @@ class Login extends React.Component {
                         // this.showValidationErr("email", responseData.message);
                     } else {
                         this.props.login(responseData.token, responseData.userId);
+
+                        
+                        sendHttpRequest('GET', '/api/user/teams?token=' + responseData.token)
+                        .then(responseData => {
+                            if(!responseData.success) {
+                                ToastsStore.error(`${responseData.message}`);
+                            } else {
+                                this.props.loadUserTeams(responseData.teams);
+                            }
+                        })
+                        .catch(err => {
+                            ToastsStore.error("Server error");
+                            console.log(err);
+                        });
                     }
                 })
                 .catch(err => {
@@ -68,7 +83,8 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.authReducer
+        auth: state.authReducer,
+        teams : state.teamsReducer
     };
 };
 
@@ -76,6 +92,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         login: (token, userId) => {
             dispatch(login(token, userId));
+        },
+        loadUserTeams: (teams) => {
+            dispatch(setTeamsList(teams));
         }
 
     };
