@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const Team = require('../../../models/Team');
-const User = require('../../../models/User');
 const UserSession = require('../../../models/UserSession');
 
 router.post('/add-team', (req, res) => {

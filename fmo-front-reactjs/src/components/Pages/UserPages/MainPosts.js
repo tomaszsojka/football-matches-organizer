@@ -19,8 +19,8 @@ const MainPosts = (props) => {
                 <div className="flex article-recent-secondary article-recent-author posts-container-flex">
                     <img src="/Images/profile_picture.png" alt="profile logo" className="user-image article-image"/>
                     <div className="name-date">
-                        <h3>Tomasz Sojka</h3>
-                        <p className="article-info">{post.info}</p>
+                        <h3>{post.authorName}</h3>
+                        <p className="article-info">{post.date}</p>
                     </div>
                 </div>
             </article>)}

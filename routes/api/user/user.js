@@ -3,11 +3,7 @@ const router = express.Router();
 
 const User = require('../../../models/User');
 const UserSession = require('../../../models/UserSession');
-const posts = require('../../../posts');
 
-router.get('/posts', (req, res) => {
-    res.json(posts);
-});
 
 router.get('/profileData', (req, res) => {
     
