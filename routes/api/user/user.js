@@ -58,6 +58,53 @@ router.get('/profileData', (req, res) => {
     });
 });
 
+router.get('/getUserId', (req, res) => {
+    
+  const { query } = req;
+  const { token } = query;
+
+  UserSession.find({
+      _id : token,
+      isDeleted : false
+  }, (err, sessions) => {
+      if(err) {
+        return res.send({
+        success : false,
+        message : 'Error : Server error'
+        });
+      }
+
+      if(sessions.length != 1) {
+        return res.send({
+        success : false,
+        message : 'Error : Invalid'
+        });
+      } else {
+          User.find({
+              _id : sessions[0].userId 
+          }, (err, users) => {
+              if(err) {
+                return res.send({
+                    success : false,
+                    message : "Error: Server error"
+                });
+              }  else if(users.length != 1) {
+                return res.send({
+                    success : false,
+                    message : "Error: Invalid"
+                });
+              }
+          
+              return res.send({
+                  success : true,
+                  message : "Profile data received from server",
+                  userId : users[0]._id
+              });
+          });
+      }
+  });
+});
+
 router.get('/verify', (req, res, next) => {
 
     const { query } = req;

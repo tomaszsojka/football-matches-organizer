@@ -6,7 +6,8 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  SET_USERID
 } from './types';
 
 // Login User
@@ -21,5 +22,13 @@ export const login = (token, userId) => {
 export const logout = () => {
   return {
     type: LOGOUT_SUCCESS
+  };
+};
+
+// Set userId
+export const setUserId = (userId) => {
+  return {
+    type: SET_USERID,
+    payload: {userId: userId}
   };
 };

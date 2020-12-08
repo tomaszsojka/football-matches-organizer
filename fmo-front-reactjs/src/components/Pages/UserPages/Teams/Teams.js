@@ -9,6 +9,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setTeamsList} from "../../../../store/actions/teamsActions";
 import {ToastsContainer, ToastsStore} from 'react-toasts';
+import { setUserId } from "../../../../store/actions/authActions";
 
 
 class Teams extends React.Component {
@@ -16,11 +17,22 @@ class Teams extends React.Component {
     componentDidMount() {
         let tok = this.props.auth.token;
         sendHttpRequest('GET', '/api/user/teams?token=' + tok)
-        .then(responseData => {
-            if(!responseData.success) {
-                ToastsStore.error(`${responseData.message}`);
+        .then(responseTeams => {
+            if(!responseTeams.success) {
+                ToastsStore.error(`${responseTeams.message}`);
             } else {
-                this.props.loadTeamsList(responseData.teams);
+                sendHttpRequest('GET', '/api/user/getUserId?token=' + tok)
+                .then(responseUserId => {
+                    if(!responseUserId.success) {
+                        ToastsStore.error(`${responseUserId.message}`);
+                    } else {
+                        this.props.loadTeamsListAndUserId(responseTeams.teams, responseUserId.userId);
+                    }
+                })
+                .catch(err => {
+                    ToastsStore.error("Server error");
+                    console.log(err);
+                });
             }
         })
         .catch(err => {
@@ -30,6 +42,7 @@ class Teams extends React.Component {
     }
 
     render() {
+        console.log(this.props.auth);
         return (
             <div className="main-container central-container">             
                 <div className="boxContainer">
@@ -60,8 +73,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadTeamsList: (teams) => {
+        loadTeamsListAndUserId: (teams, userId) => {
             dispatch(setTeamsList(teams));
+            dispatch(setUserId(userId));
         }
     };
 };

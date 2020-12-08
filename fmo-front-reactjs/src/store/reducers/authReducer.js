@@ -6,7 +6,8 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
-    REGISTER_FAIL
+    REGISTER_FAIL,
+    SET_USERID
   } from '../actions/types';
 
 const initialState = {
@@ -50,7 +51,15 @@ const authReducer = (state = initialState, action) => {
             token: null,
             user: null,
             isAuthenticated: false,
-            isLoading: false
+            isLoading: false,
+            userId : null
+        };
+        case SET_USERID:
+        return {
+            ...state,
+            ...action.payload,
+            isAuthenticated: true,
+            isLoading: false,
         };
         default:
         return state;
