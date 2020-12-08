@@ -6,8 +6,6 @@ const User = require('../../../models/User');
 const UserSession = require('../../../models/UserSession');
 const Post = require('../../../models/Post');
 
-const posts = require('../../../posts');
-
 //get posts by teamId, if no team Id get main wall posts
 router.get('/posts', (req, res) => {
     const { query } = req;
@@ -20,7 +18,24 @@ router.get('/posts', (req, res) => {
     // console.log(indexes);
     // console.log(teamName);
     if(!teamId) {
-        res.json(posts);
+        //looking for posts without teamId
+        Post.find({
+            teamId : ""
+        }, (err, posts) => {
+                if(err) {
+                    return res.send({
+                        success : false,
+                        message : 'Error : Server error'
+                    });
+                } else {
+                    // proper All posts of team of teamId found
+                    return res.send({
+                        success : true,
+                        message : "Main wall posts loaded",
+                        posts
+                    });
+                }
+        });
     } else {
         Team.find({
             _id : teamId  
@@ -106,7 +121,11 @@ router.post('/add-post', (req, res) => {
                     
                     //Save new post 
                     const newPost = new Post();
-                    newPost.teamId = teamId;
+                    if(teamId) {
+                        newPost.teamId = teamId;
+                    } else {
+                        newPost.teamId = "";
+                    }
                     newPost.authorId = user._id;
                     newPost.authorName = user.name;
                     newPost.title = title;
