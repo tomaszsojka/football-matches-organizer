@@ -28,11 +28,12 @@ router.get('/posts', (req, res) => {
                         message : 'Error : Server error'
                     });
                 } else {
+                    let sortedPosts = posts.slice(0).reverse();
                     // proper All posts of team of teamId found
                     return res.send({
                         success : true,
                         message : "Main wall posts loaded",
-                        posts
+                        posts : sortedPosts
                     });
                 }
         });
@@ -61,11 +62,12 @@ router.get('/posts', (req, res) => {
                                 message : 'Error : Server error'
                             });
                         } else {
+                            let sortedPosts = posts.slice(0).reverse();
                             // proper All posts of team of teamId found
                             return res.send({
                                 success : true,
                                 message : `${teams[0].name}'s posts loaded`,
-                                posts
+                                posts : sortedPosts
                             });
                         }
                 });

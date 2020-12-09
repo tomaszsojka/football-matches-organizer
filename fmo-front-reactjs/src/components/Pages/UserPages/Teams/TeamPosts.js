@@ -38,8 +38,8 @@ class TeamPosts extends React.Component {
         console.log(this.state.posts);
         return (
             <div className="flex main-container posts-container posts-container-flex">
+                <TeamSideBar sideBlocks={[{title : "CALENDAR", content : ""}, {title : "CALENDAR", content : ""}]}/>
                 <MainPosts posts={this.state.posts} />
-                <TeamSideBar sideBlocks={[{title : "CALENDAR", content : ""}]}/>
                 <ToastsContainer store={ToastsStore}/>
             </div>
         );

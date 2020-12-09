@@ -3,7 +3,7 @@ import React from "react";
  import "./Teams.css";
 import sendHttpRequest from "../../../../Fetch/useFetch";
 
-import {TeamsList} from "./TeamsList";
+import TeamsList from "./TeamsList";
 import { Link, Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";

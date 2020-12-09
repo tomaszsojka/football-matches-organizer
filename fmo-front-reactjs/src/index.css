@@ -34,11 +34,16 @@ body {
     font-weight: 300;
 }
 
-
 h1,
 h2,
 h3 {
     font-family: 'Lora', serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
     font-weight: 400;
     color: var(--darker-green);
     margin-top: 0;
@@ -94,6 +99,7 @@ ion-icon {
 
 .main-container {
     margin-top: 60px;
+    margin-bottom: 36px;
 }
 
 @media (min-width: 550px) {

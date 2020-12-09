@@ -3,7 +3,7 @@ import {Link} from "react-router-dom"
 import "./Teams.css";
 
 
-export const TeamsList = (props) => {
+const TeamsList = (props) => {
 
     function getAllIndexes(arr, val) {
         var indexes = [], i = -1;
@@ -33,3 +33,4 @@ export const TeamsList = (props) => {
         </div>
     );
 }
+export default TeamsList;

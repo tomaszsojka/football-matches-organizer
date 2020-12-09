@@ -1,10 +1,14 @@
 import React from "react";
 import "./Posts.css";
+import AddPost from "./AddPost";
 
 
 const MainPosts = (props) => {
     return (
+        
         <main role="main">
+            
+            <AddPost/>
             {/* key added because of error */}
             {props.posts.map((post) => 
             <article key={post._id} className="flex article-recent posts-container-flex">

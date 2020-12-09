@@ -90,7 +90,7 @@ class AddDocForm extends React.Component {
 
     render() {
         return (
-            <div className="boxContainer">
+            <div className={this.props.containerStyle ? this.props.containerStyle : "boxContainer"} style={this.props.style ? this.props.style : {}}>
                 <div className="boxContainer-header bottomBorder">
                     {this.props.title}
                 </div>
