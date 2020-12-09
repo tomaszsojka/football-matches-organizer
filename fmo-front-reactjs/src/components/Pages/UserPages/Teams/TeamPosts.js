@@ -3,7 +3,7 @@ import React from "react";
 import "../Posts.css";
 
 import MainPosts from "../MainPosts";
-import SideBar from "../SideBar";
+import TeamSideBar from "./TeamSideBar";
 
 import sendHttpRequest from "../../../../Fetch/useFetch";
 import {ToastsContainer, ToastsStore} from 'react-toasts';
@@ -39,7 +39,7 @@ class TeamPosts extends React.Component {
         return (
             <div className="flex main-container posts-container posts-container-flex">
                 <MainPosts posts={this.state.posts} />
-                <SideBar/>
+                <TeamSideBar sideBlocks={[{title : "CALENDAR", content : ""}]}/>
                 <ToastsContainer store={ToastsStore}/>
             </div>
         );

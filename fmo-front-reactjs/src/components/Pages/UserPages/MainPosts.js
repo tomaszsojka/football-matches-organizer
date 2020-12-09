@@ -7,7 +7,7 @@ const MainPosts = (props) => {
         <main role="main">
             {/* key added because of error */}
             {props.posts.map((post) => 
-            <article key={post.id} className="flex article-recent posts-container-flex">
+            <article key={post._id} className="flex article-recent posts-container-flex">
                 <div className="article-recent-main">
                     <h2 className="article-title">{post.title}</h2>
                     <p className="article-body">{post.content}</p>
