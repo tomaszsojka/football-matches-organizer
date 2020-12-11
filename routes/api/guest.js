@@ -12,8 +12,6 @@ router.post('/register', (req, res) => {
       password
     } = body;
 
-  const role = "user";
-
   User.find({
     email : email  
   }, (err, previousUsers) => {
@@ -33,7 +31,6 @@ router.post('/register', (req, res) => {
     newUser.name = name;
     newUser.email = email;
     newUser.password = newUser.generateHash(password);
-    newUser.role = role;
     console.log("Saving new user");
     newUser.save((err, user) => {
       if(err) {

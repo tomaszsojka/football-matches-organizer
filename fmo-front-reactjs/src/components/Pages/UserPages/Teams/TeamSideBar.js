@@ -14,6 +14,24 @@ const TeamSideBar = (props) => {
     };
     const submitInvite = (formData) => {
         console.log(formData);
+        console.log("SENDING INVITATION");
+        const req = {
+            teamId: window.location.href.substring(window.location.href.lastIndexOf('/') + 1),
+            email : formData.email
+        };
+        sendHttpRequest('POST', "/api/user/send-invite", req)
+            .then(responseData => {
+                if(!responseData.success) {
+                    ToastsStore.error(`${responseData.message}`);
+                } else {
+
+                    ToastsStore.success(`${responseData.message}`);
+                }
+            })
+            .catch(err => {
+                ToastsStore.error("Server error");
+                console.log(err, err.data);
+            });
     };
     return (
         <aside className="sidebar ">
