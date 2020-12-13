@@ -105,8 +105,7 @@ router.get('/teams', (req, res) => {
                     return res.send({
                         success : true,
                         message : "User teams sent from sever",
-                        teams : teams,
-                        currentUserId : sessions[0].userId
+                        teams : teams
                     });
                 }
             });
@@ -114,6 +113,32 @@ router.get('/teams', (req, res) => {
         }
     });
 
+});
+
+router.get('/getTeamCaptainId', (req, res) => {
+    const { query } = req;
+    const { teamId } = query;
+    Team.findOne({
+        _id : teamId
+    }, (err, team) => {
+        if(err) {
+            return res.send({
+            success : false,
+            message : 'Error : Server error'
+            });
+        } else if(!team) {
+            return res.send({
+                success : false,
+                message : "No team of query teamId"
+            });
+        } else {
+            return res.send({
+                success : true,
+                message : "Sending team captain's Id",
+                captainId : team.captainId
+            });
+        }
+    });
 });
 
 

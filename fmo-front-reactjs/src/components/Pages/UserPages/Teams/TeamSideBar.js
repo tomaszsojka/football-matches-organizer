@@ -46,13 +46,13 @@ const TeamSideBar = (props) => {
             {/* )} */}
             {/* <div className="sidebar-widget"> */}
                 {/* <h4 className="widget-title bottomBorder">CALENDAR</h4> */}
-                <AddDocForm 
+                { props.isCaptain && <AddDocForm 
                         title="Invite user to the group" 
                         containerStyle={containerStyle}
                         inputs={inputs}
                         onSubmitForm={(formData) => submitInvite(formData)}
                         style={{marginBottom : "5em"}}
-                        />
+                        />}
             {/* </div> */}
             <ToastsContainer store={ToastsStore}/>
         </aside>
