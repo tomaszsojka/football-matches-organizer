@@ -5,6 +5,8 @@ import sendHttpRequest from "../../../Fetch/useFetch";
 import {connect} from "react-redux";
 import {logout} from "../../../store/actions/authActions";
 
+import ProfileInviteList from "./ProfileInviteList";
+
 
 class Profile extends React.Component {
 
@@ -12,7 +14,8 @@ class Profile extends React.Component {
         super(props);
         this.state = {
             name : "",
-            email : ""
+            email : "", 
+            teamInvites : [{}]
         };
     }
 
@@ -20,14 +23,15 @@ class Profile extends React.Component {
         console.log(this.props.auth);
         sendHttpRequest('GET', '/api/user/profileData?token=' + this.props.auth.token)
         .then(responseData => {
-            console.log(responseData);
             if(responseData.success) {
                 this.setState({
                     name: responseData.name,
                     email: responseData.email,
-                    // setstate in callback not to cause render() being called twice
+                    teamInvites: responseData.teamInvites
                 });
+                
             }
+            console.log(this.state);
             console.log(responseData.message);
         })
         .catch(err => {
@@ -87,17 +91,8 @@ class Profile extends React.Component {
 
                     </div>
                     <div className="boxContainer-header">Team invitations</div>
-                    <div className="flex profileBox">
-                        <div className="flex teamInvitation">
-                            <img src="../Images/vestra.jpg" alt="profile logo" className="team-image invite-image"/>
-                            <div className="inviteContent">
-                                <p>Team Vestra Vesteris is inviting you to join</p>
-                                <div className="flex invite-buttons">
-                                    <div className="greyBtn editBtn">join</div>
-                                    <div className="greyBtn editBtn">delete</div>
-                                </div>
-                            </div>   
-                        </div>
+                    <ProfileInviteList teamInvites={this.state.teamInvites}/>
+                    {/* <div className="flex profileBox">
                         <div className="flex teamInvitation">
                             <img src="../Images/bayern.jpg" alt="profile logo" className="team-image invite-image"/>
                             <div className="inviteContent">
@@ -108,7 +103,7 @@ class Profile extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <button type="button" className="greenBtn logoutBtn" onClick={() => this.onSubmitLogout()}>Logout</button>
                         
                 </div>

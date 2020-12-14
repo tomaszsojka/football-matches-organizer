@@ -115,7 +115,7 @@ router.get('/teams', (req, res) => {
 
 });
 
-router.get('/getTeamCaptainId', (req, res) => {
+router.get('/getTeamInfo', (req, res) => {
     const { query } = req;
     const { teamId } = query;
     Team.findOne({
@@ -134,8 +134,11 @@ router.get('/getTeamCaptainId', (req, res) => {
         } else {
             return res.send({
                 success : true,
-                message : "Sending team captain's Id",
-                captainId : team.captainId
+                message : "Sending team info",
+                name: team.name,
+                captainId : team.captainId,
+                playersIds : team.playersIds
+
             });
         }
     });

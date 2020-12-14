@@ -38,7 +38,7 @@ class TeamPosts extends React.Component {
                     } else {
                         this.props.setUserId(responseUserId.userId);
                         this.setState({posts : responsePosts.posts});
-                        sendHttpRequest('GET', '/api/user/getTeamCaptainId?teamId=' + this.state.teamId)
+                        sendHttpRequest('GET', '/api/user/getTeamInfo?teamId=' + this.state.teamId)
                         .then(responseCaptainId => {
                             if(!responseCaptainId.success) {
                                 ToastsStore.error(`${responseCaptainId.message}`);

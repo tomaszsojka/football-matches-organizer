@@ -3,6 +3,7 @@ const router = express.Router();
 
 const User = require('../../../models/User');
 const UserSession = require('../../../models/UserSession');
+const Team = require('../../../models/Team');
 
 
 router.get('/profileData', (req, res) => {
@@ -40,15 +41,27 @@ router.get('/profileData', (req, res) => {
                       success : false,
                       message : "Error: Invalid"
                   });
+                } else {
+                  Team.find({
+                    _id : users[0].teamInvites
+                  }, (err, teams) => {
+                    if(err) {
+                        return res.send({
+                        success : false,
+                        message : 'Error : Server error'
+                        });
+                    } else {
+                        const user = users[0];
+                        return res.send({
+                            success : true,
+                            message : "Profile data received from server",
+                            name : user.name,
+                            email : user.email,
+                            teamInvites : teams.map((team) =>{return({ id: team._id, name: team.name })})
+                        });
+                    }
+                  });
                 }
-            
-                const user = users[0];
-                return res.send({
-                    success : true,
-                    message : "Profile data received from server",
-                    name : user.name,
-                    email : user.email
-                });
             });
         }
     });
