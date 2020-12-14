@@ -12,19 +12,14 @@ router.post('/send-invite', (req, res) => {
         email 
     } = body;
 
-  Team.find({
+  Team.findOne({
     _id : teamId
-  }, (err, teams) => {
+  }, (err, team) => {
     if(err) {
       return res.send({
         success : false,
         message : "Error: Server error"
       });
-    } else if(teams.length !== 1) {
-      return res.send({
-        success : false,
-        message : 'Error : Invalid'
-        });
     } else {
       User.find({
         email : email
@@ -39,7 +34,7 @@ router.post('/send-invite', (req, res) => {
                 success : false,
                 message : "No user found with that email"
               });
-          } else if(teams[0].playersIds.includes(users[0]._id)) {
+          } else if(team.playersIds.includes(users[0]._id)) {
               return res.send({
                 success : false,
                 message : "User already is a member of the team"
@@ -124,13 +119,9 @@ router.put('/joinInviteTeam', (req, res) => {
     teamId,
     userId
   } = body;
-  Team.findOneAndUpdate({
+  Team.findOne({
       _id : teamId
-  }, {
-    $addToSet: {
-      playersIds: userId
-    }
-  }, null, (err, team) => {
+  }, (err, team) => {
       if(err) {
           return res.send({
           success : false,
@@ -141,19 +132,60 @@ router.put('/joinInviteTeam', (req, res) => {
               success : false,
               message : "No team of teamId"
           });
+      } else if(team.playersIds.includes(userId)) {
+        return res.send({
+          success : false,
+          message : `Player is already a member of the ${team.name} team`
+        });
       } else {
           User.findOne({
             _id : userId
           }, (err, user) => {
-            const index = user.teamInvites.indexOf(teamId);
-            if (index > -1) {
-              user.teamInvites.splice(index, 1);
+            if(err) {
+              return res.send({
+                success : false,
+                message : 'Error : Server error'
+              });
+            } else if(!user) {
+                return res.send({
+                  success : false,
+                  message : "No user of userId"
+                });
+            } else if(!user.teamInvites.includes(teamId)) {
+                return res.send({
+                    success : false,
+                    message : `Invite from the ${team.name} team for the user not found`
+                });
+            } else {
+              //team of teamId and user of userId found, now update team's playersIds list and user's teamInvites list
+              team.playersIds.push(userId);
+              team.save(err => {
+                if(err) {
+                    return res.send({
+                      success : false,
+                      message : "Error: Server error"
+                    });
+                } else {
+                  const index = user.teamInvites.indexOf(teamId);
+                  if (index > -1) {
+                    user.teamInvites.splice(index, 1);
+                  }
+                  user.save(err => {
+                    if(err) {
+                        return res.send({
+                          success : false,
+                          message : "Error: Server error"
+                        });
+                    } else {
+                      return res.send({
+                        success : true,
+                        message : `Player added to the team ${team.name}`
+                      });
+                    }
+                  });
+                }
+              });
             }
-            user.save();
-            return res.send({
-              success : true,
-              message : `Player added to the team ${team.name}`
-            });
           });
       }
   });
