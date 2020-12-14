@@ -59,6 +59,12 @@ class AddDocForm extends React.Component {
         this.clearValidationErr(`${name}`);
     }
 
+    onKeyDown(e) {
+        if (e.keyCode === 13) {
+            this.onSubmitForm();
+          }
+    }
+
     onSubmitForm() {
         let isError = false;
         for(let propName in this.state) {
@@ -90,7 +96,12 @@ class AddDocForm extends React.Component {
 
     render() {
         return (
-            <div className={this.props.containerStyle ? this.props.containerStyle : "boxContainer"} style={this.props.style ? this.props.style : {}}>
+            <div 
+            onKeyDown={(e) => this.onKeyDown(e)} 
+            tabIndex="0"
+            className={this.props.containerStyle ? this.props.containerStyle : "boxContainer"} 
+            style={this.props.style ? this.props.style : {}}
+            >
                 <div className="boxContainer-header bottomBorder">
                     {this.props.title}
                 </div>
