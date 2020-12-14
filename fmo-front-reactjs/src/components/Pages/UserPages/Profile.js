@@ -6,6 +6,9 @@ import {connect} from "react-redux";
 import {logout} from "../../../store/actions/authActions";
 
 import ProfileInviteList from "./ProfileInviteList";
+import {ToastsContainer, ToastsStore} from 'react-toasts';
+
+import { setUserId } from "../../../store/actions/authActions";
 
 
 class Profile extends React.Component {
@@ -22,16 +25,59 @@ class Profile extends React.Component {
     componentDidMount() {
         console.log(this.props.auth);
         sendHttpRequest('GET', '/api/user/profileData?token=' + this.props.auth.token)
-        .then(responseData => {
-            if(responseData.success) {
+        .then(responseProfileData => {
+            if(!responseProfileData.success) {
+                ToastsStore.error(`${responseProfileData.message}`);
+            } else {
                 this.setState({
-                    name: responseData.name,
-                    email: responseData.email,
-                    teamInvites: responseData.teamInvites
+                    name: responseProfileData.name,
+                    email: responseProfileData.email,
+                    teamInvites: responseProfileData.teamInvites
+                });
+                sendHttpRequest('GET', '/api/user/getUserId?token=' + this.props.auth.token)
+                .then(responseUserId => {
+                    if(!responseUserId.success) {
+                        ToastsStore.error(`${responseUserId.message}`);
+                    } else {
+                        this.props.setUserId(responseUserId.userId);
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
                 });
                 
             }
-            console.log(this.state);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+    onJoinTeam(invite) {
+        sendHttpRequest('PUT', '/api/user/joinInviteTeam', {teamId : invite.id, userId : this.props.auth.userId})
+        .then(responseData => {
+            console.log(responseData);
+            if(!responseData.success) {
+                ToastsStore.error(`${responseData.message}`);
+            } else {
+                window.location.reload();
+            }
+            console.log(responseData.message);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+    onDeleteInvite(invite) {
+        sendHttpRequest('DELETE', '/api/user/deleteInviteTeam', {teamId : invite.id, userId : this.props.auth.userId})
+        .then(responseData => {
+            console.log(responseData);
+            if(!responseData.success) {
+                ToastsStore.error(`${responseData.message}`);
+            } else {
+                window.location.reload();
+            }
             console.log(responseData.message);
         })
         .catch(err => {
@@ -42,10 +88,10 @@ class Profile extends React.Component {
     onSubmitLogout() {
         sendHttpRequest('GET', '/api/user/logout?token=' + this.props.auth.token)
         .then(responseData => {
-            console.log(responseData);
 
-
-            if(responseData.success) {
+            if(!responseData.success) {
+                ToastsStore.error(`${responseData.message}`);
+            } else {
                 //clean localStorage
                 //clean redux storage
                 this.props.logout();
@@ -91,7 +137,10 @@ class Profile extends React.Component {
 
                     </div>
                     <div className="boxContainer-header">Team invitations</div>
-                    <ProfileInviteList teamInvites={this.state.teamInvites}/>
+                    <ProfileInviteList 
+                    teamInvites={this.state.teamInvites} 
+                    onJoinTeam={(invite) => this.onJoinTeam(invite)} 
+                    onDeleteInvite={(invite) => this.onDeleteInvite(invite)}/>
                     {/* <div className="flex profileBox">
                         <div className="flex teamInvitation">
                             <img src="../Images/bayern.jpg" alt="profile logo" className="team-image invite-image"/>
@@ -107,6 +156,8 @@ class Profile extends React.Component {
                     <button type="button" className="greenBtn logoutBtn" onClick={() => this.onSubmitLogout()}>Logout</button>
                         
                 </div>
+                
+                <ToastsContainer store={ToastsStore}/>
             </div>
         );
     }
@@ -122,6 +173,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         logout : () => {
             dispatch(logout());
+        },
+        setUserId : (userId) => {
+            dispatch(setUserId(userId));
         }
     };
 };

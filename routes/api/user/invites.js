@@ -190,4 +190,52 @@ router.put('/joinInviteTeam', (req, res) => {
       }
   });
 });
+
+router.delete('/deleteInviteTeam', (req, res) => {
+  const { body } = req;
+  const { 
+    teamId,
+    userId
+  } = body;
+
+  User.findOne({
+    _id : userId
+  }, (err, user) => {
+    if(err) {
+      return res.send({
+        success : false,
+        message : 'Error : Server error'
+      });
+    } else if(!user) {
+        return res.send({
+          success : false,
+          message : "No user of userId"
+        });
+    } else if(!user.teamInvites.includes(teamId)) {
+        return res.send({
+            success : false,
+            message : `Invite not found`
+        });
+    } else {
+      //userId found, now delete invite from teamInvites list
+      const index = user.teamInvites.indexOf(teamId);
+      if (index > -1) {
+        user.teamInvites.splice(index, 1);
+      }
+      user.save(err => {
+        if(err) {
+            return res.send({
+              success : false,
+              message : "Error: Server error"
+            });
+        } else {
+          return res.send({
+            success : true,
+            message : `Invite deleted`
+          });
+        }
+      });
+    }
+  });
+});
 module.exports = router;
