@@ -117,4 +117,45 @@ router.get('/invites', (req, res, next) => {
   });
 
 });
+
+router.put('/joinInviteTeam', (req, res) => {
+  const { body } = req;
+  const { 
+    teamId,
+    userId
+  } = body;
+  Team.findOneAndUpdate({
+      _id : teamId
+  }, {
+    $addToSet: {
+      playersIds: userId
+    }
+  }, null, (err, team) => {
+      if(err) {
+          return res.send({
+          success : false,
+          message : 'Error : Server error'
+          });
+      } else if(!team) {
+          return res.send({
+              success : false,
+              message : "No team of teamId"
+          });
+      } else {
+          User.findOne({
+            _id : userId
+          }, (err, user) => {
+            const index = user.teamInvites.indexOf(teamId);
+            if (index > -1) {
+              user.teamInvites.splice(index, 1);
+            }
+            user.save();
+            return res.send({
+              success : true,
+              message : `Player added to the team ${team.name}`
+            });
+          });
+      }
+  });
+});
 module.exports = router;
