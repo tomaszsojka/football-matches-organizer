@@ -32,6 +32,10 @@ const TeamInfoSchema = new mongoose.Schema({
         type : String,
         default: ''
     },
+    teamLogoUrl : {
+        type : String,
+        default: 'https://scontent-frt3-1.xx.fbcdn.net/v/t1.0-9/119037241_3044705132304978_401051008132371636_o.jpg?_nc_cat=102&ccb=2&_nc_sid=825194&_nc_ohc=3NjDDroJbrcAX-GDZQ4&_nc_ht=scontent-frt3-1.xx&oh=8fbd176e068e1bc6a661ff3e7f58740e&oe=5FFF00CB'
+    },
     teamScore : {
         type : String,
         default: ''
