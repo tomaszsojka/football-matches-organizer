@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
+
 
 const Team = require('../../../models/Team');
 const User = require('../../../models/User');
@@ -20,9 +22,10 @@ router.get('/posts', (req, res) => {
     if(!teamId) {
         //looking for posts without teamId
         Post.find({
-            teamId : ""
+            $or: [{ teamId: {$exists: false} }]
         }, (err, posts) => {
                 if(err) {
+                    console.log(err);
                     return res.send({
                         success : false,
                         message : 'Error : Server error'
@@ -124,16 +127,15 @@ router.post('/add-post', (req, res) => {
                     //Save new post 
                     const newPost = new Post();
                     if(teamId) {
-                        newPost.teamId = teamId;
-                    } else {
-                        newPost.teamId = "";
-                    }
+                        newPost.teamId = mongoose.Types.ObjectId(teamId);
+                        console.log(mongoose.Types.ObjectId(teamId));
+                    } 
                     newPost.authorId = user._id;
                     newPost.authorName = user.name;
                     newPost.title = title;
                     newPost.content = content;
                     newPost.date = Date.now();
-                    console.log(`Saving new post`);
+                    console.log(`Saving new post ${newPost}`);
                     newPost.save((err, post) => {
                         if(err) {
                             return res.send({

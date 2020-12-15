@@ -61,6 +61,7 @@ strong {
 }
 
 input {
+    font-family: 'Ubuntu', sans-serif;
     border-radius: 3px;
     border: 1px solid darkgreen;
     transition: border 0.4s ease-out;

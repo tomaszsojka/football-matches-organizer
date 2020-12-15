@@ -1,12 +1,15 @@
 const mongoose = require('mongoose');
 
 const PostSchema = new mongoose.Schema({
+    //for main wall undefined, for team wall ref to teamId
     teamId : {
-        type : String,
-        default : ""
+        type : mongoose.Types.ObjectId,
+        ref : 'Team',
+        default: undefined
     },
     authorId : {
-        type : String,
+        type : mongoose.Types.ObjectId,
+        ref : 'User',
         default : ""
     },
     authorName : {
