@@ -12,6 +12,7 @@ import Teams from "./components/Pages/UserPages/Teams/Teams";
 import AddTeam from "./components/Pages/UserPages/Teams/AddTeam";
 
 import TeamPosts from "./components/Pages/UserPages/Teams/TeamPosts";
+import TeamCalendar from"./components/Pages/UserPages/Teams/TeamCalendar";
 
 import Error from "./components/Pages/Error";
 
@@ -47,8 +48,11 @@ function App() {
               <Route exact path={"/user/teams/add-team"}>
                 <AddTeam/>
               </Route>
-              <Route exact path={"/user/teams/:teamName"}>
+              <Route exact path={"/user/teams/:teamId"}>
                 <TeamPosts/>
+              </Route>
+              <Route exact path={"/user/teams/:teamId/calendar"}>
+                <TeamCalendar/>
               </Route>
               <Error message="User path do not exist!"/>
             </Switch>
