@@ -3,6 +3,7 @@ const User = require('../../../models/User');
 const UserSession = require('../../../models/UserSession');
 const Team = require('../../../models/Team');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 router.post('/send-invite', (req, res) => {
    
@@ -45,7 +46,7 @@ router.post('/send-invite', (req, res) => {
                 message : "User is already invited"
               });
           } else {
-              users[0].teamInvites.push(teamId);
+              users[0].teamInvites.push(mongoose.Types.ObjectId(teamId));
               users[0].save(err => {
                 if(err) {
                     return res.send({

@@ -15,7 +15,8 @@ const UserSchema = new mongoose.Schema({
         default: ''
     },
     teamInvites : {
-        type : [String],
+        type : [mongoose.Types.ObjectId],
+        ref : 'Team',
         default: []
     }
 });

@@ -128,7 +128,6 @@ router.post('/add-post', (req, res) => {
                     const newPost = new Post();
                     if(teamId) {
                         newPost.teamId = mongoose.Types.ObjectId(teamId);
-                        console.log(mongoose.Types.ObjectId(teamId));
                     } 
                     newPost.authorId = user._id;
                     newPost.authorName = user.name;

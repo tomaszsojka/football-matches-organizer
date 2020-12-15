@@ -10,11 +10,12 @@ const TeamSchema = new mongoose.Schema({
         default: ''
     },
     captainId : {
-        type : String,
-        default: ""
+        type : mongoose.Types.ObjectId,
+        ref : 'User'
     },
     playersIds : {
-        type : [String],
+        type : [mongoose.Types.ObjectId],
+        ref : 'User',
         default : []
     }
 });
