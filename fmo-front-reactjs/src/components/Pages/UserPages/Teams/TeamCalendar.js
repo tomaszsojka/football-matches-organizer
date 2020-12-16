@@ -1,5 +1,6 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
+import { connect } from "react-redux";  
 import Paper from '@material-ui/core/Paper';
 import { ViewState, EditingState } from '@devexpress/dx-react-scheduler';
 import {
@@ -29,8 +30,12 @@ import {
     BasicLayout, 
     BooleanEditor,
     CommandLayout,
+    ResourceEditor,
+    CaptainResourceEditor,
     resources
 } from "./TeamCalendarCustoms";
+import sendHttpRequest from "../../../../Fetch/useFetch";
+import { setUserId } from "../../../../store/actions/authActions";
 
 class TeamCalendar extends React.Component {
     constructor(props) {
@@ -38,6 +43,7 @@ class TeamCalendar extends React.Component {
         const pathWithoutCalendar = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
         this.state = {
             teamId: pathWithoutCalendar.substring(pathWithoutCalendar.lastIndexOf('/') + 1),
+            isCaptain: false,
             isRedirect : false,
             currentDate : Date.now(),
             data : schedulerData,
@@ -46,6 +52,50 @@ class TeamCalendar extends React.Component {
             appointmentChanges: {},
             editingAppointment: undefined,
         };
+    }
+
+    componentDidMount() {
+        // sendHttpRequest('GET', '/api/user/events?teamId=' + this.state.teamId)
+        // .then(responseEvents => {
+        //     if(!responseEvents.success) {
+        //         ToastsStore.error(`${responseEvents.message}`);
+        //         this.setState({isRedirect: true});
+        //     } else {
+        //         console.log(responseEvents.message);
+                sendHttpRequest('GET', '/api/user/getUserId?token=' + this.props.auth.token)
+                .then(responseUserId => {
+                    if(!responseUserId.success) {
+                        // ToastsStore.error(`${responseUserId.message}`);
+                    } else {
+                        this.props.setUserId(responseUserId.userId);
+                        // this.setState({posts : responseEvents.events});
+                        sendHttpRequest('GET', '/api/user/getTeamInfo?teamId=' + this.state.teamId)
+                        .then(responseCaptainId => {
+                            if(!responseCaptainId.success) {
+                                // ToastsStore.error(`${responseCaptainId.message}`);
+                            } else {
+                                if(responseCaptainId.captainId === this.props.auth.userId) {
+                                    this.setState({isCaptain : true});
+                                }
+                            }
+                        })
+                        .catch(err => {
+                            // ToastsStore.error("Server error");
+                            console.log(err);
+                        });
+                    }
+                })
+                .catch(err => {
+                    // ToastsStore.error("Server error");
+                    console.log(err);
+                });
+            // }
+        // })
+        // .catch(err => {
+        //     ToastsStore.error("Server error");
+        //     this.setState({isRedirect: true});
+        //     console.log(err);
+        // });
     }
 
     //called on start and every change in adding appointment form
@@ -114,11 +164,11 @@ class TeamCalendar extends React.Component {
                                 onEditingAppointmentChange={this.changeEditingAppointment.bind(this)}
                             />
                             <EditRecurrenceMenu /> 
+                            <ConfirmationDialog />
                             <WeekView
                                 startDayHour={8}
                                 endDayHour={22}
                             />
-                            <ConfirmationDialog />
                             <Toolbar />
                             <DateNavigator />
                             <TodayButton />
@@ -138,11 +188,12 @@ class TeamCalendar extends React.Component {
                                 booleanEditorComponent={BooleanEditor}
 
                                 commandLayoutComponent={CommandLayout}
+                                resourceEditorComponent={this.state.isCaptain ? CaptainResourceEditor : ResourceEditor}
                             />
                             <CurrentTimeIndicator
                                 shadePreviousCells={true}
                                 shadePreviousAppointments={true}
-                                updateInterval={1000000}
+                                updateInterval={900000}
                             />
                         </Scheduler>
                     </Paper>
@@ -152,4 +203,18 @@ class TeamCalendar extends React.Component {
     }
 }
 
-export default TeamCalendar;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.authReducer
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setUserId: (userId) => {
+            dispatch(setUserId(userId));
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (TeamCalendar);
