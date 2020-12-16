@@ -12,7 +12,7 @@
     position: fixed;
     top: 0;
     /* above all */
-    z-index: 99;
+    z-index: 99999999;
 }
 
 .toolbar-base {

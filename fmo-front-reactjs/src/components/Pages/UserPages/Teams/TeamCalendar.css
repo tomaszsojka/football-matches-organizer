@@ -1,0 +1,23 @@
+
+.calendar-container {
+    margin-top: 36.8px;
+}
+
+@media (min-width: 550px) {
+    .calendar-container {
+        margin-top: 54px;
+    }
+}
+
+
+/* not connected */
+.training-container,
+.matches-container,
+#AppointmentContent {
+    background-color: '#2f9e13';
+    border-radius: '3px';
+}
+/* 
+.makeStyles-appointment-262 {
+    background-color:'#2f9e13';
+} */
