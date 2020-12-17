@@ -32,6 +32,7 @@ import {
     CommandLayout,
     ResourceEditor,
     CaptainResourceEditor,
+    Layout,
     resources
 } from "./TeamCalendarCustoms";
 import sendHttpRequest from "../../../../Fetch/useFetch";
@@ -51,6 +52,10 @@ class TeamCalendar extends React.Component {
             addedAppointment: {},
             appointmentChanges: {},
             editingAppointment: undefined,
+
+            isFormVisible : undefined,
+            isAppointmentBeingCreated : false,
+            allowUpdating : false
         };
     }
 
@@ -102,7 +107,10 @@ class TeamCalendar extends React.Component {
     //addedAppointment contains all the data about the appointment added
     changeAddedAppointment(addedAppointment) {
         console.log("ADD : ", addedAppointment);
-        this.setState({ addedAppointment });
+        this.setState({ 
+            addedAppointment,
+            isAppointmentBeingCreated : true
+         });
     }
     //called on every change in edited appointment form
     //appointmentChanges contains all changed inputs data
@@ -114,17 +122,20 @@ class TeamCalendar extends React.Component {
     //editingAppointment contains at the beginning all data about edited appointment, at the end is undefined
     changeEditingAppointment(editingAppointment) {
         // console.log("EDIT : ", editingAppointment);
-        this.setState({ editingAppointment });
+        this.setState({ 
+            editingAppointment
+         });
     }
 
 
     commitChanges({ added, changed, deleted }) {
         this.setState((state) => {
           let { data } = state;
-          console.log(data);
+        //   console.log(data);
           if (added) {
             const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
             data = [...data, { id: startingAddedId, ...added }];
+            console.log(data);
           }
           if (changed) {
             data = data.map(appointment => (
@@ -133,11 +144,17 @@ class TeamCalendar extends React.Component {
           if (deleted !== undefined) {
             data = data.filter(appointment => appointment.id !== deleted);
           }
-          return { data };
+          return { data, isAppointmentBeingCreated : false };
         });
       }
+
+    onCancelForm() {
+        console.log("here");
+        this.setState({isAppointmentBeingCreated : false})
+    }
     
     render() {
+
         if(this.state.isRedirect) {
             return <Redirect to={"/user/teams404"}/>
         } else {
@@ -164,7 +181,9 @@ class TeamCalendar extends React.Component {
                                 onEditingAppointmentChange={this.changeEditingAppointment.bind(this)}
                             />
                             <EditRecurrenceMenu /> 
-                            <ConfirmationDialog />
+                            <ConfirmationDialog 
+                                layoutComponent={Layout}
+                            />
                             <WeekView
                                 startDayHour={8}
                                 endDayHour={22}
@@ -182,6 +201,9 @@ class TeamCalendar extends React.Component {
                                 showOpenButton
                             />
                             <AppointmentForm 
+                                visible={this.state.isFormVisible}
+                                readOnly={this.state.isAppointmentBeingCreated ? false : !this.state.allowUpdating}
+
                                 basicLayoutComponent={BasicLayout}
                                 textEditorComponent={TextEditor}
                                 messages={messages}
@@ -189,6 +211,8 @@ class TeamCalendar extends React.Component {
 
                                 commandLayoutComponent={CommandLayout}
                                 resourceEditorComponent={this.state.isCaptain ? CaptainResourceEditor : ResourceEditor}
+
+                                onCancelButtonClick={() => this.onCancelForm()}
                             />
                             <CurrentTimeIndicator
                                 shadePreviousCells={true}
