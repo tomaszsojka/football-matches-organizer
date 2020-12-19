@@ -32,7 +32,7 @@ import {
     CommandLayout,
     ResourceEditor,
     CaptainResourceEditor,
-    Layout,
+    ConfLayout,
     resources
 } from "./TeamCalendarCustoms";
 import sendHttpRequest from "../../../../Fetch/useFetch";
@@ -106,7 +106,7 @@ class TeamCalendar extends React.Component {
     //called on start and every change in adding appointment form
     //addedAppointment contains all the data about the appointment added
     changeAddedAppointment(addedAppointment) {
-        console.log("ADD : ", addedAppointment);
+        // console.log("ADD : ", addedAppointment);
         this.setState({ 
             addedAppointment,
             isAppointmentBeingCreated : true
@@ -182,7 +182,7 @@ class TeamCalendar extends React.Component {
                             />
                             <EditRecurrenceMenu /> 
                             <ConfirmationDialog 
-                                layoutComponent={Layout}
+                                layoutComponent={ConfLayout}
                             />
                             <WeekView
                                 startDayHour={8}

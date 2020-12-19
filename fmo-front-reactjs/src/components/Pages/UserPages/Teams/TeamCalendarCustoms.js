@@ -39,7 +39,6 @@ export const messages = {
   };
 //disabling default multiline input
 export const TextEditor = (props) => {
-    // console.log(props);
     // eslint-disable-next-line react/destructuring-assignment
     if (props.type === 'multilineTextEditor') {
       return null;
@@ -48,18 +47,26 @@ export const TextEditor = (props) => {
     }
   };
   
+
 export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResources, readOnly, ...restProps }) => {  
+  // console.log(appointmentData, appointmentResources, restProps);
+  const loadDefaultResource = (nextValue) => {
+    onFieldChange({ eventType: nextValue });
+
+  }
+  
   //when appointment is added no resource instance is chosen, so it takes first as default
     if(appointmentResources.length === 0) {
       appointmentResources.push(restProps.resources[0].instances[0]);
-      //then sets appointmentData "eventType" field (here to "training")
-      onFieldChange({ eventType: appointmentResources[0].id });
+      
+
+      //then sets appointmentData "eventType" field (here to "training") 
+      //!!!!!!!   IT GIVES WARNING : Cannot update during an existing state transition    !!!!!!!
+      loadDefaultResource(restProps.resources[0].instances[0].id);
+      // appointmentData.eventType = restProps.resources[0].instances[0].id;
     }
-
-    console.log(restProps);   
-    // console.log(appointmentResources);
-    console.log(appointmentData);
-
+    
+      console.log(appointmentData, appointmentResources, restProps);
     const onLocationFieldChange = (nextValue) => {
         onFieldChange({ location: nextValue });
     };
@@ -109,6 +116,7 @@ export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResourc
         >
           {/* <AppointmentForm.ResourceEditor
             appointmentResources={appointmentResources}
+            resouce={{fieldName: "eventType", isMain: true, title: "Event type", allowMultiple: false, instances: [{id: "training", color: "#2f9e13", fieldName: "eventType", text: "Training", title: "Event type", allowMultiple: false, isMain: true},{id: "match", color: "#1b3b13", fieldName: "eventType", text: "Match", title: "Event type", allowMultiple: false, isMain: true}]}}
 
           /> */}
           <AppointmentForm.Label
@@ -125,7 +133,7 @@ export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResourc
           {isMatch &&  opponentField}
       </AppointmentForm.BasicLayout>
     );
-  };
+};
 export const BooleanEditor = props => {
       if(props.label === 'All Day') {
             //returns null, to hide all day option 
@@ -133,7 +141,7 @@ export const BooleanEditor = props => {
       } else {
             return <AppointmentForm.BooleanEditor {...props} />;
       }
-  };
+};
 
 export const CommandLayout = ({ onCommitButtonClick, ...restProps }) => {
     // console.log(restProps);
@@ -146,12 +154,6 @@ export const CommandLayout = ({ onCommitButtonClick, ...restProps }) => {
 }
 
 export const ResourceEditor = ({readOnly, appointmentResources, ...restProps }) => {
-  // console.log(restProps);
-  // console.log(appointmentResources);
-  //when appointment is added no resource instance is chosen, so it takes first as default
-  if(appointmentResources.length === 0) {
-    appointmentResources.push(restProps.resource.instances[0]);
-  }
   readOnly = true;
   return (
       <AppointmentForm.ResourceEditor
@@ -162,26 +164,21 @@ export const ResourceEditor = ({readOnly, appointmentResources, ...restProps }) 
   )
 }
 
-export const CaptainResourceEditor = ({appointmentResources, onResourceChange, ...restProps }) => {
-  // console.log(restProps);
-  // console.log(appointmentResources);
-  //when appointment is added no resource instance is chosen, so it takes first as default
-  // if(appointmentResources.length === 0) {
-  //   appointmentResources.push(restProps.resource.instances[0]);
-  //   // onResourceChange({eventType : "training"});
-  // }
+export const CaptainResourceEditor = ({onResourceChange, ...restProps }) => {
+  console.log(restProps);
+  if(restProps.appointmentResources.length === 0) {
+    // onResourceChange({eventType: restProps.resource.instances[0].id});   
+  }
   return (
       <AppointmentForm.ResourceEditor
-          appointmentResources={appointmentResources}
-          onResourceChange={onResourceChange}
+      onResourceChange={onResourceChange}
           {...restProps}
       />
   )
 }
 
 /* CONFIRMATION DIALOG CUSTOMS */
-export const Layout = ({...restProps }) => {
-  console.log(restProps);
+export const ConfLayout = ({...restProps }) => {
   return (
       <ConfirmationDialog.Layout
           {...restProps}
