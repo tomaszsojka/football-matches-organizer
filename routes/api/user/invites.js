@@ -21,6 +21,11 @@ router.post('/send-invite', (req, res) => {
         success : false,
         message : "Error: Server error"
       });
+    } else if(!team) {
+      return res.send({
+        success : false,
+        message : "No team of passed id found"
+      });
     } else {
       User.find({
         email : email

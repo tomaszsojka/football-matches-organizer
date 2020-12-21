@@ -48,6 +48,8 @@ router.post('/register', (req, res) => {
   });
 });
 
+const matches = require('../../matches');
+const Match = require('../../models/Match');
 
 router.post('/login', (req, res) => {
   const { body } = req;
@@ -55,6 +57,11 @@ router.post('/login', (req, res) => {
       email,
       password
     } = body;
+
+    // matches.forEach(match => {
+    //   const m = new Match(match);
+    //   m.save();
+    // })
 
   User.find({
     email : email  

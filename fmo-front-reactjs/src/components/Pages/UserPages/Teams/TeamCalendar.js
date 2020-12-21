@@ -54,10 +54,14 @@ class TeamCalendar extends React.Component {
             appointmentChanges: {},
             editingAppointment: undefined,
 
-            isFormVisible : undefined,
             isAppointmentBeingCreated : false,
             allowUpdating : false
         };
+
+        this.changeAddedAppointment = this.changeAddedAppointment.bind(this);
+        this.changeAppointmentChanges = this.changeAppointmentChanges.bind(this);
+        this.changeEditingAppointment = this.changeEditingAppointment.bind(this);
+
     }
 
     componentDidMount() {
@@ -78,6 +82,11 @@ class TeamCalendar extends React.Component {
                         responseAppointments.trainings.forEach(training => training.eventType="training");
                         responseAppointments.matches.forEach(training => training.eventType="match");
                         const allData = [...responseAppointments.trainings, ...responseAppointments.matches];
+                        //because mongoose was returning date with 'Z' in the end
+                        allData.forEach(appointment => {
+                            appointment.startDate = new Date(appointment.startDate);
+                            appointment.endDate = new Date(appointment.endDate);
+                        });
                         this.setState({data : allData});
                         sendHttpRequest('GET', '/api/user/getTeamInfo?teamId=' + this.state.teamId)
                         .then(responseCaptainId => {
@@ -109,56 +118,78 @@ class TeamCalendar extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.data !== prevState.data) {
-            // console.log(this.state.addedAppointment);
-            if(this.state.addedAppointment) {
-                if(this.state.addedAppointment.eventType === "training") {
-                    const req = {
-                        teamId : this.state.teamId,
-                        ...this.state.addedAppointment
-                    };
-                    sendHttpRequest('POST', "/api/user/add-training", req)
-                        .then(responseData => {
-                            if(!responseData.success) {
-                                ToastsStore.error(`${responseData.message}`);
-                            } else {
-                                console.log(responseData.message);
-                            }
-                        })
-                        .catch(err => {
-                            ToastsStore.error("Server error");
-                            console.log(err, err.data);
-                        });
-                } else {
-                    const req = {
-                        hometeamId : this.state.teamId,
-                        ...this.state.addedAppointment
-                    };
-                    sendHttpRequest('POST', "/api/user/add-match", req)
+        //when there is appointment to add (it was created in commitChanges), after 
+        if(this.state.addedAppointment && JSON.stringify(this.state.addedAppointment) !== '{}') { 
+            console.log(JSON.stringify(this.state.addedAppointment));
+            if(this.state.addedAppointment.eventType === "training") {
+                const req = {
+                    teamId : this.state.teamId,
+                    ...this.state.addedAppointment
+                };
+                sendHttpRequest('POST', "/api/user/add-training", req)
                     .then(responseData => {
                         if(!responseData.success) {
                             ToastsStore.error(`${responseData.message}`);
+                            this.setState({
+                                addedAppointment : {}
+                            });
                         } else {
-                            ToastsStore.success(`Invite for the match sent to ${this.state.addedAppointment.opponent} team`);
                             console.log(responseData.message);
+                            this.setState({
+                                data : [...this.state.data, {...this.state.addedAppointment}],
+                                addedAppointment : {}
+                            });
                         }
                     })
                     .catch(err => {
                         ToastsStore.error("Server error");
+                        this.setState({
+                            addedAppointment : {}
+                        });
                         console.log(err, err.data);
                     });
-                }
-                
+            } else {
+                console.log("ADDING MATCH");
+                const req = {
+                    homeTeamId : this.state.teamId,
+                    ...this.state.addedAppointment
+                };
+                sendHttpRequest('POST', "/api/user/add-match", req)
+                .then(responseData => {
+                    if(!responseData.success) {
+                        ToastsStore.error(`${responseData.message}`, 4000);
+                        this.setState({
+                            addedAppointment : {}
+                        });
+                    } else {
+                        ToastsStore.success(`Invitation for the match sent to ${this.state.addedAppointment.opponent} team`, 4000);
+                        setTimeout(() => ToastsStore.info("Now wait for their captain to accept..."), 4000);
+                        
+                        // console.log(responseData.match);
+                        this.setState({
+                            //data is not being updated, because match needs to be accepted by opponent team
+                            // data : [...this.state.data, {...this.state.addedAppointment}],
+                            addedAppointment : {}
+                        });
+                    }
+                })
+                .catch(err => {
+                    ToastsStore.error("Server error");
+                    this.setState({
+                        addedAppointment : {}
+                    });
+                    console.log(err, err.data);
+                });
             }
-          }
+        }
     }
 
     //called on start and every change in adding appointment form
     //addedAppointment contains all the data about the appointment added
     changeAddedAppointment(addedAppointment) {
+        // console.log(addedAppointment);
         // console.log("ADD : ", addedAppointment);
         this.setState({ 
-            addedAppointment,
             isAppointmentBeingCreated : true
          });
     }
@@ -180,7 +211,7 @@ class TeamCalendar extends React.Component {
 
     commitChanges({ added, changed, deleted }) {
         this.setState((state) => {
-          let { data } = state;
+          let { data} = state;
           if (added) {
               if(added.eventType === "training") {
                 if(!added.title) {
@@ -197,8 +228,7 @@ class TeamCalendar extends React.Component {
                     added.title = `MATCH VS ${added.opponent}`
                 }
               }
-            //   const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
-              data = [...data, {...added }];
+            //   data = [...data, {...added }];
           }
           if (changed) {
             data = data.map(appointment => (
@@ -207,7 +237,7 @@ class TeamCalendar extends React.Component {
           if (deleted !== undefined) {
             data = data.filter(appointment => appointment.id !== deleted);
           }
-          return { data, isAppointmentBeingCreated : false };
+          return { data, isAppointmentBeingCreated : false, addedAppointment : added};
         });
       }
 
@@ -234,14 +264,14 @@ class TeamCalendar extends React.Component {
                                 onCommitChanges={this.commitChanges.bind(this)}
 
                                                     
-                                addedAppointment={this.state.addedAppointment}
-                                onAddedAppointmentChange={this.changeAddedAppointment.bind(this)}
+                                // addedAppointment={this.state.addedAppointment}
+                                onAddedAppointmentChange={this.changeAddedAppointment}
 
                                 appointmentChanges={this.state.appointmentChanges}
-                                onAppointmentChangesChange={this.changeAppointmentChanges.bind(this)}
+                                onAppointmentChangesChange={this.changeAppointmentChanges}
 
                                 editingAppointment={this.state.editingAppointment}
-                                onEditingAppointmentChange={this.changeEditingAppointment.bind(this)}
+                                onEditingAppointmentChange={this.changeEditingAppointment}
                             />
                             <EditRecurrenceMenu /> 
                             <ConfirmationDialog 
@@ -264,7 +294,6 @@ class TeamCalendar extends React.Component {
                                 showOpenButton
                             />
                             <AppointmentForm 
-                                visible={this.state.isFormVisible}
                                 readOnly={this.state.isAppointmentBeingCreated ? false : !this.state.allowUpdating}
 
                                 basicLayoutComponent={BasicLayout}

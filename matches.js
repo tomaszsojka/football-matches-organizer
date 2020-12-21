@@ -1,6 +1,5 @@
 const matches = [
     {
-      startDate: "2020-12-03T21:32:49",
       homeTeam: {
         teamName: "Bayern Munich",
         teamLogoUrl : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Logo_FC_Bayern_M%C3%BCnchen_%282002%E2%80%932017%29.svg/1024px-Logo_FC_Bayern_M%C3%BCnchen_%282002%E2%80%932017%29.svg.png",
@@ -36,7 +35,8 @@ const matches = [
           {playerName: "Joao Felix", tShirtNumber: "7", position: "LFW"},
           {playerName: "Luis Suarez", tShirtNumber: "9", position: "RFW"}
         ]
-      }
+      },
+      isAccepted : true
     },
     {
       homeTeam: {
@@ -59,7 +59,7 @@ const matches = [
       },
       awayTeam: {
         teamName : "GKS Katowice",
-        teamLogoUrl : "https://cdn.freebiesupply.com/logos/large/2x/gks-katowice-1-logo-png-transparent.png",
+        teamLogoUrl : "https://iconape.com/wp-content/files/kj/307837/png/307837.png",
         teamScore: "",
         lineup: [
           {playerName: "Jan Oblak", tShirtNumber: "13", position: "GK"},
@@ -74,7 +74,8 @@ const matches = [
           {playerName: "Joao Felix", tShirtNumber: "7", position: "LFW"},
           {playerName: "Luis Suarez", tShirtNumber: "9", position: "RFW"}
         ]
-      }
+      },
+      isAccepted : true
     },
     {
       homeTeam: {
@@ -112,12 +113,13 @@ const matches = [
           {playerName: "Joao Felix", tShirtNumber: "7", position: "LFW"},
           {playerName: "Luis Suarez", tShirtNumber: "9", position: "RFW"}
         ]
-      }
+      },
+      isAccepted : true
     },
     {
       homeTeam: {
         teamName: "Broń Radom",
-        teamLogoUrl: "https://lh3.googleusercontent.com/proxy/oe_fzz7omdbbl92vlXbUPRzsVN4WkTpCJYPnnGNi-AiNNuAyPtNwOunSEBkNi2RIpzCQDWPOcXEBRPk0ZKMI979z",
+        teamLogoUrl: "https://sortitoutsi.net/uploads/team/96030295.png",
         teamScore: "",
         lineup: [
             {playerName: "Manuel Neuer", tShirtNumber: "1", position: "GK"},
@@ -135,7 +137,7 @@ const matches = [
       },
       awayTeam: {
         teamName : "Pelikan Łowicz",
-        teamLogoUrl : "https://lh3.googleusercontent.com/proxy/COdQAgDaGknWsYy5MmlhzgaD5ecIibkFmtb0uOq8sW5YQpg6CpTp1rTOHDHsZGmRzaMXKPs07NmEWSedKfoomruZTlU85iiOTroRrq1qreSwuff33YD77X7KusQ",
+        teamLogoUrl : "http://psvlodz.pl/wp-content/uploads/2017/06/Pelikan-%C5%81owicz.png",
         teamScore: "",
         lineup: [
           {playerName: "Jan Oblak", tShirtNumber: "13", position: "GK"},
@@ -150,7 +152,8 @@ const matches = [
           {playerName: "Joao Felix", tShirtNumber: "7", position: "LFW"},
           {playerName: "Luis Suarez", tShirtNumber: "9", position: "RFW"}
         ]
-      }
+      },
+      isAccepted : true
     },
     {
       homeTeam: {
@@ -188,7 +191,8 @@ const matches = [
           {playerName: "Joao Felix", tShirtNumber: "7", position: "LFW"},
           {playerName: "Luis Suarez", tShirtNumber: "9", position: "RFW"}
         ]
-      }
+      },
+      isAccepted : true
     }
     
   ];

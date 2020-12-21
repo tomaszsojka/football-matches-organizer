@@ -49,7 +49,7 @@ export const TextEditor = (props) => {
   };
   
 
-export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResources, readOnly, ...restProps }) => {  
+export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResources, readOnly, ...restProps }) => { 
   const loadDefaultResource = (nextValue) => {
     onFieldChange({ eventType: nextValue });
 
@@ -176,54 +176,19 @@ export const CaptainResourceEditor = ({onResourceChange, ...restProps }) => {
 }
 
 /* CONFIRMATION DIALOG CUSTOMS */
-export const ConfLayout = ({...restProps }) => {
+export const ConfLayout = ({handleConfirm, ...restProps }) => {
+  console.log(restProps);
+  //function to make isAppointmentBeingCreated value go back to defult : false -> it keeps updating existing events disallowed
+  const forceRefresh = () => {
+    window.location.reload();
+  }
   return (
       <ConfirmationDialog.Layout
+          handleConfirm={() => {handleConfirm(); forceRefresh();}}
           {...restProps}
       />
   )
 }
-
-
-
-
-/* DATA */
-
-export const schedulerData = [
-    { 
-        title: 'Training', 
-        startDate: new Date(2020, 11, 14, 10, 45), 
-        endDate: new Date(2020, 11, 14, 12, 45), 
-        id: 0,
-        location: "Bielszowice", 
-        eventType: 'training'
-    },
-    { 
-        title: 'Training', 
-        startDate: new Date(2020, 11, 23, 9, 45), 
-        endDate: new Date(2020, 11, 23, 11, 0), 
-        id: 1, 
-        location: "", 
-        eventType: 'training'
-    },
-    { 
-        title: 'Match with Olimpia', 
-        startDate: new Date(2020, 11, 25, 12, 0), 
-        endDate: new Date(2020, 11, 25, 13, 30), 
-        id: 2, 
-        location: "", 
-        eventType: 'match', 
-        opponent: "Olimpia"
-    },
-    { 
-        title: 'Training', 
-        startDate: new Date(2020, 11, 21, 12, 30), 
-        endDate: new Date(2020, 11, 21, 14, 0), 
-        id: 3, 
-        location: "", 
-        eventType: 'training'
-    },
-  ];
 
 /* RESOURCES */
 export const resources = [

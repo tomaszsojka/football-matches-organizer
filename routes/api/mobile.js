@@ -40,7 +40,8 @@ router.put('/update-matchinfo', (req, res) => {
 
     Match.findOneAndUpdate({
         _id : body._id,
-        isUpdated : false
+        isUpdated : false,
+        isAccepted : true
       }, {
         $set: {
             isUpdated : true,
