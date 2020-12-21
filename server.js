@@ -34,6 +34,7 @@ app.use('/api/user', require('./routes/api/user/user'));
 app.use('/api/user', require('./routes/api/user/teams'));
 app.use('/api/user', require('./routes/api/user/posts'));
 app.use('/api/user', require('./routes/api/user/invites'));
+app.use('/api/user', require('./routes/api/user/calendar'));
 
 app.use('/api/mobile', require('./routes/api/mobile'));
 

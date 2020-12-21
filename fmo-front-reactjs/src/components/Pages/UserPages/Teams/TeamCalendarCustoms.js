@@ -39,6 +39,7 @@ export const messages = {
   };
 //disabling default multiline input
 export const TextEditor = (props) => {
+  // console.log(props);
     // eslint-disable-next-line react/destructuring-assignment
     if (props.type === 'multilineTextEditor') {
       return null;
@@ -49,12 +50,10 @@ export const TextEditor = (props) => {
   
 
 export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResources, readOnly, ...restProps }) => {  
-  // console.log(appointmentData, appointmentResources, restProps);
   const loadDefaultResource = (nextValue) => {
     onFieldChange({ eventType: nextValue });
 
   }
-  
   //when appointment is added no resource instance is chosen, so it takes first as default
     if(appointmentResources.length === 0) {
       appointmentResources.push(restProps.resources[0].instances[0]);
@@ -65,8 +64,9 @@ export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResourc
       loadDefaultResource(restProps.resources[0].instances[0].id);
       // appointmentData.eventType = restProps.resources[0].instances[0].id;
     }
+    // console.log(restProps.textEditorComponent);
     
-      console.log(appointmentData, appointmentResources, restProps);
+      // console.log(appointmentData, appointmentResources, restProps);
     const onLocationFieldChange = (nextValue) => {
         onFieldChange({ location: nextValue });
     };
@@ -98,7 +98,6 @@ export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResourc
         // readOnly = true;
       } else if(appointmentData.startDate) {
         if(appointmentData.startDate < Date.now()) {
-          console.log("here");
           readOnly = true;
         } else {
           // readOnly = false;
@@ -165,7 +164,6 @@ export const ResourceEditor = ({readOnly, appointmentResources, ...restProps }) 
 }
 
 export const CaptainResourceEditor = ({onResourceChange, ...restProps }) => {
-  console.log(restProps);
   if(restProps.appointmentResources.length === 0) {
     // onResourceChange({eventType: restProps.resource.instances[0].id});   
   }
@@ -202,16 +200,16 @@ export const schedulerData = [
     },
     { 
         title: 'Training', 
-        startDate: new Date(2020, 11, 16, 9, 45), 
-        endDate: new Date(2020, 11, 16, 11, 0), 
+        startDate: new Date(2020, 11, 23, 9, 45), 
+        endDate: new Date(2020, 11, 23, 11, 0), 
         id: 1, 
         location: "", 
         eventType: 'training'
     },
     { 
         title: 'Match with Olimpia', 
-        startDate: new Date(2020, 11, 18, 12, 0), 
-        endDate: new Date(2020, 11, 18, 13, 30), 
+        startDate: new Date(2020, 11, 25, 12, 0), 
+        endDate: new Date(2020, 11, 25, 13, 30), 
         id: 2, 
         location: "", 
         eventType: 'match', 
@@ -219,8 +217,8 @@ export const schedulerData = [
     },
     { 
         title: 'Training', 
-        startDate: new Date(2020, 11, 20, 12, 30), 
-        endDate: new Date(2020, 11, 20, 14, 0), 
+        startDate: new Date(2020, 11, 21, 12, 30), 
+        endDate: new Date(2020, 11, 21, 14, 0), 
         id: 3, 
         location: "", 
         eventType: 'training'

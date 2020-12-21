@@ -4,6 +4,48 @@ const router = express.Router();
 const Team = require('../../../models/Team');
 const UserSession = require('../../../models/UserSession');
 
+router.get('/teams', (req, res) => {
+    const { query } = req;
+    const { token } = query;
+    
+    UserSession.find({
+        _id : token,
+        isDeleted : false 
+    }, (err, sessions) => {
+        if(err) {
+            return res.send({
+            success : false,
+            message : 'Error : Server error'
+            });
+        }
+        if(sessions.length != 1) {
+            return res.send({
+            success : false,
+            message : 'Error : Invalid'
+            });
+        } else {
+            
+            Team.find({
+                playersIds : sessions[0].userId
+            }, (err, teams) => {
+                if(err) {
+                    return res.send({
+                    success : false,
+                    message : 'Error : Server error'
+                    });
+                } else {
+                    return res.send({
+                        success : true,
+                        message : "User teams sent from sever",
+                        teams : teams
+                    });
+                }
+            });
+
+        }
+    });
+});
+
 router.post('/add-team', (req, res) => {
     const { body } = req;
     const {
@@ -72,50 +114,6 @@ router.post('/add-team', (req, res) => {
             });
         }
     });
-});
-
-
-router.get('/teams', (req, res) => {
-    const { query } = req;
-    const { token } = query;
-    
-    UserSession.find({
-        _id : token,
-        isDeleted : false 
-    }, (err, sessions) => {
-        if(err) {
-            return res.send({
-            success : false,
-            message : 'Error : Server error'
-            });
-        }
-        if(sessions.length != 1) {
-            return res.send({
-            success : false,
-            message : 'Error : Invalid'
-            });
-        } else {
-            
-            Team.find({
-                playersIds : sessions[0].userId
-            }, (err, teams) => {
-                if(err) {
-                    return res.send({
-                    success : false,
-                    message : 'Error : Server error'
-                    });
-                } else {
-                    return res.send({
-                        success : true,
-                        message : "User teams sent from sever",
-                        teams : teams
-                    });
-                }
-            });
-
-        }
-    });
-
 });
 
 router.get('/getTeamInfo', (req, res) => {

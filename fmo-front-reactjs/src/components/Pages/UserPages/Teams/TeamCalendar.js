@@ -1,5 +1,6 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
+import {ToastsContainer, ToastsStore} from 'react-toasts';
 import { connect } from "react-redux";  
 import Paper from '@material-ui/core/Paper';
 import { ViewState, EditingState } from '@devexpress/dx-react-scheduler';
@@ -47,7 +48,7 @@ class TeamCalendar extends React.Component {
             isCaptain: false,
             isRedirect : false,
             currentDate : Date.now(),
-            data : schedulerData,
+            data : [],
 
             addedAppointment: {},
             appointmentChanges: {},
@@ -60,24 +61,28 @@ class TeamCalendar extends React.Component {
     }
 
     componentDidMount() {
-        // sendHttpRequest('GET', '/api/user/events?teamId=' + this.state.teamId)
-        // .then(responseEvents => {
-        //     if(!responseEvents.success) {
-        //         ToastsStore.error(`${responseEvents.message}`);
-        //         this.setState({isRedirect: true});
-        //     } else {
-        //         console.log(responseEvents.message);
+        sendHttpRequest('GET', '/api/user/appointments?teamId=' + this.state.teamId)
+        .then(responseAppointments => {
+            if(!responseAppointments.success) {
+                ToastsStore.error(`${responseAppointments.message}`);
+                this.setState({isRedirect: true});
+            } else {
+                console.log(responseAppointments.message);
                 sendHttpRequest('GET', '/api/user/getUserId?token=' + this.props.auth.token)
                 .then(responseUserId => {
                     if(!responseUserId.success) {
-                        // ToastsStore.error(`${responseUserId.message}`);
+                        ToastsStore.error(`${responseUserId.message}`);
                     } else {
                         this.props.setUserId(responseUserId.userId);
-                        // this.setState({posts : responseEvents.events});
+                        //eventType is not stored in database
+                        responseAppointments.trainings.forEach(training => training.eventType="training");
+                        responseAppointments.matches.forEach(training => training.eventType="match");
+                        const allData = [...responseAppointments.trainings, ...responseAppointments.matches];
+                        this.setState({data : allData});
                         sendHttpRequest('GET', '/api/user/getTeamInfo?teamId=' + this.state.teamId)
                         .then(responseCaptainId => {
                             if(!responseCaptainId.success) {
-                                // ToastsStore.error(`${responseCaptainId.message}`);
+                                ToastsStore.error(`${responseCaptainId.message}`);
                             } else {
                                 if(responseCaptainId.captainId === this.props.auth.userId) {
                                     this.setState({isCaptain : true});
@@ -85,22 +90,67 @@ class TeamCalendar extends React.Component {
                             }
                         })
                         .catch(err => {
-                            // ToastsStore.error("Server error");
+                            ToastsStore.error("Server error");
                             console.log(err);
                         });
                     }
                 })
                 .catch(err => {
-                    // ToastsStore.error("Server error");
+                    ToastsStore.error("Server error");
                     console.log(err);
                 });
-            // }
-        // })
-        // .catch(err => {
-        //     ToastsStore.error("Server error");
-        //     this.setState({isRedirect: true});
-        //     console.log(err);
-        // });
+            }
+        })
+        .catch(err => {
+            ToastsStore.error("Server error");
+            this.setState({isRedirect: true});
+            console.log(err);
+        });
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.data !== prevState.data) {
+            // console.log(this.state.addedAppointment);
+            if(this.state.addedAppointment) {
+                if(this.state.addedAppointment.eventType === "training") {
+                    const req = {
+                        teamId : this.state.teamId,
+                        ...this.state.addedAppointment
+                    };
+                    sendHttpRequest('POST', "/api/user/add-training", req)
+                        .then(responseData => {
+                            if(!responseData.success) {
+                                ToastsStore.error(`${responseData.message}`);
+                            } else {
+                                console.log(responseData.message);
+                            }
+                        })
+                        .catch(err => {
+                            ToastsStore.error("Server error");
+                            console.log(err, err.data);
+                        });
+                } else {
+                    const req = {
+                        hometeamId : this.state.teamId,
+                        ...this.state.addedAppointment
+                    };
+                    sendHttpRequest('POST', "/api/user/add-match", req)
+                    .then(responseData => {
+                        if(!responseData.success) {
+                            ToastsStore.error(`${responseData.message}`);
+                        } else {
+                            ToastsStore.success(`Invite for the match sent to ${this.state.addedAppointment.opponent} team`);
+                            console.log(responseData.message);
+                        }
+                    })
+                    .catch(err => {
+                        ToastsStore.error("Server error");
+                        console.log(err, err.data);
+                    });
+                }
+                
+            }
+          }
     }
 
     //called on start and every change in adding appointment form
@@ -131,11 +181,24 @@ class TeamCalendar extends React.Component {
     commitChanges({ added, changed, deleted }) {
         this.setState((state) => {
           let { data } = state;
-        //   console.log(data);
           if (added) {
-            const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
-            data = [...data, { id: startingAddedId, ...added }];
-            console.log(data);
+              if(added.eventType === "training") {
+                if(!added.title) {
+                    added.title = "TRAINING"
+                }
+              } else {
+                if(!added.opponent) {
+                    ToastsStore.error("You need to pass correct opponent team name to set match event");
+                    return null;
+                } else {
+                    //send invite to the opponent team for the match
+                }
+                if(!added.title) {
+                    added.title = `MATCH VS ${added.opponent}`
+                }
+              }
+            //   const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
+              data = [...data, {...added }];
           }
           if (changed) {
             data = data.map(appointment => (
@@ -221,6 +284,7 @@ class TeamCalendar extends React.Component {
                             />
                         </Scheduler>
                     </Paper>
+                    <ToastsContainer store={ToastsStore}/>
                </div>
             );
         }

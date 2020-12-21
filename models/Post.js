@@ -10,7 +10,7 @@ const PostSchema = new mongoose.Schema({
     authorId : {
         type : mongoose.Types.ObjectId,
         ref : 'User',
-        default : ""
+        default : null
     },
     authorName : {
         type : String,

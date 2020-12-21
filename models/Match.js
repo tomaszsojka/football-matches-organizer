@@ -28,6 +28,11 @@ const LineUpSchema = new mongoose.Schema({
 });
 
 const TeamInfoSchema = new mongoose.Schema({
+    teamId : {
+        type : mongoose.Types.ObjectId,
+        ref : 'Team',
+        default : null
+    },
     teamName : {
         type : String,
         default: ''
@@ -43,11 +48,28 @@ const TeamInfoSchema = new mongoose.Schema({
     lineup : [LineUpSchema]
 });
 
+
 const MatchSchema = new mongoose.Schema({
-    date : {
+    title: {
+        type: String,
+        defualt: "MATCH"
+    },
+    startDate : {
         type : Date,
         default: Date.now
     },    
+    endDate : {
+        type : Date,
+        default: Date.now
+    },
+    location : {
+        type : String,
+        default : ""
+    },
+    isAccepted : {
+        type : Boolean,
+        default: false
+    },
     isUpdated : {
         type : Boolean,
         default: false
