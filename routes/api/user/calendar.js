@@ -125,10 +125,20 @@ router.post('/add-match', (req, res) => {
                     } else {
                         console.log(homeTeam, opponentTeam);
                         Match.find({
-                            //if there is already a match appointment between both teams at the same time
-                            $or:[ {'homeTeam.teamId' : homeTeamId, 'awayTeam.teamId' : opponentTeam._id}, {'homeTeam.teamId' : opponentTeam._id, 'awayTeam.teamId': homeTeamId}],
-                            //new match cannot start before and finish in the time of the match or start in the time of the match
-                            $or:[ {startDate : {$gte: startDate}, startDate : {$lt: endDate}}, {startDate : {$lte: startDate}}]
+                            $and: [
+                                //if there is already a match appointment between both teams at the same time
+                                { $or: [ 
+                                    {'homeTeam.teamId' : homeTeamId, 'awayTeam.teamId' : opponentTeam._id}, 
+                                    {'homeTeam.teamId' : opponentTeam._id, 'awayTeam.teamId': homeTeamId}
+                                ] },
+                                
+                                //new match cannot start before and finish in the time of the match or start in the time of the match
+                                { $or: [ 
+                                    {startDate : {$lte: startDate}, endDate : {$gt: startDate}}, 
+                                    {startDate : {$lt: endDate}, endDate : {$gte: endDate}}, 
+                                    {startDate : {$gte: startDate}, endDate : {$lte: endDate}}
+                                ] }
+                            ]
                         }, (err, matches) => {
                             if(err) {
                                 return res.send({
@@ -137,7 +147,9 @@ router.post('/add-match', (req, res) => {
                                 });
                             } else {
                                 if(matches.length > 0) {
-                                    console.log("Match at this hour exists: ", matches);
+                                    console.log("Match at this hour exists: ");
+                                    console.log(matches[0].startDate);
+                                    console.log(matches[0].endDate);
                                     return res.send({
                                         success : false,
                                         message : 'Appointment for the match between those two teams at this hour already exists'
