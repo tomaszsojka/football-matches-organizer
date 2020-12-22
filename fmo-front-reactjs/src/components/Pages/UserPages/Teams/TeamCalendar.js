@@ -6,9 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import { ViewState, EditingState } from '@devexpress/dx-react-scheduler';
 import {
   Scheduler,
-  DayView,
   WeekView,
-  MonthView, 
   Toolbar,
   DateNavigator,
   Appointments,
@@ -25,7 +23,6 @@ import {
 import "./TeamCalendar.css";
 import {
     Appointment, 
-    schedulerData, 
     messages, 
     TextEditor, 
     BasicLayout, 
@@ -80,7 +77,7 @@ class TeamCalendar extends React.Component {
                         this.props.setUserId(responseUserId.userId);
                         //eventType is not stored in database
                         responseAppointments.trainings.forEach(training => training.eventType="training");
-                        responseAppointments.matches.forEach(training => training.eventType="match");
+                        responseAppointments.matches.forEach(match => {match.eventType="match"; match.opponent=match.awayTeam.teamName});
                         const allData = [...responseAppointments.trainings, ...responseAppointments.matches];
                         //because mongoose was returning date with 'Z' in the end
                         allData.forEach(appointment => {

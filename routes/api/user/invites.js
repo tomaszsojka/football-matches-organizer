@@ -119,7 +119,7 @@ router.get('/invites', (req, res, next) => {
 
 });
 
-router.put('/joinInviteTeam', (req, res) => {
+router.put('/acceptInviteTeam', (req, res) => {
   const { body } = req;
   const { 
     teamId,

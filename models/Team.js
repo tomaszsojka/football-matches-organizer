@@ -17,6 +17,11 @@ const TeamSchema = new mongoose.Schema({
         type : [mongoose.Types.ObjectId],
         ref : 'User',
         default : []
+    },
+    matchInvites : {
+        type : [mongoose.Types.ObjectId],
+        ref : 'Match',
+        default : []
     }
 });
 

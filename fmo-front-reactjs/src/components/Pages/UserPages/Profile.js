@@ -54,7 +54,7 @@ class Profile extends React.Component {
     }
 
     joinTeam(invite) {
-        sendHttpRequest('PUT', '/api/user/joinInviteTeam', {teamId : invite.id, userId : this.props.auth.userId})
+        sendHttpRequest('PUT', '/api/user/acceptInviteTeam', {teamId : invite.teamId, userId : this.props.auth.userId})
         .then(responseData => {
             console.log(responseData);
             if(!responseData.success) {
@@ -70,7 +70,7 @@ class Profile extends React.Component {
     }
 
     deleteInvite(invite) {
-        sendHttpRequest('DELETE', '/api/user/deleteInviteTeam', {teamId : invite.id, userId : this.props.auth.userId})
+        sendHttpRequest('DELETE', '/api/user/deleteInviteTeam', {teamId : invite.teamId, userId : this.props.auth.userId})
         .then(responseData => {
             console.log(responseData);
             if(!responseData.success) {

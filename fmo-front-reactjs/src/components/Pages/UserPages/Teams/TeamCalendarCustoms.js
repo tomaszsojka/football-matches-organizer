@@ -134,7 +134,7 @@ export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResourc
     );
 };
 export const BooleanEditor = props => {
-      if(props.label === 'All Day') {
+      if(props.label === 'All Day' || props.label === 'Repeat') {
             //returns null, to hide all day option 
             return null;
       } else {

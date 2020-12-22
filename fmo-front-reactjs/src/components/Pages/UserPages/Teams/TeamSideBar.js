@@ -45,11 +45,38 @@ class TeamSideBar extends React.Component {
     };
 
     acceptMatchInvite(invite) {
-
+        sendHttpRequest('PUT', '/api/user/acceptInviteMatch', {...invite, invitedTeamId : this.props.teamId})
+        .then(responseData => {
+            console.log(responseData);
+            if(!responseData.success) {
+                ToastsStore.error(`${responseData.message}`);
+            } else {
+                ToastsStore.success(`${responseData.message}`);
+                setTimeout(() => ToastsStore.info("Appointment is being added to the calendar"), 3000);
+                setTimeout(() => window.location.reload(), 6000);
+            }
+            console.log(responseData.message);
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     deleteMatchInvite(invite) {
-
+        sendHttpRequest('DELETE', '/api/user/deleteInviteMatch', {...invite, invitedTeamId : this.props.teamId})
+        .then(responseData => {
+            console.log(responseData);
+            if(!responseData.success) {
+                ToastsStore.error(`${responseData.message}`);
+            } else {
+                ToastsStore.success(`${responseData.message}`);
+                setTimeout(() => window.location.reload(), 3000);
+            }
+            console.log(responseData.message);
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
     render() {
         return (
@@ -63,7 +90,7 @@ class TeamSideBar extends React.Component {
                 { this.props.isCaptain && <div className="sidebar-widget">
                         <h4 className="widget-title bottomBorder">TEAM INVITES FOR A MATCH</h4>
                         <InviteList 
-                        teamInvites={[{name : "Olimpia Grudziądz", startDate: "2020-12-25T12:30", endDate: "2020-12-25T14:30"}, {name : "Olimpia Grudziądz", startDate: "2020-12-25T12:30", endDate: "2020-12-25T14:30"}]} 
+                        teamInvites={this.props.matchInvites} 
                         inviteReason={"your team for the match:"}
                         // boxStyle={"flex "}
                         invitationStyle={"flex matchInvite-content teamInvitation"}

@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Team = require('../../../models/Team');
 const UserSession = require('../../../models/UserSession');
+const Match = require('../../../models/Match');
 
 router.get('/teams', (req, res) => {
     const { query } = req;
@@ -133,13 +134,37 @@ router.get('/getTeamInfo', (req, res) => {
                 message : "No team of query teamId"
             });
         } else {
-            return res.send({
-                success : true,
-                message : "Sending team info",
-                name: team.name,
-                captainId : team.captainId,
-                playersIds : team.playersIds
-
+            Match.find({
+                _id : team.matchInvites,
+                isAccepted : false
+            }, (err, matches) => {
+                if(err) {
+                    return res.send({
+                        success : false,
+                        message : 'Error : Server error'
+                    });
+                } else {
+                    return res.send({
+                        success : true,
+                        message : "Sending team info",
+                        name: team.name,
+                        captainId : team.captainId,
+                        playersIds : team.playersIds,
+                        matchInvites : matches.map(match => 
+                            {
+                                return({ 
+                                    matchId : match._id,
+                                    title : match.title,
+                                    teamId: match.homeTeam.teamId, 
+                                    teamName: match.homeTeam.teamName, 
+                                    startDate: match.startDate,
+                                    endDate: match.endDate,
+                                    location : match.location 
+                                });
+                            })
+        
+                    });
+                }
             });
         }
     });

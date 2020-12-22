@@ -5,6 +5,7 @@ const Team = require('../../../models/Team');
 const Training = require('../../../models/Training');
 const Match = require('../../../models/Match');
 const UserSession = require('../../../models/UserSession');
+const mongoose = require('mongoose');
 
 
 router.get('/appointments', (req, res) => {
@@ -177,9 +178,20 @@ router.post('/add-match', (req, res) => {
                                             message : "Error: Server error"
                                             });
                                         } else {
-                                            return res.send({
-                                            success : true,
-                                            message : "Match added"
+                                            //sending invite to the opponent team
+                                            opponentTeam.matchInvites.push(mongoose.Types.ObjectId(match._id));
+                                            opponentTeam.save(err => {
+                                              if(err) {
+                                                  return res.send({
+                                                  success : false,
+                                                  message : "Error: Server error"
+                                                  });
+                                              } else {
+                                                  return res.send({
+                                                    success : true,
+                                                    message : "Match added and invitation for the match sent"
+                                                  });
+                                              }
                                             });
                                         }
                                     });
@@ -193,5 +205,179 @@ router.post('/add-match', (req, res) => {
     });
   });
 
+  /* Match invites */
+
+  
+router.put('/acceptInviteMatch', (req, res) => {
+    const { body } = req;
+    const {
+      matchId,
+      title,
+      teamId,
+      teamName,
+      startDate,
+      endDate,
+      location,
+
+      invitedTeamId
+    } = body;
+    //looking for the invited team (the one that has invitation in matchInvites list)
+    Team.findOne({
+        _id : invitedTeamId
+    }, (err, team) => {
+        if(err) {
+            return res.send({
+            success : false,
+            message : 'Error : Server error'
+            });
+        } else if(!team) {
+            return res.send({
+                success : false,
+                message : "No team of teamId"
+            });
+        } else if(!team.matchInvites.includes(matchId)) {
+          return res.send({
+            success : false,
+            message : "Invite not found"
+          });
+        } else {
+            Match.findOne({
+              _id : matchId
+            }, (err, match) => {
+              if(err) {
+                return res.send({
+                  success : false,
+                  message : 'Error : Server error'
+                });
+              } else if(!match) {
+                  return res.send({
+                    success : false,
+                    message : "No match of matchId"
+                  });
+              } else if(match.isAccepted) {
+                  return res.send({
+                      success : false,
+                      message : `Invitation from the team ${teamName} already accepted`
+                  });
+              } else {
+                //team of teamId and match of matchId found, now update teams's matchInvites list 
+                //and add match to the calendar of the invited team and updated isAccepted=true
+                const index = team.matchInvites.indexOf(matchId);
+                    if (index > -1) {
+                      team.matchInvites.splice(index, 1);
+                    }
+                team.save(err => {
+                  if(err) {
+                      return res.send({
+                        success : false,
+                        message : "Error: Server error"
+                      });
+                  } else {
+                    match.isAccepted = true;                    
+                    match.save(err => {
+                      if(err) {
+                          return res.send({
+                            success : false,
+                            message : "Error: Server error"
+                          });
+                      } else {
+                          const newMatch = new Match();
+                          newMatch.title = title;
+                          newMatch.startDate = startDate;
+                          newMatch.endDate = endDate;
+                          newMatch.location = location;
+                          newMatch.homeTeam = {
+                              teamName : team.teamName,
+                              teamId : team._id,
+                              lineup : []
+                          };
+                          newMatch.awayTeam = {
+                              teamName : teamName,
+                              teamId : teamId,
+                              lineup : []
+                          };
+                          return res.send({
+                            success : true,
+                            message : `Invite from the team ${teamName} accepted`, 
+                        
+                          }); 
+                      }
+                    });
+                  }
+                });
+              }
+            });
+        }
+    });
+  });
+
+  
+router.delete('/deleteInviteMatch', (req, res) => {
+    const { body } = req;
+    const {
+      matchId,
+      teamName,
+      invitedTeamId
+    } = body;
+    //looking for the invited team (the one that has invitation in matchInvites list)
+    Team.findOne({
+        _id : invitedTeamId
+    }, (err, team) => {
+        if(err) {
+            return res.send({
+            success : false,
+            message : 'Error : Server error'
+            });
+        } else if(!team) {
+            return res.send({
+                success : false,
+                message : "No team of teamId"
+            });
+        } else if(!team.matchInvites.includes(matchId)) {
+          return res.send({
+            success : false,
+            message : "Invite not found"
+          });
+        } else {
+            //team found, now delete invite from matchInvites list
+            const index = team.matchInvites.indexOf(matchId);
+            if (index > -1) {
+                team.matchInvites.splice(index, 1);
+            }
+            team.save(err => {
+                if(err) {
+                    return res.send({
+                        success : false,
+                        message : "Error: Server error"
+                    });
+                } else {
+                    //delete not accepted match document
+                    Match.deleteOne({
+                        _id : matchId
+                    }, (err, match) => {
+                        if(err) {
+                            return res.send({
+                                success : false,
+                                message : "Error: Server error"
+                            });
+                        } else if(!match) {
+                            return res.send({
+                                success : false,
+                                message : "Match not found"
+                            });
+                        } else {
+                            return res.send({
+                                success : true,
+                                message : `Invite from the team ${teamName} deleted`, 
+                            
+                            }); 
+                        }
+                    });
+                }
+            });
+        }
+    });
+  });
+  
 
 module.exports = router;

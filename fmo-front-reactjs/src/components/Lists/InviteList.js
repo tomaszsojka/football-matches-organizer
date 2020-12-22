@@ -9,24 +9,22 @@ const InviteList = (props) => {
                 let day, startHour, endHour;
                 if(invite.startDate) {
                     day = invite.startDate.substring(0, invite.startDate.indexOf('T'));
-                    startHour = invite.startDate.substring(invite.startDate.indexOf('T') + 1);
-                    endHour = invite.endDate.substring(invite.endDate.indexOf('T') + 1)
+                    startHour = invite.startDate.substring(invite.startDate.indexOf('T') + 1, invite.startDate.lastIndexOf(':'));
+                    endHour = invite.endDate.substring(invite.endDate.indexOf('T') + 1, invite.startDate.lastIndexOf(':'));
                 }
                 return (
                     <div key={i} className={props.invitationStyle ? props.invitationStyle :"flex teamInvitation"}>
                         <img src="/Images/vestra.jpg" alt="profile logo" className={props.imageStyle ? props.imageStyle : "team-image invite-image"}/>
                         <div className="inviteContent">
-                            <p>{`Team ${invite.name} is inviting ${props.inviteReason}`}</p>
+                            <p>{`Team ${invite.teamName} is inviting ${props.inviteReason}`}</p>
                             {invite.startDate ? 
                                 <div className="flex invite-matchDate">
                                     <p>{day}</p>
-                                    <div className="flex">
-                                        <p>{startHour}</p>-<p>{endHour}</p>
-                                    </div>
+                                    <p>{`${startHour}-${endHour}`}</p>
                                 </div> 
                             : null}
                             <div className="flex invite-buttons">
-                                <div className="greyBtn editBtn" onClick={() => props.onAcceptInvite(invite)}>join</div>
+                                <div className="greyBtn editBtn" onClick={() => props.onAcceptInvite(invite)}>accept</div>
                                 <div className="greyBtn editBtn" onClick={() => props.onDeleteInvite(invite)}>delete</div>
                             </div>
                         </div>   

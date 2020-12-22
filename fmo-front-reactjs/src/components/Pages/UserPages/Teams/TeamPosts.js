@@ -19,6 +19,7 @@ class TeamPosts extends React.Component {
             teamId: window.location.href.substring(window.location.href.lastIndexOf('/') + 1),
             isCaptain: false,
             posts: [], 
+            matchInvites: [],
             isRedirect : false
         };
     }
@@ -39,12 +40,17 @@ class TeamPosts extends React.Component {
                         this.props.setUserId(responseUserId.userId);
                         this.setState({posts : responsePosts.posts});
                         sendHttpRequest('GET', '/api/user/getTeamInfo?teamId=' + this.state.teamId)
-                        .then(responseCaptainId => {
-                            if(!responseCaptainId.success) {
-                                ToastsStore.error(`${responseCaptainId.message}`);
+                        .then(responseTeamInfo => {
+                            if(!responseTeamInfo.success) {
+                                ToastsStore.error(`${responseTeamInfo.message}`);
                             } else {
-                                    if(responseCaptainId.captainId === this.props.auth.userId) {
-                                        this.setState({isCaptain : true});
+                                this.setState({
+                                    matchInvites : responseTeamInfo.matchInvites
+                                });
+                                if(responseTeamInfo.captainId === this.props.auth.userId) {
+                                    this.setState({
+                                        isCaptain : true
+                                    });
                                 }
                             }
                         })
@@ -73,7 +79,7 @@ class TeamPosts extends React.Component {
         } else {
             return (
                 <div className="flex main-container posts-container posts-container-flex">
-                    <TeamSideBar isCaptain={this.state.isCaptain} sideBlocks={[{title : "CALENDAR", content : ""}, {title : "CALENDAR", content : ""}]}/>
+                    <TeamSideBar isCaptain={this.state.isCaptain} matchInvites={this.state.matchInvites} teamId={this.state.teamId}/>
                     <MainPosts posts={this.state.posts} />
                     <ToastsContainer store={ToastsStore}/>
                 </div>

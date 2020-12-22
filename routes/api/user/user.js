@@ -47,8 +47,8 @@ router.get('/profileData', (req, res) => {
                   }, (err, teams) => {
                     if(err) {
                         return res.send({
-                        success : false,
-                        message : 'Error : Server error'
+                          success : false,
+                          message : 'Error : Server error'
                         });
                     } else {
                         const user = users[0];
@@ -57,7 +57,7 @@ router.get('/profileData', (req, res) => {
                             message : "Profile data received from server",
                             name : user.name,
                             email : user.email,
-                            teamInvites : teams.map((team) =>{return({ id: team._id, name: team.name })})
+                            teamInvites : teams.map((team) =>{return({ teamId: team._id, teamName: team.name })})
                         });
                     }
                   });
