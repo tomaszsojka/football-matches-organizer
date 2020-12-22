@@ -123,7 +123,6 @@ router.post('/add-match', (req, res) => {
                             message : "If you want to make appointment only for this team change Event type to \"training\""
                         });
                     } else {
-                        console.log(homeTeam, opponentTeam);
                         Match.find({
                             $and: [
                                 //if there is already a match appointment between both teams at the same time

@@ -1,14 +1,14 @@
 import React from "react";
-
-import "./Profile.css";
-import sendHttpRequest from "../../../Fetch/useFetch";
 import {connect} from "react-redux";
-import {logout} from "../../../store/actions/authActions";
-
-import ProfileInviteList from "./ProfileInviteList";
 import {ToastsContainer, ToastsStore} from 'react-toasts';
 
+import "./Profile.css";
+
+import sendHttpRequest from "../../../Fetch/useFetch";
+import InviteList from "../../Lists/InviteList";
+
 import { setUserId } from "../../../store/actions/authActions";
+import {logout} from "../../../store/actions/authActions";
 
 
 class Profile extends React.Component {
@@ -53,7 +53,7 @@ class Profile extends React.Component {
         });
     }
 
-    onJoinTeam(invite) {
+    joinTeam(invite) {
         sendHttpRequest('PUT', '/api/user/joinInviteTeam', {teamId : invite.id, userId : this.props.auth.userId})
         .then(responseData => {
             console.log(responseData);
@@ -69,7 +69,7 @@ class Profile extends React.Component {
         });
     }
 
-    onDeleteInvite(invite) {
+    deleteInvite(invite) {
         sendHttpRequest('DELETE', '/api/user/deleteInviteTeam', {teamId : invite.id, userId : this.props.auth.userId})
         .then(responseData => {
             console.log(responseData);
@@ -85,7 +85,7 @@ class Profile extends React.Component {
         });
     }
 
-    onSubmitLogout() {
+    submitLogout() {
         sendHttpRequest('GET', '/api/user/logout?token=' + this.props.auth.token)
         .then(responseData => {
 
@@ -137,23 +137,13 @@ class Profile extends React.Component {
 
                     </div>
                     <div className="boxContainer-header">Team invitations</div>
-                    <ProfileInviteList 
+                    <InviteList 
                     teamInvites={this.state.teamInvites} 
-                    onJoinTeam={(invite) => this.onJoinTeam(invite)} 
-                    onDeleteInvite={(invite) => this.onDeleteInvite(invite)}/>
-                    {/* <div className="flex profileBox">
-                        <div className="flex teamInvitation">
-                            <img src="../Images/bayern.jpg" alt="profile logo" className="team-image invite-image"/>
-                            <div className="inviteContent">
-                                <p>Team Bayern is inviting you to join</p>
-                                <div className="flex invite-buttons">
-                                    <div className="greyBtn editBtn">join</div>
-                                    <div className="greyBtn editBtn">delete</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
-                    <button type="button" className="greenBtn logoutBtn" onClick={() => this.onSubmitLogout()}>Logout</button>
+                    inviteReason={"you to join"}
+                    boxStyle={"flex profileBox"}
+                    onAcceptInvite={(invite) => this.joinTeam(invite)} 
+                    onDeleteInvite={(invite) => this.deleteInvite(invite)}/>
+                    <button type="button" className="greenBtn logoutBtn" onClick={() => this.submitLogout()}>Logout</button>
                         
                 </div>
                 

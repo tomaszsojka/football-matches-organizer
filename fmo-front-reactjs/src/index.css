@@ -11,7 +11,9 @@ Variables
     --darker-green: #1b3b13;
     --light-light-grey: rgba(15, 15, 15, 0.03);
     --light-grey: #efefef;
-    --dark-grey : rgba(14, 17, 13, 0.75);
+    --main-font-grey: #707070;
+    --input-grey: #3e3e42;
+    --dark-grey: rgba(14, 17, 13, 0.75);
     --black: black;
     --error-red: #e74c3c;
     --clr-white: #fff;
@@ -30,7 +32,7 @@ body {
     margin: 0;
     font-size: 1.125rem;
     font-family: 'Ubuntu', sans-serif;
-    color: #707070;
+    color: var(--main-font-grey);
     font-weight: 300;
 }
 
@@ -65,7 +67,7 @@ input {
     border-radius: 3px;
     border: 1px solid darkgreen;
     transition: border 0.4s ease-out;
-    color: #3e3e42;
+    color: var(--input-grey);
     background: rgba(15, 15, 15, 0.01);
 }
 

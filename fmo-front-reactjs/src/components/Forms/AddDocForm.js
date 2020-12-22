@@ -123,7 +123,11 @@ class AddDocForm extends React.Component {
                     <button
                         type="button"
                         className="greenBtn formBtn"
-                        onClick={() => this.onSubmitForm()}>{this.props.title}</button>
+                        onClick={() => this.onSubmitForm()}>
+                            {this.props.title.substring(0, this.props.title.indexOf(' ')) 
+                            ? this.props.title.substring(0, this.props.title.indexOf(' ')) 
+                            : this.props.title}
+                            </button>
                 </div>
             </div>
         );
