@@ -86,6 +86,11 @@ class Profile extends React.Component {
     }
 
     submitLogout() {
+
+        // TODO delete this later 
+        this.props.logout();
+        //Refresh page if logout success
+        window.location.reload();
         sendHttpRequest('GET', '/api/user/logout?token=' + this.props.auth.token)
         .then(responseData => {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "./Teams.css";
 
 import {
   Appointments,
@@ -11,9 +11,6 @@ import {
 export const Appointment = ({
     children, style, ...restProps
   }) => {
-      // console.log(restProps);
-    //   console.log(style);
-    //   console.log(children);
       
       return (
     <Appointments.Appointment
@@ -39,7 +36,6 @@ export const messages = {
   };
 //disabling default multiline input
 export const TextEditor = (props) => {
-  // console.log(props);
     // eslint-disable-next-line react/destructuring-assignment
     if (props.type === 'multilineTextEditor') {
       return null;
@@ -50,6 +46,7 @@ export const TextEditor = (props) => {
   
 
 export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResources, readOnly, ...restProps }) => { 
+  console.log(appointmentData);
   const loadDefaultResource = (nextValue) => {
     onFieldChange({ eventType: nextValue });
 
@@ -64,9 +61,7 @@ export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResourc
       loadDefaultResource(restProps.resources[0].instances[0].id);
       // appointmentData.eventType = restProps.resources[0].instances[0].id;
     }
-    // console.log(restProps.textEditorComponent);
     
-      // console.log(appointmentData, appointmentResources, restProps);
     const onLocationFieldChange = (nextValue) => {
         onFieldChange({ location: nextValue });
     };
@@ -94,16 +89,112 @@ export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResourc
       //set isMatch -> show textEditor for opponent name
       if(appointmentResources[0].id === "match") { 
         isMatch = true;
-
-        // readOnly = true;
       } else if(appointmentData.startDate) {
         if(appointmentData.startDate < Date.now()) {
           readOnly = true;
-        } else {
-          // readOnly = false;
         }
       }
     }
+
+
+    let resultText = null;
+    if(appointmentData) {
+     if(appointmentData.isUpdated) {
+      const homeScore = appointmentData.homeTeam.teamScore ? appointmentData.homeTeam.teamScore : "0";
+      const awayScore = appointmentData.awayTeam.teamScore ? appointmentData.awayTeam.teamScore : "0";
+        resultText = 
+        <div style={{textAlign : "center"}}>
+          <AppointmentForm.Label
+            text="Final score: "
+            type="title"
+          />
+          <br/>
+          <div className="scoreText-container">
+            <div>
+              <div className="scoreMainText">
+                {appointmentData.homeTeam.teamName}
+              </div>
+              {appointmentData.homeTeam.lineup
+              .map((player, i) => {
+                if(player.scoredGoals) {
+                  return <p key={i} className="scoreInfoText">{player.playerName + " x" + player.scoredGoals}</p>;
+                } else {
+                  return <p key={i} className="scoreInfoText"/>;
+                }
+              })}
+            </div>
+            <div>
+              <div className="scoreMainText">
+                {homeScore + " - " + awayScore}
+              </div>
+              <img src="http://ssl.gstatic.com/onebox/sports/soccer_timeline/soccer-ball-retina.png" alt="ball" className="ball-image"/>
+            </div>
+            <div>
+              <div className="scoreMainText">
+                {appointmentData.awayTeam.teamName}
+              </div>
+              {appointmentData.awayTeam.lineup
+              .map((player, i) => {
+                if(player.scoredGoals) {
+                  return <p key={i} className="scoreInfoText">{player.playerName + " x" + player.scoredGoals}</p>;
+                } else {
+                  return <p key={i} className="scoreInfoText"/>;
+                }
+              })}
+            </div>
+          </div>
+          {/* CARDS */}
+          <div className="scoreText-container">
+            <div>
+              {appointmentData.homeTeam.lineup
+              .map((player, i) => {
+                if(player.redCards) {
+                  return <p key={i} className="scoreInfoText">{player.playerName}</p>;
+                } else {
+                  return <p key={i} className="scoreInfoText">    </p>;
+                }
+              })}
+            </div>
+            <img src="http://ssl.gstatic.com/onebox/sports/soccer_timeline/red-card-right.svg" alt="ball" className="ball-image"/>
+            <div>
+              {appointmentData.awayTeam.lineup
+              .map((player, i) => {
+                if(player.redCards) {
+                  return <p key={i} className="scoreInfoText">{player.playerName}</p>;
+                } else {
+                  return <p key={i} className="scoreInfoText"/>;
+                }
+              })}
+            </div>
+          </div>
+          {/* YELLOW CARDS */}
+          <div className="scoreText-container">
+            <div>
+              {appointmentData.homeTeam.lineup
+              .map((player, i) => {
+                if(player.yellowCards) {
+                  return <p key={i} className="scoreInfoText">{player.playerName+ " x" + player.yellowCards}</p>;
+                } else {
+                  return <p key={i} className="scoreInfoText">    </p>;
+                }
+              })}
+            </div>
+            <img src="http://ssl.gstatic.com/onebox/sports/soccer_timeline/yellow-card-right.svg" alt="ball" className="ball-image"/>
+            <div>
+              {appointmentData.awayTeam.lineup
+              .map((player, i) => {
+                if(player.yellowCards) {
+                  return <p key={i} className="scoreInfoText">{player.playerName+ " x" + player.yellowCards}</p>;
+                } else {
+                  return <p key={i} className="scoreInfoText"/>;
+                }
+              })}
+            </div>
+          </div>
+        </div>;
+      }
+    }
+    console.log(resultText);
 
     return (
         <AppointmentForm.BasicLayout
@@ -113,11 +204,6 @@ export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResourc
             readOnly={readOnly}
             {...restProps}
         >
-          {/* <AppointmentForm.ResourceEditor
-            appointmentResources={appointmentResources}
-            resouce={{fieldName: "eventType", isMain: true, title: "Event type", allowMultiple: false, instances: [{id: "training", color: "#2f9e13", fieldName: "eventType", text: "Training", title: "Event type", allowMultiple: false, isMain: true},{id: "match", color: "#1b3b13", fieldName: "eventType", text: "Match", title: "Event type", allowMultiple: false, isMain: true}]}}
-
-          /> */}
           <AppointmentForm.Label
               text="Location"
               type="title"
@@ -130,12 +216,16 @@ export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResourc
           />
           {isMatch &&  opponentLabel}
           {isMatch &&  opponentField}
+          <br/>
+          <br/>
+          <br/>
+          {resultText}
       </AppointmentForm.BasicLayout>
     );
 };
 export const BooleanEditor = props => {
       if(props.label === 'All Day' || props.label === 'Repeat') {
-            //returns null, to hide all day option 
+            //returns null, to hide all day and repeat option 
             return null;
       } else {
             return <AppointmentForm.BooleanEditor {...props} />;
@@ -143,7 +233,6 @@ export const BooleanEditor = props => {
 };
 
 export const CommandLayout = ({ onCommitButtonClick, ...restProps }) => {
-    // console.log(restProps);
     return (
         <AppointmentForm.CommandLayout
             onCommitButtonClick={onCommitButtonClick}
@@ -177,7 +266,6 @@ export const CaptainResourceEditor = ({onResourceChange, ...restProps }) => {
 
 /* CONFIRMATION DIALOG CUSTOMS */
 export const ConfLayout = ({handleConfirm, ...restProps }) => {
-  console.log(restProps);
   //function to make isAppointmentBeingCreated value go back to defult : false -> it keeps updating existing events disallowed
   const forceRefresh = () => {
     window.location.reload();

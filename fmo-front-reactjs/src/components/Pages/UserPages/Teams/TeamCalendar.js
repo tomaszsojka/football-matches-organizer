@@ -117,7 +117,6 @@ class TeamCalendar extends React.Component {
     componentDidUpdate(prevProps, prevState) {
         //when there is appointment to add (it was created in commitChanges), after 
         if(this.state.addedAppointment && JSON.stringify(this.state.addedAppointment) !== '{}') { 
-            console.log(JSON.stringify(this.state.addedAppointment));
             if(this.state.addedAppointment.eventType === "training") {
                 const req = {
                     teamId : this.state.teamId,
@@ -184,8 +183,6 @@ class TeamCalendar extends React.Component {
     //called on start and every change in adding appointment form
     //addedAppointment contains all the data about the appointment added
     changeAddedAppointment(addedAppointment) {
-        // console.log(addedAppointment);
-        // console.log("ADD : ", addedAppointment);
         this.setState({ 
             isAppointmentBeingCreated : true
          });
@@ -193,13 +190,11 @@ class TeamCalendar extends React.Component {
     //called on every change in edited appointment form
     //appointmentChanges contains all changed inputs data
     changeAppointmentChanges(appointmentChanges) {
-        // console.log("CHANGE : ", appointmentChanges);
         this.setState({ appointmentChanges });
     }
     //called on star and end of editing appointment
     //editingAppointment contains at the beginning all data about edited appointment, at the end is undefined
     changeEditingAppointment(editingAppointment) {
-        // console.log("EDIT : ", editingAppointment);
         this.setState({ 
             editingAppointment
          });
@@ -225,8 +220,9 @@ class TeamCalendar extends React.Component {
                     added.title = `MATCH VS ${added.opponent}`
                 }
               }
-            //   data = [...data, {...added }];
           }
+
+        //   For now editing and deleting is not supported
           if (changed) {
             data = data.map(appointment => (
               changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment));
@@ -239,7 +235,6 @@ class TeamCalendar extends React.Component {
       }
 
     onCancelForm() {
-        console.log("here");
         this.setState({isAppointmentBeingCreated : false})
     }
     

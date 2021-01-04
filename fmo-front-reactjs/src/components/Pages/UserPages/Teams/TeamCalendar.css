@@ -10,14 +10,28 @@
 }
 
 
-/* not connected */
-.training-container,
-.matches-container,
-#AppointmentContent {
-    background-color: '#2f9e13';
-    border-radius: '3px';
+/* MATCH RESULTS */
+
+.scoreText-container {
+    width : 100%;
+    display : flex;
+    justify-content : space-between;
 }
-/* 
-.makeStyles-appointment-262 {
-    background-color:'#2f9e13';
-} */
+
+.scoreMainText {
+    font-weight: 700;
+}
+
+.scoreInfoText {
+    font-size: 1rem;
+    width: 160px;
+}
+
+.ball-image {
+    width : 25px;
+    height: 25px;
+    margin: 0 auto;
+    margin-top: .5em;
+}
+
+

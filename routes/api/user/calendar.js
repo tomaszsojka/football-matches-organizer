@@ -160,15 +160,28 @@ router.post('/add-match', (req, res) => {
                                     newMatch.startDate = startDate;
                                     newMatch.endDate = endDate;
                                     newMatch.location = location;
+                                    const defaultLineup = [
+                                        {playerName: "Manuel Neuer", tShirtNumber: "1", position: "GK"},
+                                        {playerName: "Alphonso Davies", tShirtNumber: "19", position: "LB"},
+                                        {playerName: "David Alaba", tShirtNumber: "27", position: "LCB"},
+                                        {playerName: "Niclas Sule", tShirtNumber: "4", position: "RCB"},
+                                        {playerName: "Benjamin Pavard", tShirtNumber: "5", position: "RB"},
+                                        {playerName: "Leon Goretzka", tShirtNumber: "18", position: "LDM"},
+                                        {playerName: "Joshua Kimmich", tShirtNumber: "6", position: "RDM"},
+                                        {playerName: "Leroy Sane", tShirtNumber: "10", position: "LW"},
+                                        {playerName: "Thomas Muller", tShirtNumber: "25", position: "CM"},
+                                        {playerName: "Kingsley Coman", tShirtNumber: "29", position: "RW"},
+                                        {playerName: "Robert Lewandowski", tShirtNumber: "9", position: "FW"}
+                                    ];
                                     newMatch.homeTeam = {
                                         teamName : homeTeam.name,
                                         teamId : homeTeam._id,
-                                        lineup : []
+                                        lineup : defaultLineup
                                     };
                                     newMatch.awayTeam = {
                                         teamName : opponentTeam.name,
                                         teamId : opponentTeam._id,
-                                        lineup : []
+                                        lineup : defaultLineup
                                     };
                                     //Saving new match appointments
                                     newMatch.save((err, match) => {
