@@ -22,7 +22,7 @@ const SideBar = (props) => {
                 </div>
             </Link>
 
-            <div className="sidebar-widget">
+            <div className="sidebar-widget" style={{marginBottom: "5em"}}>
                 <h4 className="widget-title bottomBorder">POPULAR POSTS</h4>
                 <div className="flex widget-recent-post">
                     <h3 className="widget-recent-post-title">Team Bayern Munich is looking for a defender</h3>

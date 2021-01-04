@@ -54,6 +54,14 @@ img {
 
 }
 
+main {
+    order: 2;
+}
+
+aside {
+    order: 1;
+}
+
 @media (min-width: 850px) {
 
     .posts-container {

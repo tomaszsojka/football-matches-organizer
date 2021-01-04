@@ -42,7 +42,7 @@ router.get('/posts', (req, res) => {
         });
     } else {
         Team.find({
-            _id : teamId  
+            _id : teamId 
           }, (err, teams) => {
             if(err) {
               return res.send({

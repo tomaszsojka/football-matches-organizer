@@ -119,20 +119,27 @@ class Profile extends React.Component {
                         
                         <div className="flex profileData">
                             <div className="profileData-placehold">Name:</div>
-                            <div className="textWrap profileData-text">{this.state.name}</div>
-                            <div/>
+                            <div className="flex profileData-content">
+                                <div className="textWrap profileData-text">{this.state.name}</div>
+                                <div/>
+                            </div>
+                            
                         </div>
                         <div className="flex profileData">
                             <div className="profileData-placehold">Email:</div>
-                            <div className="textWrap profileData-text">{this.state.email}</div>
-                            <div/>
+                            <div className="flex profileData-content">
+                                <div className="textWrap profileData-text">{this.state.email}</div>
+                                <div/>
+                            </div>
                         </div>
                         <div className="flex profileData">
                             <div className="profileData-placehold">Password:</div>
-                            <div className="textWrap profileData-text">***** ***</div>
-                            <button type="button" className="greyBtn editBtn">
-                                Edit
-                            </button>
+                            <div className="flex profileData-content">
+                                <div className="textWrap profileData-text">******</div>
+                                <button type="button" className="greyBtn editBtn">
+                                    Edit
+                                </button>
+                            </div>
                         </div>
 
                     </div>

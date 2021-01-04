@@ -14,8 +14,9 @@ const GuestRoot = (props) => {
     return (
         <div className="flex guestRoot-container">
           <div>
-              <h1>LOGO</h1>
-              <p>This is short describtion of this application...</p>
+              <h1>FMO</h1>
+              <p>Football Matches Organizer,</p>
+              <p> for amateur players and football weenies...</p>
           </div>
           <AccessAccount/>
         </div>

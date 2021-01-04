@@ -5,9 +5,9 @@ import PrivateRoute from "./components/PrivateRoute";
 
 import GuestRoot from "./components/Pages/GuestPages/GuestRoot";
 import UserRoot from "./components/Pages/UserPages/UserRoot";
-import Home from "./components/Pages/UserPages/Home";
 import Posts from "./components/Pages/UserPages/Posts";
 import Profile from "./components/Pages/UserPages/Profile";
+import Contact from "./components/Pages/UserPages/Contact";
 import Teams from "./components/Pages/UserPages/Teams/Teams";
 import AddTeam from "./components/Pages/UserPages/Teams/AddTeam";
 
@@ -34,13 +34,13 @@ function App() {
           <UserRoot>
             <Switch>
               <Route exact path={"/user"}>
-                <Home/>
-              </Route>
-              <Route exact path={"/user/posts"}>
                 <Posts/>
               </Route>
               <Route exact path={"/user/profile"}>
                 <Profile/>
+              </Route>
+              <Route exact path={"/user/contact"}>
+                <Contact/>
               </Route>
               <Route exact path={"/user/teams"}>
                 <Teams/>

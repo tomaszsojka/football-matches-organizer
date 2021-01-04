@@ -38,19 +38,22 @@ class TeamPosts extends React.Component {
                         ToastsStore.error(`${responseUserId.message}`);
                     } else {
                         this.props.setUserId(responseUserId.userId);
-                        this.setState({posts : responsePosts.posts});
                         sendHttpRequest('GET', '/api/user/getTeamInfo?teamId=' + this.state.teamId)
                         .then(responseTeamInfo => {
                             if(!responseTeamInfo.success) {
                                 ToastsStore.error(`${responseTeamInfo.message}`);
                             } else {
-                                this.setState({
-                                    matchInvites : responseTeamInfo.matchInvites
-                                });
-                                if(responseTeamInfo.captainId === this.props.auth.userId) {
-                                    this.setState({
-                                        isCaptain : true
-                                    });
+                                if(!responseTeamInfo.playersIds.includes(this.props.auth.userId)) {
+                                    // here user is not a member of the team 
+                                    this.setState({isRedirect: true});
+                                } else {
+                                    this.setState({posts : responsePosts.posts});
+                                    if(responseTeamInfo.captainId === this.props.auth.userId) {
+                                        this.setState({
+                                            isCaptain : true,
+                                            matchInvites : responseTeamInfo.matchInvites
+                                        });
+                                    }
                                 }
                             }
                         })

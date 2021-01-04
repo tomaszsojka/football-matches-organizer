@@ -14,7 +14,7 @@ const Toolbar = (props) => {
             <nav className="flex">
                 <div className="flex toolbar-base">
                     <div className="logo">
-                    <Link to="/user" onClick={() => openCloseDropDownMenu()}>LOGO</Link>
+                    <Link to="/user" onClick={() => openCloseDropDownMenu()}>FMO</Link>
                     </div>
                     <ion-icon class="menu-icon" name="menu-outline" onClick={() => openCloseDropDownMenu()}></ion-icon>
                 </div>
@@ -22,8 +22,7 @@ const Toolbar = (props) => {
                 <div className={`toolbar-navigation-items`}>
                     <ul className="flex">
                         {/* a was not closing ulist smoothly before reloading */}
-                        <li><Link to="/user" onClick={() => openCloseDropDownMenu()}>HOME</Link></li>
-                        <li><Link to="/user/posts" onClick={() => openCloseDropDownMenu()}>POSTS</Link></li>
+                        <li><Link to="/user" onClick={() => openCloseDropDownMenu()}>POSTS</Link></li>
                         <li><Link to="/user/teams" onClick={() => openCloseDropDownMenu()}>TEAMS</Link></li>
                         <li><Link to="/user/contact" onClick={() => openCloseDropDownMenu()}>CONTACT</Link></li>
                         <li>

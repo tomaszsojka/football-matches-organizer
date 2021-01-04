@@ -37,7 +37,7 @@ class Posts extends React.Component {
         return (
             <div className="flex main-container posts-container posts-container-flex">
                 <MainPosts posts={this.state.posts} />
-                <SideBar sideBlocks={[{title : "CALENDAR", content : ""}]}/>
+                <SideBar/> {/*  sideBlocks={[{title : "CALENDAR", content : ""}]} */}
                 <ToastsContainer store={ToastsStore}/>
             </div>
         );
