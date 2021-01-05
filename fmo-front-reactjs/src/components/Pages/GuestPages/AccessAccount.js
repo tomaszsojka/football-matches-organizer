@@ -32,11 +32,11 @@ class AccessAccount extends React.Component {
                 <div className="flex boxController">
                     <div className={"controller" + (this.state.isLoginOpen ? " selectedController" : "")}
                             onClick={this.showLoginBox.bind(this)}>
-                        Login
+                        LOGIN
                     </div>
                     <div className={"controller" + (this.state.isRegisterOpen ? " selectedController" : "")}
                             onClick={this.showRegisterBox.bind(this)}>
-                        Register
+                        REGISTER
                     </div>
                 </div>
                 {this.state.isLoginOpen && <Login/>}

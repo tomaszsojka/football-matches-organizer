@@ -22,7 +22,7 @@ class AddPost extends React.Component {
     }
 
     componentDidMount() {
-        if(this.state.teamId === "posts") {
+        if(this.state.teamId === "user") {
             this.setState({
                 teamId : null
             });
@@ -31,6 +31,7 @@ class AddPost extends React.Component {
     
     submitAddPost(formData) {
         console.log("ADDING NEW POST");
+        console.log(this.state.teamId);
         const req = {
             token : this.props.auth.token,
             teamId : this.state.teamId,
@@ -55,7 +56,7 @@ class AddPost extends React.Component {
 
                 <div>
                     <AddDocForm 
-                        title="Add New Post" 
+                        title="ADD NEW POST" 
                         containerStyle="article-recent"
                         inputs={this.state.inputs}
                         onSubmitForm={(formData) => this.submitAddPost(formData)}

@@ -117,10 +117,10 @@ class Profile extends React.Component {
                 
                 <div className="boxContainer">
                     <div className="boxContainer-header bottomBorder">
-                        Profile
+                        PROFILE
                     </div>
                     <div className="flex profileBox bottomBorder">
-                        <img src="../Images/profile_picture.png" alt="profile logo" className="user-image profile-image"/>
+                        <img src="../Images/PROFILE.svg" alt="prof" className="user-image profile-image"/>
                         
                         <div className="flex profileData">
                             <div className="profileData-placehold">Name:</div>
@@ -148,7 +148,7 @@ class Profile extends React.Component {
                         </div>
 
                     </div>
-                    <div className="boxContainer-header">Team invitations</div>
+                    <div className="boxContainer-header">TEAM INVITATIONS</div>
                     <InviteList 
                     teamInvites={this.state.teamInvites} 
                     inviteReason={"you to join"}

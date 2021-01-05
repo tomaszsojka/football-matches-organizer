@@ -126,7 +126,7 @@ router.post('/add-post', (req, res) => {
                     
                     //Save new post 
                     const newPost = new Post();
-                    if(teamId) {
+                    if(teamId) { 
                         newPost.teamId = mongoose.Types.ObjectId(teamId);
                     } 
                     newPost.authorId = user._id;

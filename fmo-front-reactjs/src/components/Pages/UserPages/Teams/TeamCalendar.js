@@ -77,7 +77,16 @@ class TeamCalendar extends React.Component {
                         this.props.setUserId(responseUserId.userId);
                         //eventType is not stored in database
                         responseAppointments.trainings.forEach(training => training.eventType="training");
-                        responseAppointments.matches.forEach(match => {match.eventType="match"; match.opponent=match.awayTeam.teamName});
+                        responseAppointments.matches.forEach(match => {
+                            match.eventType="match";
+                            if(match.awayTeam._id !== this.state.teamId) {
+                                //if its calendar of invited team
+                                match.opponent=match.homeTeam.teamName;
+                            } else {
+                                //if its calendar of inviting team
+                                match.opponent=match.awayTeam.teamName;
+                            }
+                        });
                         const allData = [...responseAppointments.trainings, ...responseAppointments.matches];
                         //because mongoose was returning date with 'Z' in the end
                         allData.forEach(appointment => {

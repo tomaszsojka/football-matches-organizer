@@ -99,7 +99,7 @@ class TeamSideBar extends React.Component {
                         onDeleteInvite={(invite) => this.deleteMatchInvite(invite)}/>
                     </div>}
                 { this.props.isCaptain && <AddDocForm 
-                    title="Invite user to the group" 
+                    title="INVITE USER TO THE GROUP" 
                     containerStyle={this.state.containerStyle}
                     inputs={this.state.inputs}
                     onSubmitForm={(formData) => this.submitMemberInvite(formData)}

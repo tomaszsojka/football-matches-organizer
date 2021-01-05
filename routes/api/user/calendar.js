@@ -22,6 +22,7 @@ router.get('/appointments', (req, res) => {
             });
         } else {
             Match.find({
+                //team is a hometeam or awayteam
                 $or:[ {'homeTeam.teamId' : teamId}, {'awayTeam.teamId': teamId}],
                 isAccepted : true
             }, (err, matches) => {

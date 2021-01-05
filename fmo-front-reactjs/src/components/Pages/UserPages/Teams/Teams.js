@@ -47,7 +47,7 @@ class Teams extends React.Component {
             <div className="main-container central-container">             
                 <div className="boxContainer">
                     <div className="boxContainer-header bottomBorder">
-                        Teams
+                        TEAMS
                     </div>
                     <TeamsList teams={this.props.teams.teams} userId={this.props.auth.userId}/>
                     <div className="flex teamsBox">

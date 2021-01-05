@@ -14,7 +14,9 @@ const Toolbar = (props) => {
             <nav className="flex">
                 <div className="flex toolbar-base">
                     <div className="logo">
-                    <Link to="/user" onClick={() => openCloseDropDownMenu()}>FMO</Link>
+                    <Link to="/user" onClick={() => openCloseDropDownMenu()}>
+                        <img src="Images/LOGO.svg" alt="FOOT-MORE" style={{ height : "36px", textShadow: "0px -2px 2px rgba(40, 40, 40, 1)"}}/>
+                    </Link>
                     </div>
                     <ion-icon class="menu-icon" name="menu-outline" onClick={() => openCloseDropDownMenu()}></ion-icon>
                 </div>

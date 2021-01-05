@@ -14,9 +14,10 @@ const GuestRoot = (props) => {
     return (
         <div className="flex guestRoot-container">
           <div>
-              <h1>FMO</h1>
-              <p>Football Matches Organizer,</p>
-              <p> for amateur players and football weenies...</p>
+              {/* <h1>FMO</h1> */}
+              <img src="Images/LOGO_BIG.svg" alt="logo" className="guestLogo-img"/>
+              
+              <p> FOR AMATEUR PLAYERS AND FOOTBALL FREAKS...</p>
           </div>
           <AccessAccount/>
         </div>

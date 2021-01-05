@@ -47,7 +47,7 @@ class Register extends React.Component {
         return(
             <div>
                 <AddDocForm 
-                title="Register" 
+                title="REGISTER" 
                 inputs={this.state.inputs}
                 onSubmitForm={(formData) => this.submitRegister(formData)}
                 />

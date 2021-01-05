@@ -40,6 +40,7 @@
 
 .profileData-text {
     margin-right: .5em;
+    font-weight: 400;
 }
 
 .invite-image {
@@ -51,7 +52,7 @@
 
 /* CONTACT  */
 .contactBox {
-    flex-direction: column;
+    /* flex-direction: column; */
     color: var(--black);
     padding-bottom: 1.344444444em;
     align-items: center;
@@ -83,13 +84,13 @@
     width: 100%;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 400px) {
     .contactBox {
         flex-direction: row;
     }
 
     .contact-info {
-        width: calc(90% - 150px);
+        width: calc(100% - 150px);
     }
 
     .contact-image {
@@ -97,4 +98,11 @@
         height: 100px;
     }
 
+}
+
+@media (min-width: 650px) {
+    
+    .contact-info {
+        width: calc(90% - 150px);
+    }
 }

@@ -7,7 +7,7 @@
     border: none;
     text-shadow: var(--toolbar-text-shadow);
     color: var(--clr-white);
-    font-weight: 300;
+    font-weight: 400;
 
     position: fixed;
     top: 0;

@@ -10,13 +10,13 @@ const Contact = (props) => {
             
             <div className="boxContainer">
                 <div className="boxContainer-header bottomBorder">
-                    Help Center
+                    HELP CENTER
                 </div>
                 <div className="contactBox-header">
                         ADMINISTRATORS
                 </div>
                 <div className="flex contactBox">
-                    <img src="../Images/profile_picture.png" alt="profile logo" className="user-image contact-image"/>
+                    <img src="../Images/PROFILE.svg" alt="prof" className="user-image contact-image"/>
                     <div className="contact-info">
                         <div className="flex profileData">
                             <div className="profileData-placehold"></div>
@@ -37,7 +37,7 @@ const Contact = (props) => {
                         IT HELP
                 </div>
                 <div className="flex contactBox">
-                    <img src="../Images/profile_picture.png" alt="profile logo" className="user-image contact-image"/>
+                    <img src="../Images/PROFILE.svg" alt="prof" className="user-image contact-image"/>
                     <div className="contact-info">
                         <div className="flex profileData">
                             <div className="profileData-placehold"></div>

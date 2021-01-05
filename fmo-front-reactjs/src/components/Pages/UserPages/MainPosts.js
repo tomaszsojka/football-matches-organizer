@@ -32,12 +32,12 @@ const MainPosts = (props) => {
                     <h2 className="article-title">{post.title}</h2>
                     <p className="article-body">{post.content}</p>
                     <div className="flex posts-container-flex comment-container">
-                        <img src="/Images/profile_picture.png" alt="profile logo" className="user-image comment-image"/>
+                        <img src="/Images/PROFILE.svg" alt="prof" className="user-image comment-image"/>
                         <input className="comment-input"></input>
                     </div>
                 </div>
                 <div className="flex article-recent-secondary article-recent-author posts-container-flex">
-                    <img src="/Images/profile_picture.png" alt="profile logo" className="user-image article-image"/>
+                    <img src="/Images/PROFILE.svg" alt="prof" className="user-image article-image"/>
                     <div className="name-date">
                         <h3>{post.authorName}</h3>
                         <p className="article-info">{post.date.substring(0, post.date.lastIndexOf(':')).replace('T', ' ')}</p>

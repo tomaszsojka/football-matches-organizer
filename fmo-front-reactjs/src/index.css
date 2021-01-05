@@ -31,7 +31,7 @@ Variables
 body {
     margin: 0;
     font-size: 1.125rem;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     color: var(--main-font-grey);
     font-weight: 300;
 }
@@ -39,11 +39,18 @@ body {
 h1,
 h2,
 h3 {
-    font-family: 'Lora', serif;
+    font-family: 'Roboto', sans-serif;
+
 }
 
 h1,
-h2,
+h2 {
+    font-weight: 500;
+    color: var(--darker-green);
+    margin-top: 0;
+}
+
+
 h3,
 h4 {
     font-weight: 400;
@@ -63,7 +70,7 @@ strong {
 }
 
 input {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     border-radius: 3px;
     border: 1px solid darkgreen;
     transition: border 0.4s ease-out;
@@ -82,7 +89,7 @@ a:focus {
 }
 
 button {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 
@@ -145,6 +152,7 @@ ion-icon {
     padding: 5px;
     margin-bottom: 1.1em;
     font-size: 1.5rem;
+    font-weight: 400;
 }
 
 .user-image {

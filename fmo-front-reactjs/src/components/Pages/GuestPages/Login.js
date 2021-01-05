@@ -69,7 +69,7 @@ class Login extends React.Component {
         return(
             <div>
                 <AddDocForm 
-                title="Login" 
+                title="LOGIN" 
                 inputs={this.state.inputs}
                 onSubmitForm={(formData) => this.submitLogin(formData)}
                 />

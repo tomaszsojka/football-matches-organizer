@@ -71,7 +71,12 @@ router.post('/login', (req, res) => {
         success : false,
         message : "Error: Server error"
       });
-    }  else if(users.length != 1) {
+    }  else if(!users.length) {
+      return res.send({
+        success : false,
+        message : "User account not found"
+      });
+    } else if(users.length != 1) {
       return res.send({
         success : false,
         message : "Error: Invalid"
