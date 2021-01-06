@@ -279,7 +279,7 @@ class TeamCalendar extends React.Component {
                                 layoutComponent={ConfLayout}
                             />
                             <WeekView
-                                startDayHour={8}
+                                startDayHour={10}
                                 endDayHour={22}
                             />
                             <Toolbar />

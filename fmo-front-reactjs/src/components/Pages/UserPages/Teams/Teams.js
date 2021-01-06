@@ -4,7 +4,7 @@ import React from "react";
 import sendHttpRequest from "../../../../Fetch/useFetch";
 
 import TeamsList from "./TeamsList";
-import { Link, Redirect } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 import { connect } from "react-redux";
 import { setTeamsList} from "../../../../store/actions/teamsActions";
@@ -42,7 +42,6 @@ class Teams extends React.Component {
     }
 
     render() {
-        console.log(this.props.auth);
         return (
             <div className="main-container central-container">             
                 <div className="boxContainer">

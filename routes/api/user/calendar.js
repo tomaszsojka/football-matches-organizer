@@ -34,7 +34,7 @@ router.get('/appointments', (req, res) => {
                 } else {
                     return res.send({
                         success : true,
-                        message : "Team's trainings sent from sever",
+                        message : "Team's events sent from sever",
                         trainings : trainings,
                         matches : matches
                     });

@@ -19,7 +19,6 @@ const TeamsList = (props) => {
             {props.teams.map((team) => {
                 let idxOfWhitespace = getAllIndexes(team.name, ' ');
                 // /user/teams/${team.name.replace(/\s/g, "")}.${idxOfWhitespace.toString().replace(/,/g, ".")}
-                console.log(idxOfWhitespace);
                 return <Link to={`/user/teams/${team._id}`} key={team._id}>
                     <button className="flex teamBtn greyBtn">
                         <img src="../Images/vestra.jpg" alt="team logo" className="team-image teamsItem-image"/>

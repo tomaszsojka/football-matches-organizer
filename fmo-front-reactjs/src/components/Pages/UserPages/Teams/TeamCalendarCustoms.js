@@ -46,7 +46,6 @@ export const TextEditor = (props) => {
   
 
 export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResources, readOnly, ...restProps }) => { 
-  console.log(appointmentData);
   const loadDefaultResource = (nextValue) => {
     onFieldChange({ eventType: nextValue });
 
@@ -194,7 +193,6 @@ export const BasicLayout = ({ onFieldChange, appointmentData, appointmentResourc
         </div>;
       }
     }
-    console.log(resultText);
 
     return (
         <AppointmentForm.BasicLayout

@@ -23,7 +23,6 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.auth);
         sendHttpRequest('GET', '/api/user/profileData?token=' + this.props.auth.token)
         .then(responseProfileData => {
             if(!responseProfileData.success) {
@@ -56,7 +55,6 @@ class Profile extends React.Component {
     joinTeam(invite) {
         sendHttpRequest('PUT', '/api/user/acceptInviteTeam', {teamId : invite.teamId, userId : this.props.auth.userId})
         .then(responseData => {
-            console.log(responseData);
             if(!responseData.success) {
                 ToastsStore.error(`${responseData.message}`);
             } else {
@@ -72,7 +70,6 @@ class Profile extends React.Component {
     deleteInvite(invite) {
         sendHttpRequest('DELETE', '/api/user/deleteInviteTeam', {teamId : invite.teamId, userId : this.props.auth.userId})
         .then(responseData => {
-            console.log(responseData);
             if(!responseData.success) {
                 ToastsStore.error(`${responseData.message}`);
             } else {
